@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="stylesheets/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<script src="javascripts/tablesorter/js/jquery.tablesorter.js"></script>
+<script src="javascripts/tablesorter/js/jquery.tablesorter.widgets.js"></script>
+<script src="javascripts/tablesorter/js/widgets/widget-uitheme.js"></script>
+<script src="javascripts/jquery.maskMoney.js"></script>
+<link rel="stylesheet" href="stylesheets/jquery-ui.css">
+<link rel="stylesheet" href="stylesheets/jquery.ui.theme.css">
+<script src="javascripts/tablesorter/js/widgets/widget-print.js"></script>
+
+<link rel="stylesheet" href="javascripts/tablesorter/css/theme.blue.css">
+
+<title>Check Register</title>
+</head>
+
+<body>
+
+<div class="container">
+<!--<div class="print button">Print</div>-->
+{% if username %}
+Welcome {{username}}        <a href="/logout">Logout</a> | <a href="/customers">Customers</a><p>
+{% else %}
+You are not logged in!        <a href="/login">Login</a> | <a href="/signup">Sign Up</a><p>
+{% endif %}
+
+
+
+
+
+<button id="search-register">Search Register</button>
+<table class="tbl tablesorter" width="800" border="1" cellpadding="2">
+<thead>
+  <tr>
+    <th scope="col">Date</th>
+    <th scope="col">Reference</th>
+    <th scope="col">Number</th>
+    <th scope="col">Payee</th>
+    <th scope="col">Memo</th>
+    <th scope="col">Account</th>
+    <th scope="col">Payment</th>
+    <th scope="col">Deposit</th>
+    <th scope="col">Balance</th>
+  </tr>
+</thead>
+<tbody class="tbody">
+ {% for item in items %}
+ {% if (item.date) %}
+  <tr id="{{item.id}}"> 
+    <td class="date">{{item.date}}</td>     
+    <td class="reference">{{item.reference}}</td>
+    <td class="number">{{item.number}}</td>    
+    <td class="payee">{{item.payee}}</td>
+    <td class="memo">{{item.memo}}</td>
+    <td class="account">{{item.account}}</td>    
+    <td class="payment rtalign">{{item.payment}}</td>
+    <td class="deposit rtalign">{{item.deposit}}</td>
+    <td class="balance rtalign">{{item.balance}}</td>
+  </tr>
+{% endif %}  
+ {% endfor %}
+ </tbody>
+</table>
+
+<form  method="POST" id="entryform">
+<input type="text" id="datepicker" >
+<select id="reference"><option value="">Choose</option><option value="payment">Payment</option><option value="deposit">Deposit</option></select>
+<input type="text" id="number" placeholder="number">
+<input type="text" id="payee" placeholder="payee">
+<input type="text" id="memo" placeholder="memo">
+<input type="text" id="account" placeholder="account">
+<input type="text" id="payment" placeholder="payment" readonly  />
+<input type="text" id="deposit" placeholder="deposit" readonly />
+<input type="reset" class="cancel" class="ui-button" value="Cancel">
+<input type="submit" class="submit" class="ui-button" value="Add"> 
+ 
+
+</form>
+</div>
+
+<div id="dialog-form" title="Find Checking Transactions">
+  <p class="title">Search the Check Register.</p>
+ 
+  <form id="dialogForm">
+    <fieldset>
+      <label for="search">Search</label>
+      <select id="search" name="search"><option value="date">date</option><option value="amount">amount</option><option value="account">account</option><option value="payee">payee</option></select>
+      <label for="find">Find</label>
+     
+      <div class="wrapdiv">
+      <input type="text" id="datepicker2" name="date" >
+      </div>
+     <!-- <label for="match">Match</label>
+      <select id="match" name="match"></select>-->
+ 
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+     <!-- <div id="findbtn"> <input type="submit" class="submit ui-button" value="find"></div>-->
+       
+    </fieldset>
+  </form>
+  
+  <table id="resultTable">
+  <caption></caption>
+  <thead>
+  <tr>
+  <th>#</th><th>Date</th><th>Type</th><th>Amount</th>
+  </tr>
+  </thead>
+  <tbody
+  </tbody>
+  </table>
+  
+</div>
+
+
+<script src="javascripts/display_ent.js">
+</script>
+
+</body>
+</html>

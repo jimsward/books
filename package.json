@@ -1,0 +1,38 @@
+{
+  "name": "ckbk",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.10.2",
+    "cookie-parser": "~1.3.3",
+    "debug": "~2.1.1",
+    "express": "~4.11.1",
+    "jade": "~1.9.1",
+    "morgan": "~1.5.1",
+    "serve-favicon": "~2.2.0",
+    "swig": "^1.4.2",
+	"mongodb":"~2.6.4",
+	"consolidate":"0.12.1"
+  },
+  "description": "Complete Check Register",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jimsward/ckbk"
+  },
+  "keywords": [
+    "financials",
+    "node",
+    "mongDB"
+  ],
+  "author": "jim sward",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jimsward/ckbk/issues"
+  },
+  "homepage": "https://github.com/jimsward/ckbk"
+}

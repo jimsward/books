@@ -1,0 +1,94 @@
+body { background-color:#fff; font:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif }
+
+.container { width : 1000px; margin:auto;  margin-bottom:100px }
+
+table { width:1000px; border-collapse: collapse; }
+
+/* Extra selectors needed to override the default styling */
+/*table.tablesorter tbody tr.normal-row td {
+  background: #888;
+  color: #fff;
+}
+table.tablesorter tbody tr.alt-row td {
+  background: #000;
+  color: #fff;
+}*/
+
+.tbody { position : relative; }
+
+th { background-color:#3868bc; color : #fff }
+
+div.editable, div.not-editable { width : 150px; height: 24px }
+
+input { color:#000000}
+
+input[placeholder] {color : #000000;}
+
+input#datepicker.hasDatepicker { width : 120px; }
+
+input[type="text"] { width : 117px; height : 24px; padding:0; border:1px #999 solid }
+
+input[type="date"] { width : 138px !important; height : 24px; padding:0; border:1px #999 solid }
+
+input#submit, button.submit, input.submit, input.cancel { width:106px; height:36px; margin:4px  }
+
+button.submit { margin : 4px; }
+
+button.reset { right : 4px; }
+
+#ui-datepicker-div { background-color:#FFFFFF; }
+
+form#entryForm { height:84px;width:1000px; background-color:#3868bc; border: 0;}
+
+td.rtalign {  text-align:right; }
+
+select#reference { width : 113px; height:26px; border: gray solid 1px; background-color : white }
+
+input#datepicker { width : 148px; padding:0; border :1px solid gray }
+
+
+input#editdeposit, input#editpayment { width : 66px }
+
+#resultsForm input[type="text"], #resultsForm label { width : 150px; height : 20px; display:block; font-size:12px; background-color:#dddddd }
+
+#resultsForm label { display : inline; background-color:white }
+
+dvi#ui-datepicker-div { width:150px; height:122px }
+
+input.cancel { display : block; float:right ; width:106px; height:36px; margin:4px }
+
+#editRow {background-color:red}
+
+button#save { opacity :0.5; }
+
+.buttons { width:460px; }
+
+#search-register { width : 220px; height : 42px; position : fixed; top : 0; left : 450px; font-size:14px; margin: 0 0 40px 0 }
+
+fieldset { height : 140px; }
+
+fieldset label, fieldset input { display : block; }
+
+button.ui-datepicker-trigger { display:inline }
+
+div#findbtn { float:right }
+
+#resultTable caption { margin:20px; font-weight:bolder; font-size:22px; }
+
+table#resultTable tbody tr td, table#resultTable thead tr th { text-align:right }
+
+.odd { background-color : #ecf3e1 }
+
+.wrapdiv { height:24px; width:260px; }
+
+form#resultsForm input.submit { width:142px; margin-top:18px }
+
+table#resultTable tr { font-size : 12px; background-color:#fff; cursor:pointer; }
+
+table tr { font-size : 12px; background-color:#fff; cursor:pointer; }
+
+tr.odd td { background-color : #ecf3e1; }
+
+tr td { border-color : transparent; }
+
+.ui-dialog-buttonset:nth-child(1) { display:block; float:left !important }

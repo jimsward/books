@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="stylesheets/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<script src="javascripts/tablesorter/js/jquery.tablesorter.js"></script>
+<script src="javascripts/tablesorter/js/jquery.tablesorter.widgets.js"></script>
+<script src="javascripts/tablesorter/js/widgets/widget-uitheme.js"></script>
+<script src="javascripts/jquery.maskMoney.js"></script>
+<link rel="stylesheet" href="stylesheets/jquery-ui.css">
+<link rel="stylesheet" href="stylesheets/jquery.ui.theme.css">
+
+<!--<link rel="stylesheet" href="javascripts/tablesorter/css/theme.blue.css"></script>-->
+
+<title>Edit Entry</title>
+</head>
+
+<body>
+<div class="container">
+
+
+<form  method="POST" id="editform">
+<p>{{date}}</p>
+<input type="text" id="datepicker" value="{{date}}">
+<select id="reference"><option value="">Choose</option><option value="payment">Payment</option><option value="deposit">Deposit</option></select>
+<input type="text" id="payee" placeholder="payee">
+<input type="text" id="memo" placeholder="memo">
+<input type="text" id="payment" readonly  />
+<input type="text" id="deposit" readonly />
+<input type="submit" class="submit" class="ui-button" value="Save"> 
+<input type="button" class="cancel" class="ui-button" value="Cancel"> 
+
+</form>
+</div>
+
+
+
+</body>
+</html>
