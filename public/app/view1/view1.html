@@ -1,5 +1,9 @@
+<p>This is the partial for view 1.</p>
+<div class="container" >
+<div ng-controller="View1Ctrl">
 
-<div class="container" ng-controller="View1Ctrl">
+<!--<button id="search-register" ng-click="openSearch()">Search Register</button>-->
+
 <table class="tbl tablesorter" width="800" border="1" cellpadding="2">
 <thead>
   <tr>
@@ -15,10 +19,7 @@
   </tr>
 </thead>
 <tbody class="tbody">
-
-<!--  <tr id="{{item.id}}"> 
--->
-	<tr ng-repeat="item in items" ng-class-odd="'odd'" editable id={{item.id}}>
+	<tr ng-repeat="item in items" ng-class-odd="'odd'" ng-click="openDlg(item)" id={{item.id}}>
     <td class="date">{{item.date}}</td>     
     <td class="reference">{{item.reference}}</td>
     <td class="number">{{item.number}}</td>    
@@ -31,10 +32,31 @@
   </tr>
  </tbody>
 </table>
-
+<div id="chkEntryDlg" title="Check Register Entry" editable>
+<form novalidate method="POST" id="chkEntryForm" name="chkEntryForm">
+<label>Date</label>
+<input type="text" name="date" ng-model="item.date" readonly>
+<label>Reference</label>
+<input type="text" name="reference" ng-model="item.reference" readonly>
+<label>Number</label>
+<input type="text" name="number" ng-model="item.number">
+<label>Payee</label>
+<input type="text" name="payee" ng-model="item.payee" >
+<label>Memo</label>
+<input type="text" name="memo" ng-model="item.memo">
+<label>Account</label>
+<input type="text" name="account" ng-model="item.account" listaccts>
+<label>Payment</label>
+<input type="text" name="payment" ng-model="item.payment" ng-disabled="disablePayment" >
+<label>Deposit</label>
+<input type="text" name="deposit" ng-model="item.deposit" ng-disabled="disableDeposit" >
+</form>
+</div><!--chkEntryDlg-->
+</div><!--View1Ctrl-->
 <div ng-controller="entryFormCtl">
 <form  novalidate method="POST" name="entryForm" id="entryForm">
-<input name="date" type="date" ng-model="entry.date" id="datepicker"  required ng-model-options="{ updateOn: 'blur' }">
+<input name="date" type="date" ng-model="entry.date" id="datepicker" 
+ required ng-blur="validDate()">
 <select name="reference" ng-model="entry.reference" id="reference" ng-change="change()"><option value="">Choose</option><option value="payment"  selected>Payment</option><option value="deposit">Deposit</option></select>
 <input name="number" type="text" ng-model="entry.number" id="number" placeholder="number">
 <input name="payee" type="text" ng-model="entry.payee" id="payee" placeholder="payee">
@@ -46,28 +68,25 @@
 <input type="submit" class="submit" class="ui-button" value="Add"  ng-click="add()">
 </form>
 </div>
-</div>
-
+</div><!--container-->
 <div ng-controller="schRegDialog">
 <button id="search-register" ng-click="openSearch()">Search Register</button>
 
 <div id="dialog-form" title="Find Checking Transactions" wdialog>
-  <p class="title">Search the Check Register.</p>
- 
+  <p class="title">Search the Check Register.</p> 
  <form id="dialogForm" name="dialogForm">
     <fieldset>
-      <label for="search">Search</label>
+      <label for="search">Search by</label>
       <select id="search" ng-model="setSearch" ng-change="search()"><option value="">date</option><option value="amount">amount</option><option value="account">account</option><option value="payee">payee</option></select>
       <label for="find">Find</label>     
       <div class="wrapdiv">
       <input type="text" ng-model="dtAmtAccPy" id="datepicker2" name="searchdate" datepicker ng-change="findValidate()" >
       </div> 
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-     <!-- <div id="findbtn"> <input type="submit" class="submit ui-button" value="find"></div>-->       
+    <!--  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
+           
     </fieldset>
- </form>
-  
+ </form>  
   <table id="resultTable">
   <caption>Results</caption>
   <thead>
@@ -81,11 +100,9 @@
     <td>{{item.date | date:'M/d/yyyy'}}</td>
     <td>{{item.reference}}</td>
     <td>{{(item.payment + item.deposit)/100 | number : 2}}</td>    
- </tr>
-  
+ </tr>  
   </tbody>
-  </table>
-  
+  </table>  
 <form novalidate method="POST" id="resultsForm" name="resultsForm">
 <label>Date</label>
 <input type="text" name="date" ng-model="entry.date" readonly>
@@ -103,11 +120,7 @@
 <input type="text" name="payment" ng-model="entry.payment" ng-disabled="disablePayment" >
 <label>Deposit</label>
 <input type="text" name="deposit" ng-model="entry.deposit" ng-disabled="disableDeposit" >
-</form>
-  
-  
+</form>  
 </div><!--dialogForm-->
-
-
 </div><!--ng-controller schRegDialog-->
 </div><!--.container-->

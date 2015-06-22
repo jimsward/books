@@ -18,12 +18,10 @@ app.use(sessionHandler.isLoggedInMiddleware);
 
 app.get('/', contentHandler.displayMainPage);
 app.post('/newentry', contentHandler.handleNewEntry);
-app.post('/edit', contentHandler.editRow)
 app.post('/delete', contentHandler.deleteRow)
 app.get( '/find', contentHandler.findRow )
 app.get('/customers', sessionHandler.displayCustomersPage);
 app.get( '/accounts', contentHandler.listAccounts )
-app.get( '/results', contentHandler.editResults )
 app.post( '/chkUpdate', contentHandler.chkUpdate )
 console.log("HERE")
 

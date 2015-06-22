@@ -64,10 +64,10 @@ function ContentHandler (app, db) {
 		var newE = req.body;  //need to store dollar amounts as integers
 		newE.deposit = toInt( newE.deposit )
 		newE.payment = toInt( newE.payment )
-		
+		console.log(newE.payment)
 		//date needs to be a date object
-		var parts = newE.date.split('/');
-		newE.date = new Date( parts[2],parts[0]-1,parts[1] )		
+		var parts = newE.date.split('-');
+		newE.date = new Date( parts[0],parts[1]-1,parts[2] )		
 		
 			entries.insertEntry( newE, function(err) {
             "use strict";
@@ -85,38 +85,13 @@ function ContentHandler (app, db) {
 			}
 			
 			var entry = { "items" : results }			
-            return res.render('entries', entry );
+           // return res.render('entries', entry );
+		   return res.send( entry )
         });			
 		})
 	}
 	
-	//called if user clicks 'save' after editing
-	this.editRow = function(req, res, next) 
-	{	
-	console.log(req.body)			
-		var itemsStart = app.locals.entry.items[0].id
-		var itemsOffset = req.body.id		
-		var arrIndex =  itemsOffset - itemsStart		
-		var obj = app.locals.entry.items[arrIndex]
-		
-		
-		
-		
-		//amount sent is a string with decimal, commas - fix it
-		var re = /\,/g
-		obj.deposit = req.body.deposit.replace( re, ''  )
-				console.log(typeof obj.deposit)
 
-		obj.payment = req.body.payment.replace( re, ''  )
-		obj.deposit = (obj.deposit*100)
-		obj.payment = (obj.payment*100)
-		
-		entries.updateEntry( obj, function(err, results)
-		{
-		if (err) return next(err)		
-		return res.end()
-		})				
-	}
 				
 	this.deleteRow = function(req, res, next) 
 	{
@@ -151,14 +126,6 @@ function ContentHandler (app, db) {
 	}
 	
 	
-	this.editResults = function( req, res, next )//req has object from search dialog
-	{
-		var results = req.query
-		console.log('results:' + results.deposit)
-		res.render( 'edit_search_results', results, function(err, html) {
-		res.send(html);})		
-	}
-	
 	this.chkUpdate = function( req, res, next ){		
 		var obj = req.body
 		
@@ -167,8 +134,10 @@ function ContentHandler (app, db) {
 		var re = /\,/g
 		obj.deposit = req.body.deposit.replace( re, ''  )				
 		obj.payment = req.body.payment.replace( re, ''  )
-		obj.deposit = (obj.deposit*100)
-		obj.payment = (obj.payment*100)
+		obj.deposit = parseInt((obj.deposit*100))
+		obj.payment = parseInt((obj.payment*100))
+		
+		console.log(obj.deposit + '  ' + obj.payment)
 
 		
 		entries.updateEntry( obj, function(err, results)

@@ -11,18 +11,36 @@ app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, 
 	getEntries.then(function(response) {
 		
 	$scope.items = response.data.items
-	//console.log($scope.items[39])
 	
-			
-	})	
-	}])
+	$scope.openDlg =  function(item){
+		angular.element( '#' + item.id ).unbind().css( 'opacity', '0.5' )
+		$scope.item = item
+		
+		$scope.$watch('item.payment', function(){
+			if ( $scope.item.deposit > 0 && $scope.item.payment > 0 )
+			{ $scope.item.deposit = '0' }
+		})
+		$scope.$watch('item.deposit', function(){
+			if ( $scope.item.deposit > 0 && $scope.item.payment > 0 )
+			{ $scope.item.payment = '0' }			
+		})
+		
+	$scope.dialog.dialog( "open" )
+		}			
+	})//promise	
+	}])//controller
 app.factory( 'getEntries', [ '$http', function($http) {	 
     return $http.get('/')	
 	}])	
 app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 	$scope.entry = {}
+	
+	var myDate = new Date();
+	var imonth = myDate.getMonth()+1
+	if ( imonth < 10 ) imonth = '0' + imonth	
+	var today =( myDate.getFullYear() + '-' + imonth  + '-' + myDate.getDate())
+	$scope.entry.date = today
 	angular.element( '#datepicker' ).focus()
-	$scope.entry.date = $filter('date')( new Date(), 'M/d/yyyy' )	
 	$scope.entry.payment = 0
 	$scope.entry.deposit = 0
 	$scope.disablePayment = true
@@ -75,8 +93,9 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $
 		}	
 	$scope.validDate = function(){
         var val = $scope.entry.date
+		
         var val1 = Date.parse(val);
-		console.log( typeof val1 )
+		
         if (isNaN(val1)==true && val!==''){
 			$scope.entry.date = ""
            alert("Please enter a valid date!")
@@ -150,7 +169,7 @@ app.directive('datepicker', function(){
 });
 //Placed on an input element, GETs the list of accounts from db
 //and verifies that input is in that list - this is a required field
-app.directive('listaccts', function($http){	
+app.directive('listaccts', [ '$http', function($http){	
 	return {
 	require : 'ngModel',
 	link : function(scope,element,attrs, ngModel){
@@ -171,7 +190,8 @@ app.directive('listaccts', function($http){
 				if (accounts.indexOf(val) == -1  )			
 				{
 				alert(val + ' not in list of Accounts')	
-				scope.entry.account = ""
+				//scope.entry.account = ""
+				angular.element(event.target).val("")
 				return
 				}//if
 				scope.$apply(function(){
@@ -181,8 +201,8 @@ app.directive('listaccts', function($http){
 		})//success
 		}//link
 	}//return
-	})//directive
-app.directive('wdialog', function($http, $location){	      
+	}])//directive
+app.directive('wdialog', [ '$http', function($http){	      
 	return {
 	link : function(scope,element,attrs, ngModel){		 
 	  scope.dialog = $( "#dialog-form" ).dialog({
@@ -266,58 +286,63 @@ app.directive('wdialog', function($http, $location){
 		$(this).dialog( "close" );
 		}}        
 		]//buttons
-    });//link					
-		}//scope.dialog
+    });//scope.dialog					
+		}//link
 	}//return
-});//wdialog
+}]);//wdialog
 
-app.directive( 'editable', function($http, $location){
+app.directive( 'editable', [ '$http', function($http){
 	return {
 		
-			link : function(scope,element,attrs, ngModel){
-			element.on('click', function(event){
-			var actives = angular.element( 'tr.activeTr' ).length//.activeTr means there is already an active row
-			if ( actives ) return
-			element.unbind().css( 'opacity', '0.5' ).addClass( 'activeTr' )
-						
-			/*var target = angular.element( event.target );	
-			var x = target.parent().position().left;
-			var y = target.parent().position().top;
-			var positX = Math.round(x) + 542;
-			var positY = Math.round(y) + 23;
-			var buttons = '<button class="submit" id="save">Save</button>'
-			+ '<button class="submit" id="edit">Edit</button>'
-			+ '<button class="submit" id="cancel">Cancel</button>'
-			+ '<button class="submit" id="delete">Delete</button>'		*/
-			
-			/*angular.element( '<div/>' ).css( { 'height' : '46px', 'border' : '1px solid black', 'position' : 'absolute', 'left' : positX + 'px', 'top' : positY + 'px', 'background': '#3868bc' } )
-			.appendTo( '.tbody' ).html(buttons)*/
-			
-			/*angular.element( '.tbody tr.activeTr td.payment' ).maskMoney()*/
-			//angular.element( '.tbody tr.activeTr td' ).html('<input type="text"/>')			
-			//angular.element('button#save' ).on( 'click', function(event){
-			//console.log(event.target)
-			
-/*			scope.item.reference = angular.element( 'tr.activeTr td.reference' ).text()				
-				//validation
+			link : function(scope,element,attrs, ngModel){						
+			  scope.dialog = $( "#chkEntryDlg" ).dialog({
+		      autoOpen: false,
+		      height: 600,
+	 		  width: 400,
+		      modal: true,
+		buttons : [
+			{
+		text : 'save',
+			id : 'eidtableSave',
+			click : function() {
 				scope.$apply( function() {			
-				$http( {
-    			url: '/chkUpdate',
-   	 			method: "POST",
-    			data : scope.item } )
-				.success(  function(data){			
-				alert('Document Updated!')
+		$http( {
+    	url: '/chkUpdate',
+   	 	method: "POST",
+    	data : scope.item } )
+		.success(  function(data){			
+		alert('Document Updated!')
+			})
 				})
-				})//apply				
-				})//button#save click				*/
-		/*angular.element( 'button#edit' ).on( 'click', function(){
-			angular.element(element).attr('contentEditable', true)
-			})*/
+				}			
+			},
+			{
+		text : 'delete',
+			id : 'editableDelete',
+			click : function(){
+				 var data = {} 
+		  data._id = scope.item._id
+		scope.$apply( function() {			
+		$http( {
+    	url: '/delete',
+   	 	method: "POST",
+    	data : data } )
+		.success(  function(data){			
+		alert('Document Deleted!')
+			})
+		  })				
+				}
+			},
+			{
+		text : 'cancel',
+			id : 'editableCancel',
+			click : function(){
+				$(this).dialog( "close" );
+				}
+			}			
+			]						
 			
-			
-			//console.log(scope.item)
-			//.attr('contentEditable', true)			
-				})//click handler
+				})//dialog
 			}//link function
 		}//return
-	})//editable
+	}])//editable
