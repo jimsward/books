@@ -2,8 +2,6 @@
 <div class="container" >
 <div ng-controller="View1Ctrl">
 
-<!--<button id="search-register" ng-click="openSearch()">Search Register</button>-->
-
 <table class="tbl tablesorter" width="800" border="1" cellpadding="2">
 <thead>
   <tr>
@@ -47,9 +45,9 @@
 <label>Account</label>
 <input type="text" name="account" ng-model="item.account" listaccts>
 <label>Payment</label>
-<input type="text" name="payment" ng-model="item.payment" ng-disabled="disablePayment" >
+<input type="text" name="payment" ng-model="item.payment" ng-disabled="disablePayment" maskmoney >
 <label>Deposit</label>
-<input type="text" name="deposit" ng-model="item.deposit" ng-disabled="disableDeposit" >
+<input type="text" name="deposit" ng-model="item.deposit" ng-disabled="disableDeposit" maskmoney>
 </form>
 </div><!--chkEntryDlg-->
 </div><!--View1Ctrl-->
@@ -62,8 +60,8 @@
 <input name="payee" type="text" ng-model="entry.payee" id="payee" placeholder="payee">
 <input name="memo" type="text" ng-model="entry.memo" id="memo" placeholder="memo">
 <input name="account" type="text" ng-model="entry.account" id="account" placeholder="account" listaccts required>
-<input name="payment" type="text" ng-model="entry.payment" ng-disabled="disablePayment" id="payment" placeholder="payment" title="Payment"/>
-<input name="deposit" type="text" ng-model="entry.deposit" ng-disabled="disableDeposit" id="deposit" placeholder="deposit" readonly title="Deposit" />
+<input name="payment" type="text" ng-model="entry.payment" ng-disabled="disablePayment" id="payment" placeholder="payment" title="Payment" maskmoney/>
+<input name="deposit" type="text" ng-model="entry.deposit" ng-disabled="disableDeposit" id="deposit" placeholder="deposit" readonly title="Deposit" maskmoney/>
 <input type="reset" class="cancel" class="ui-button" value="Cancel" ng-click="cancel()">
 <input type="submit" class="submit" class="ui-button" value="Add"  ng-click="add()">
 </form>
@@ -71,17 +69,29 @@
 </div><!--container-->
 <div ng-controller="schRegDialog">
 <button id="search-register" ng-click="openSearch()">Search Register</button>
-
 <div id="dialog-form" title="Find Checking Transactions" wdialog>
   <p class="title">Search the Check Register.</p> 
  <form id="dialogForm" name="dialogForm">
     <fieldset>
       <label for="search">Search by</label>
-      <select id="search" ng-model="setSearch" ng-change="search()"><option value="">date</option><option value="amount">amount</option><option value="account">account</option><option value="payee">payee</option></select>
-      <label for="find">Find</label>     
-      <div class="wrapdiv">
+     <!-- <select id="search" ng-model="setSearch" ng-change="search()"><option value="date">date</option><option value="amount">amount</option><option value="account">account</option><option value="payee">payee</option></select>
+      <label for="find">Find</label>
+      -->
+      
+   <select id="search" ng-model="obj.key" ng-options="item for item in items">
+  </select>   
+           
+     <!-- <div class="wrapdiv">
       <input type="text" ng-model="dtAmtAccPy" id="datepicker2" name="searchdate" datepicker ng-change="findValidate()" >
-      </div> 
+      </div> -->
+     <label for="find">Find</label>
+     <div id="find" class="wrapdiv" ng-switch on="obj.key">
+     <div ng-switch-when="date"><input type="text" ng-model="obj.val" name="searchdate" datepicker id="datepicker2"/></div>
+     <div ng-switch-when="amount"><input type="text" ng-model="obj.val" maskmoney/></div>
+     <div ng-switch-when="payee"><input type="text" ng-model="obj.val"  /></div>
+     <div ng-switch-when="account"> <input type="text" ng-model="obj.val" listaccts  /></div>
+     </div> 
+      
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
     <!--  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
            
@@ -117,9 +127,9 @@
 <label>Account</label>
 <input type="text" name="account" ng-model="entry.account" listaccts>
 <label>Payment</label>
-<input type="text" name="payment" ng-model="entry.payment" ng-disabled="disablePayment" >
+<input type="text" name="payment" ng-model="entry.payment" ng-disabled="disablePayment" maskmoney>
 <label>Deposit</label>
-<input type="text" name="deposit" ng-model="entry.deposit" ng-disabled="disableDeposit" >
+<input type="text" name="deposit" ng-model="entry.deposit" ng-disabled="disableDeposit" maskmoney>
 </form>  
 </div><!--dialogForm-->
 </div><!--ng-controller schRegDialog-->

@@ -71,7 +71,9 @@ button#save { opacity :0.5; }
 
 fieldset { height : 140px; }
 
-fieldset label, fieldset input { display : block; padding : 6px 0; font-weight:700 }
+fieldset label, fieldset input { display : block; padding : 6px 0; }
+
+fieldset label { font-weight : 700 }
 
 button.ui-datepicker-trigger { display:inline }
 

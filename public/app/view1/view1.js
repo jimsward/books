@@ -8,14 +8,11 @@ app.config(['$routeProvider', function($routeProvider) {
 }])
 //Populate the table with checkbook entries
 app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, getEntries, $http){		
-	getEntries.then(function(response) {
-		
-	$scope.items = response.data.items
-	
+	getEntries.then(function(response) {		
+	$scope.items = response.data.items	
 	$scope.openDlg =  function(item){
 		angular.element( '#' + item.id ).unbind().css( 'opacity', '0.5' )
-		$scope.item = item
-		
+		$scope.item = item		
 		$scope.$watch('item.payment', function(){
 			if ( $scope.item.deposit > 0 && $scope.item.payment > 0 )
 			{ $scope.item.deposit = '0' }
@@ -23,18 +20,17 @@ app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, 
 		$scope.$watch('item.deposit', function(){
 			if ( $scope.item.deposit > 0 && $scope.item.payment > 0 )
 			{ $scope.item.payment = '0' }			
-		})
-		
+		})		
 	$scope.dialog.dialog( "open" )
 		}			
 	})//promise	
 	}])//controller
 app.factory( 'getEntries', [ '$http', function($http) {	 
     return $http.get('/')	
-	}])	
+	}])
+	//form with controls for new entries to the check register
 app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
-	$scope.entry = {}
-	
+	$scope.entry = {}	
 	var myDate = new Date();
 	var imonth = myDate.getMonth()+1
 	if ( imonth < 10 ) imonth = '0' + imonth	
@@ -45,9 +41,6 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $
 	$scope.entry.deposit = 0
 	$scope.disablePayment = true
 	$scope.disableDeposit = true
-	angular.element( '#payment' ).maskMoney()
-	angular.element( '#deposit' ).maskMoney()	
-	//only allow a payment or a deposit; not both
 	$scope.change = function(){
 		var ref = angular.element( 'select#reference' ).val()
 		if ( ref == 'payment' )
@@ -80,10 +73,8 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $
 		{			
 			alert('Please enter an Amount')			
 			return
-		}
-				
-		else
-		
+		}				
+		else		
 		$http.post('/newentry', $scope.entry).then( function(){
 		location.reload(true)})
 		}	
@@ -105,32 +96,31 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $
         }
 	}
 	}])	
+	//controller for wdialog directive; launches dialog with search on several fields;allows selction of a single record
+	//and allows update, delete
 app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $http, $filter){		
 	$scope.openSearch = function(){
 		$scope.dialog.dialog( "open" )
 		}
-	angular.element("input[name|='payment']").maskMoney()
-	angular.element("input[name|='deposit']").maskMoney()
-	
-	
-			
+	$scope.obj = {}
+	$scope.items = [ 'date', 'amount', 'payee', 'account' ]
+	$scope.obj.key = $scope.items[0];			
 	$scope.search = function(){							
-	var choice = $scope.setSearch	
+	var choice = $scope.obj.key	
 	switch (choice) {
 		case 'date' :
-		
+		$( '#datepicker2' ).datepicker( "show" )
 		break;		
 		case 'amount' :
 		angular.element( 'input#datepicker2.hasDatepicker' ).datepicker('destroy')
-		angular.element( '#datepicker2' ).maskMoney()		
 		break;		
 		case 'account' :
 		 $( '#datepicker2' ).datepicker( 'destroy' )
-		 $( 'input#datepicker2' ).maskMoney( 'destroy' )		
+		 $( 'div.wrapdiv input' ).maskMoney( 'destroy' )		
 		break;		
 		case 'payee' :
 		 $( '#datepicker2' ).datepicker( 'destroy' )
-		 $( 'input#datepicker2' ).maskMoney( 'destroy' )		 
+		 $( 'div.wrapdiv input' ).maskMoney( 'destroy' )		 
 		break;		
 		}//switch		
 	}//$scope.search
@@ -138,18 +128,11 @@ app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $
 	$scope.pickRow = function(item){
 		$scope.entry = item
 		$scope.entry.date = $filter('date')( item.date, 'M/d/yyyy' )
-		console.log($scope.entry.payment)
 		$scope.disablePayment = true
 		$scope.disableDeposit = true
 		$scope.entry.deposit == 0 ? $scope.disablePayment = false : $scope.disableDeposit = false
 		$scope.entry.payment = $filter('number')( ($scope.entry.payment)/100 , 2)
 		$scope.entry.deposit = $filter('number')( ($scope.entry.deposit)/100 , 2)	
-		}
-	$scope.findValidate = function(){
-		
-		//var inDate = angular.element( 'input#datepicker2.hasDatepicker' ).val()
-		
-	
 		}
 	}])	//schRegDialog controller
 app.directive('datepicker', function(){	      
@@ -167,6 +150,15 @@ app.directive('datepicker', function(){
 		}
 	}
 });
+
+app.directive('maskmoney', function(){	      
+	return {
+	link : function(scope,element,attrs, ngModel){
+		element.maskMoney();	
+		}
+	}
+});
+
 //Placed on an input element, GETs the list of accounts from db
 //and verifies that input is in that list - this is a required field
 app.directive('listaccts', [ '$http', function($http){	
@@ -202,6 +194,10 @@ app.directive('listaccts', [ '$http', function($http){
 		}//link
 	}//return
 	}])//directive
+	//dialog with form to choose the key (date, amount, payee, account) to search on
+	//followed by the value. Uses key/value pair to get a list of documents
+	//a click on an item in the list populates a form with the data from that document
+	//the form is editable - update, delete
 app.directive('wdialog', [ '$http', function($http){	      
 	return {
 	link : function(scope,element,attrs, ngModel){		 
@@ -216,8 +212,6 @@ app.directive('wdialog', [ '$http', function($http){
 	  id : 'schUpdate',
 	  click : function()
 	  	{
-			console.log(scope.entry)
-		
 		scope.$apply( function() {			
 		$http( {
     	url: '/chkUpdate',
@@ -242,18 +236,14 @@ app.directive('wdialog', [ '$http', function($http){
 	 text : 'Find',
 	 id : 'schFind',	  
 	 click: function(){		
-		var obj = {}
-		obj.key = angular.element( "select#search option:selected" ).text()
-		obj.val = angular.element( "input[name='searchdate']" ).val()
-		alert( obj.key + ' ' + obj.val )
+		alert( scope.obj.key + ' ' + scope.obj.val )
 		scope.$apply( function() {			
 		$http( {
     	url: '../find',
    	 	method: "GET",
-    	params: obj } )
+    	params: scope.obj } )
 		.success(  function(data){			
 		scope.results = data
-			//	console.log(scope.results)
 			})
 		})
 	  }},//find
@@ -261,9 +251,8 @@ app.directive('wdialog', [ '$http', function($http){
 	  text : 'Delete',
 	  id : 'schDelete',
 	  click: function(){
-		  //console.log('scope.entry : ' + scope.entry._id)
-		  var data = {} 
-		  data._id = scope.entry._id
+		 var data = {} 
+		 data._id = scope.entry._id
 		scope.$apply( function() {			
 		$http( {
     	url: '/delete',
@@ -290,7 +279,9 @@ app.directive('wdialog', [ '$http', function($http){
 		}//link
 	}//return
 }]);//wdialog
-
+	//click on any of the rows in the table displaying check register entries
+	//a dialog with this directive appears with the contents of the clicked row
+	//this directive on the chkEntryDlg form allows edits and/or delete on the data 
 app.directive( 'editable', [ '$http', function($http){
 	return {
 		
@@ -303,7 +294,7 @@ app.directive( 'editable', [ '$http', function($http){
 		buttons : [
 			{
 		text : 'save',
-			id : 'eidtableSave',
+			id : 'editableSave',
 			click : function() {
 				scope.$apply( function() {			
 		$http( {
@@ -340,8 +331,7 @@ app.directive( 'editable', [ '$http', function($http){
 				$(this).dialog( "close" );
 				}
 			}			
-			]						
-			
+			]			
 				})//dialog
 			}//link function
 		}//return
