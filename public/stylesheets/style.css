@@ -1,3 +1,5 @@
+#shadow { color : #fff }
+
 body { background-color:#fff; font:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif }
 
 .container { width : 1000px; margin:auto;  margin-bottom:100px }
@@ -85,7 +87,7 @@ table#resultTable tbody tr td, table#resultTable thead tr th { text-align:right 
 
 .odd { background-color : #ecf3e1 }
 
-.wrapdiv { height:24px; width:260px; }
+.wrapdiv { height:24px; width:260px; }	
 
 form#resultsForm input.submit { width:142px; margin-top:18px }
 
@@ -98,3 +100,8 @@ tr.odd td { background-color : #ecf3e1; }
 tr td { border-color : transparent; }
 
 .ui-dialog-buttonset:nth-child(1) { display:block; float:left !important }
+
+ul.menu li { list-style-type: none;    padding: 0px;    margin: 0px; }
+
+ul.menu li a { display:block; background-color : #3868bc; color : #fff ;
+ 	text-decoration:none;width:150px; text-align : center; border: 1px #fff solid; font-size:24px; }
