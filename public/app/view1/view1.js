@@ -104,7 +104,8 @@ app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $
 		}
 	$scope.obj = {}
 	$scope.items = [ 'date', 'amount', 'payee', 'account' ]
-	$scope.obj.key = $scope.items[0];			
+	$scope.obj.key = $scope.items[0];	
+	/*		
 	$scope.search = function(){							
 	var choice = $scope.obj.key	
 	switch (choice) {
@@ -124,6 +125,7 @@ app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $
 		break;		
 		}//switch		
 	}//$scope.search
+	*/
 	//user clicked on a row in the results table
 	$scope.pickRow = function(item){
 		$scope.entry = item
@@ -244,6 +246,7 @@ app.directive('wdialog', [ '$http', function($http){
     	params: scope.obj } )
 		.success(  function(data){			
 		scope.results = data
+		scope.obj.val = ''
 			})
 		})
 	  }},//find

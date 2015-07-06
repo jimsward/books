@@ -14,7 +14,7 @@
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0",
     "swig": "^1.4.2",
-	"mongodb":"~2.6.4",
+	"mongodb":"^2.0.35",
 	"consolidate":"0.12.1"
   },
   "description": "Complete Check Register",

@@ -73,31 +73,18 @@
   <p class="title">Search the Check Register.</p> 
  <form id="dialogForm" name="dialogForm">
     <fieldset>
-      <label for="search">Search by</label>
-     <!-- <select id="search" ng-model="setSearch" ng-change="search()"><option value="date">date</option><option value="amount">amount</option><option value="account">account</option><option value="payee">payee</option></select>
-      <label for="find">Find</label>
-      -->
-      
-   <select id="search" ng-model="obj.key" ng-options="item for item in items">
-  </select>   
-           
-     <!-- <div class="wrapdiv">
-      <input type="text" ng-model="dtAmtAccPy" id="datepicker2" name="searchdate" datepicker ng-change="findValidate()" >
-      </div> -->
+     <label for="search">Search by</label>
+     <select id="search" ng-model="obj.key" ng-options="item for item in items"></select>       
      <label for="find">Find</label>
      <div id="find" class="wrapdiv" ng-switch on="obj.key">
      <div ng-switch-when="date"><input type="text" ng-model="obj.val" name="searchdate" datepicker id="datepicker2"/></div>
      <div ng-switch-when="amount"><input type="text" ng-model="obj.val" maskmoney/></div>
      <div ng-switch-when="payee"><input type="text" ng-model="obj.val"  /></div>
      <div ng-switch-when="account"> <input type="text" ng-model="obj.val" listaccts  /></div>
-     </div> 
-      
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-    <!--  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">-->
-           
-    </fieldset>
+     </div>      
+   </fieldset>
  </form>  
-  <table id="resultTable">
+ <table id="resultTable">
   <caption>Results</caption>
   <thead>
  <tr>
@@ -105,14 +92,14 @@
  </tr>
   </thead>
   <tbody title="Click on a row to see complete contents of the transaction below.">
- <tr ng-repeat="item in results" ng-click="pickRow(item)" ng-class-odd="'odd'">
+  <tr ng-repeat="item in results" ng-click="pickRow(item)" ng-class-odd="'odd'">
  	<td>{{$index + 1}}</td>
     <td>{{item.date | date:'M/d/yyyy'}}</td>
     <td>{{item.reference}}</td>
     <td>{{(item.payment + item.deposit)/100 | number : 2}}</td>    
- </tr>  
-  </tbody>
-  </table>  
+  </tr>  
+ </tbody>
+ </table>  
 <form novalidate method="POST" id="resultsForm" name="resultsForm">
 <label>Date</label>
 <input type="text" name="date" ng-model="entry.date" readonly>
