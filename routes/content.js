@@ -8,8 +8,7 @@ var toInt = require('../public/javascripts/toInt')
 
 /* The ContentHandler must be constructed with a connected db */
 function ContentHandler (app, db) {
-    "use strict";
-	var displArr
+    var displArr
     var entries = new EntriesDAO(db);
 	var accounts = new AccountsDAO(db);
 	
@@ -40,10 +39,9 @@ function ContentHandler (app, db) {
 			results[i].balance = toDecimal(results[i].balance)
 			results[i].id = i.toString()
 			
-			var myDate = new Date(results[i].date)
-			results[i].date = (myDate.getMonth()+1) + '/' + myDate.getDate() + '/' +
-            myDate.getFullYear();
-			
+			var parts = results[i].date.split('/');
+			results[i].date = parts[1] + '/' + parts[2] + '/' + parts[0]
+						
 			}
 			
 			var displArr = results.slice( results.length - 40 )
@@ -64,10 +62,10 @@ function ContentHandler (app, db) {
 		var newE = req.body;  //need to store dollar amounts as integers
 		newE.deposit = toInt( newE.deposit )
 		newE.payment = toInt( newE.payment )
-		console.log(newE.payment)
-		//date needs to be a date object
+				
 		var parts = newE.date.split('-');
-		newE.date = new Date( parts[0],parts[1]-1,parts[2] )		
+		
+		newE.date =  parts[0] + '/' + parts[1] + '/' + parts[2] 		
 		
 			entries.insertEntry( newE, function(err) {
             "use strict";

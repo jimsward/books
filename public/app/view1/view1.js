@@ -147,7 +147,7 @@ app.directive('datepicker', function(){
 					ngModel.$setViewValue(dateText);
 				  });
 				},
-				dateFormat: "m/d/yy"
+				dateFormat: "mm/dd/yy"
 			  });	
 		}
 	}

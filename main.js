@@ -14,9 +14,8 @@ var users = require('./routes/users');
 var cons = require('consolidate') // Templating library adapter for Express
 app.use(express.static('public'));
 
-
 MongoClient.connect('mongodb://jimsward:polello1@ds045757.mongolab.com:45757/checking', function(err, db) {
-    "use strict";
+   
     if(err) throw err;
 
 var entries = db.collection("entries");
