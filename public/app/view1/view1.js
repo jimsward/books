@@ -105,27 +105,6 @@ app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $
 	$scope.obj = {}
 	$scope.items = [ 'date', 'amount', 'payee', 'account' ]
 	$scope.obj.key = $scope.items[0];	
-	/*		
-	$scope.search = function(){							
-	var choice = $scope.obj.key	
-	switch (choice) {
-		case 'date' :
-		$( '#datepicker2' ).datepicker( "show" )
-		break;		
-		case 'amount' :
-		angular.element( 'input#datepicker2.hasDatepicker' ).datepicker('destroy')
-		break;		
-		case 'account' :
-		 $( '#datepicker2' ).datepicker( 'destroy' )
-		 $( 'div.wrapdiv input' ).maskMoney( 'destroy' )		
-		break;		
-		case 'payee' :
-		 $( '#datepicker2' ).datepicker( 'destroy' )
-		 $( 'div.wrapdiv input' ).maskMoney( 'destroy' )		 
-		break;		
-		}//switch		
-	}//$scope.search
-	*/
 	//user clicked on a row in the results table
 	$scope.pickRow = function(item){
 		$scope.entry = item
@@ -152,7 +131,6 @@ app.directive('datepicker', function(){
 		}
 	}
 });
-
 app.directive('maskmoney', function(){	      
 	return {
 	link : function(scope,element,attrs, ngModel){
@@ -160,7 +138,6 @@ app.directive('maskmoney', function(){
 		}
 	}
 });
-
 //Placed on an input element, GETs the list of accounts from db
 //and verifies that input is in that list - this is a required field
 app.directive('listaccts', [ '$http', function($http){	

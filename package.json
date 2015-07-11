@@ -18,21 +18,22 @@
 	"consolidate":"0.12.1"
   },
   "description": "Complete Check Register",
-  "main": "app.js",
+  "main": "main.js",
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git://github.com/jimsward/ckbk"
+    "url": "git://github.com/jimsward/books"
   },
   "keywords": [
     "financials",
     "node",
-    "mongDB"
+    "mongDB",
+	"angular"
   ],
   "author": "jim sward",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jimsward/ckbk/issues"
+    "url": "https://github.com/jimsward/books/issues"
   },
-  "homepage": "https://github.com/jimsward/ckbk"
+  "homepage": "https://github.com/jimsward/books"
 }

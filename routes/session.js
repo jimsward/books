@@ -10,6 +10,8 @@ function SessionHandler (db) {
 
     this.isLoggedInMiddleware = function(req, res, next) {
 		
+		console.log('isLoggedIn')
+		
         var session_id = req.cookies.session;
         sessions.getUsername(session_id, function(err, username) {
             "use strict";
@@ -17,13 +19,17 @@ function SessionHandler (db) {
             if (!err && username) {
                 req.username = username;
             }
-			
+			console.log( 'uSERNAME ' + username	 )
+
             return next();
         });
     }
 
     this.displayLoginPage = function(req, res, next) {
         "use strict";
+		
+		console.log( 'LOGIN HERE'	 )
+		
         return res.render("login", {username:"", password:"", login_error:""})
     }
 

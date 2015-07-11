@@ -54,7 +54,7 @@
 <div ng-controller="entryFormCtl">
 <form  novalidate method="POST" name="entryForm" id="entryForm">
 <input name="date" type="date" ng-model="entry.date" id="datepicker" 
- required ng-blur="validDate()">
+ required ng-change="validDate()">
 <select name="reference" ng-model="entry.reference" id="reference" ng-change="change()"><option value="">Choose</option><option value="payment"  selected>Payment</option><option value="deposit">Deposit</option></select>
 <input name="number" type="text" ng-model="entry.number" id="number" placeholder="number">
 <input name="payee" type="text" ng-model="entry.payee" id="payee" placeholder="payee">
@@ -94,7 +94,7 @@
   <tbody title="Click on a row to see complete contents of the transaction below.">
   <tr ng-repeat="item in results" ng-click="pickRow(item)" ng-class-odd="'odd'">
  	<td>{{$index + 1}}</td>
-    <td>{{item.date | date:'M/d/yyyy'}}</td>
+    <td>{{item.date }}</td>
     <td>{{item.reference}}</td>
     <td>{{(item.payment + item.deposit)/100 | number : 2}}</td>    
   </tr>  

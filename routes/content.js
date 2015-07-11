@@ -125,10 +125,7 @@ function ContentHandler (app, db) {
 	
 	
 	this.chkUpdate = function( req, res, next ){		
-		var obj = req.body
-		
-		var parts = obj.date.split('/');
-		obj.date = new Date( parts[2],parts[0]-1,parts[1] )
+		var obj = req.body		
 		var re = /\,/g
 		obj.deposit = req.body.deposit.replace( re, ''  )				
 		obj.payment = req.body.payment.replace( re, ''  )
