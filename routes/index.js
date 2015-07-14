@@ -16,7 +16,9 @@ module.exports = exports = function(app, db) {
 app.use(sessionHandler.isLoggedInMiddleware);
 /* GET home page. */
 
-app.get('/', contentHandler.displayMainPage);
+app.get('/', contentHandler.displayLayout);
+app.get('/entries', contentHandler.displayMainPage);
+
 app.post('/newentry', contentHandler.handleNewEntry);
 app.post('/delete', contentHandler.deleteRow)
 app.get( '/find', contentHandler.findRow )

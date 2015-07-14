@@ -9,10 +9,12 @@ app.config(['$routeProvider', function($routeProvider) {
 //Populate the table with checkbook entries
 app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, getEntries, $http){		
 	getEntries.then(function(response) {		
-	$scope.items = response.data.items	
+	$scope.items = response.data.items
+		
 	$scope.openDlg =  function(item){
 		angular.element( '#' + item.id ).unbind().css( 'opacity', '0.5' )
-		$scope.item = item		
+		$scope.item = item
+				
 		$scope.$watch('item.payment', function(){
 			if ( $scope.item.deposit > 0 && $scope.item.payment > 0 )
 			{ $scope.item.deposit = '0' }
@@ -20,13 +22,17 @@ app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, 
 		$scope.$watch('item.deposit', function(){
 			if ( $scope.item.deposit > 0 && $scope.item.payment > 0 )
 			{ $scope.item.payment = '0' }			
-		})		
+		})
+		$scope.clearAmt = function(which){
+			
+			which == 'payment' ? $scope.item.payment = 0 : $scope.item.deposit = 0
+			}		
 	$scope.dialog.dialog( "open" )
 		}			
 	})//promise	
 	}])//controller
 app.factory( 'getEntries', [ '$http', function($http) {	 
-    return $http.get('/')	
+    return $http.get('/entries')	
 	}])
 	//form with controls for new entries to the check register
 app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
@@ -102,6 +108,7 @@ app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $
 	$scope.openSearch = function(){
 		$scope.dialog.dialog( "open" )
 		}
+		
 	$scope.obj = {}
 	$scope.items = [ 'date', 'amount', 'payee', 'account' ]
 	$scope.obj.key = $scope.items[0];	
@@ -112,9 +119,10 @@ app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $
 		$scope.disablePayment = true
 		$scope.disableDeposit = true
 		$scope.entry.deposit == 0 ? $scope.disablePayment = false : $scope.disableDeposit = false
-		$scope.entry.payment = $filter('number')( ($scope.entry.payment)/100 , 2)
-		$scope.entry.deposit = $filter('number')( ($scope.entry.deposit)/100 , 2)	
 		}
+	$scope.clearAmt = function(which){
+			which == 'payment' ? $scope.entry.payment = 0 : $scope.entry.deposit = 0
+			}		
 	}])	//schRegDialog controller
 app.directive('datepicker', function(){	      
 	return {
@@ -179,7 +187,8 @@ app.directive('listaccts', [ '$http', function($http){
 	//the form is editable - update, delete
 app.directive('wdialog', [ '$http', function($http){	      
 	return {
-	link : function(scope,element,attrs, ngModel){		 
+	link : function(scope,element,attrs, ngModel){
+				 
 	  scope.dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
       height: 600,
@@ -207,9 +216,10 @@ app.directive('wdialog', [ '$http', function($http){
 	 click : function()
 		{ $( '#dialogForm' )[0].reset()
 		$( '#resultsForm' )[0].reset()
-		$( 'input#datepicker2' ).maskMoney( 'destroy' )
+		$( 'input#dialogAmt' ).maskMoney( 'destroy' )
 		$( 'table#resultTable caption' ).html( '' )
 		 $( 'table#resultTable tbody tr' ).remove()
+		 scope.obj.key = ""
 		}},
       {
 	 text : 'Find',
@@ -239,8 +249,7 @@ app.directive('wdialog', [ '$http', function($http){
    	 	method: "POST",
     	data : data } )
 		.success(  function(data){			
-		alert('Document Deleted!')
-			})
+		element.dialog( "close" );			})
 		  })		  
 	  }},		
       { 
@@ -265,12 +274,14 @@ app.directive('wdialog', [ '$http', function($http){
 app.directive( 'editable', [ '$http', function($http){
 	return {
 		
-			link : function(scope,element,attrs, ngModel){						
+			link : function(scope,element,attrs, ngModel){
+										
 			  scope.dialog = $( "#chkEntryDlg" ).dialog({
 		      autoOpen: false,
 		      height: 600,
 	 		  width: 400,
 		      modal: true,
+			  
 		buttons : [
 			{
 		text : 'save',
@@ -282,7 +293,7 @@ app.directive( 'editable', [ '$http', function($http){
    	 	method: "POST",
     	data : scope.item } )
 		.success(  function(data){			
-		alert('Document Updated!')
+		element.dialog( "close" );
 			})
 				})
 				}			
@@ -299,7 +310,7 @@ app.directive( 'editable', [ '$http', function($http){
    	 	method: "POST",
     	data : data } )
 		.success(  function(data){			
-		alert('Document Deleted!')
+		element.dialog( "close" );
 			})
 		  })				
 				}

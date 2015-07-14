@@ -1,7 +1,7 @@
 var ObjectID = require('mongodb').ObjectID
 /* The EntriesDAO must be constructed with a connected database object */
 function EntriesDAO(db) {
-    "use strict";
+    
 
     /* If this constructor is called without the "new" operator, "this" points
      * to the global object. Log a warning and call it correctly. */
@@ -99,8 +99,10 @@ function EntriesDAO(db) {
 			{
 			case 'date' :
 			var parts = val.split('/');
-			val = new Date( parts[2],parts[0]-1,parts[1] )
-			query[key] = val;			
+			val = parts[2] + '/' + parts[0] + '/' + parts[1] 
+			console.log(val)
+			query[key] = val;
+			console.log(val)			
 			break;
 			
 			case 'amount' :			

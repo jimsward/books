@@ -12,7 +12,8 @@ function ContentHandler (app, db) {
     var entries = new EntriesDAO(db);
 	var accounts = new AccountsDAO(db);
 	
-
+	this.displayLayout = function(req, res, next){
+	return res.redirect( 'app/index.html' )}
 
     this.displayMainPage = function(req, res, next) {
         "use strict";
@@ -104,12 +105,24 @@ function ContentHandler (app, db) {
 	
 	this.findRow = function( req, res, next )
 	{
-		
-		console.dir(req.query)
+			
 	var obj = req.query
 		entries.findEntries(obj, function(err, results)
 		{
 			//console.log(results)
+			for ( var i=0; i<results.length; i++ )
+			{
+			var parts = results[i].date.split('/');
+			results[i].date = parts[1] + '/' + parts[2] + '/' + parts[0]
+			if ( results[i].deposit== 0 ){
+				 results[i].deposit = "";
+				 results[i].payment = toDecimal(results[i].payment)
+			}			
+			else{
+				results[i].payment = "";
+				results[i].deposit = toDecimal(results[i].deposit)
+			}
+			}
 			return res.send(results)
 			})
 		}
@@ -131,7 +144,8 @@ function ContentHandler (app, db) {
 		obj.payment = req.body.payment.replace( re, ''  )
 		obj.deposit = parseInt((obj.deposit*100))
 		obj.payment = parseInt((obj.payment*100))
-		
+		var parts = obj.date.split('/');
+			obj.date = parts[2] + '/' + parts[0] + '/' + parts[1]
 		console.log(obj.deposit + '  ' + obj.payment)
 
 		
