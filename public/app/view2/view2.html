@@ -1,5 +1,22 @@
 <p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div class="container">
+<div ng-controller="View2Ctrl">
+<input type="text" ng-model="customer.name" id="name" placeholder="Find a customer" listcustomers>
+<table width="1000" border="1" cellpadding="2">
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Open Balance</th>
+    <th scope="col">Action</th>
+  </tr>
+  <tbody class="tbody">
+  <tr ng-repeat="customer in customers" ng-class-odd="'odd'" ng-click="customerDetail()" id={{item.id}}>
+  	<td>{{customer.name}}</td>
+    <td class="rtalign">{{customer.balance | number : 2}}</td>
+    <td class="rtalign">Create Invoice</td>
+  </tr>
+  </tbody>
+</table>
+
+
+</div><!--customerCtrl-->
+</div>

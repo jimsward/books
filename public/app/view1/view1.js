@@ -146,6 +146,7 @@ app.directive('maskmoney', function(){
 		}
 	}
 });
+
 //Placed on an input element, GETs the list of accounts from db
 //and verifies that input is in that list - this is a required field
 app.directive('listaccts', [ '$http', function($http){	

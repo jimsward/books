@@ -1,6 +1,7 @@
  var qs = require('querystring');
 var EntriesDAO = require('../entries').EntriesDAO
 var AccountsDAO = require('../accounts').AccountsDAO
+var CustomersDAO = require('../customers').CustomersDAO
 var toDecimal = require('../public/javascripts/toDecimal')
 var toInt = require('../public/javascripts/toInt')
 
@@ -11,6 +12,7 @@ function ContentHandler (app, db) {
     var displArr
     var entries = new EntriesDAO(db);
 	var accounts = new AccountsDAO(db);
+	var customers = new CustomersDAO(db);
 	
 	this.displayLayout = function(req, res, next){
 	return res.redirect( 'app/index.html' )}
@@ -157,6 +159,17 @@ function ContentHandler (app, db) {
 		return res.end()
 		})	
 	}
+	this.displayCustomersPage = function( req, res, next ){
+		customers.getCustomers( function( err, results ){
+			if (err) return next(err)
+			console.log(results.length)
+			return res.send( results )
+			} )
+		}
+	
+	
 }
+
+	
 
 module.exports = ContentHandler;

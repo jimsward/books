@@ -22,7 +22,7 @@ app.get('/entries', contentHandler.displayMainPage);
 app.post('/newentry', contentHandler.handleNewEntry);
 app.post('/delete', contentHandler.deleteRow)
 app.get( '/find', contentHandler.findRow )
-app.get('/customers', sessionHandler.displayCustomersPage);
+app.get('/customers', contentHandler.displayCustomersPage);
 app.get( '/accounts', contentHandler.listAccounts )
 app.post( '/chkUpdate', contentHandler.chkUpdate )
 console.log("HERE")
