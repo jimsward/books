@@ -7,10 +7,11 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }])
 //Populate the table with checkbook entries
-app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, getEntries, $http){		
+app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, getEntries, $http){	
+	
 	getEntries.then(function(response) {		
 	$scope.items = response.data.items
-		
+	
 	$scope.openDlg =  function(item){
 		angular.element( '#' + item.id ).unbind().css( 'opacity', '0.5' )
 		$scope.item = item
@@ -23,8 +24,7 @@ app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, 
 			if ( $scope.item.deposit > 0 && $scope.item.payment > 0 )
 			{ $scope.item.payment = '0' }			
 		})
-		$scope.clearAmt = function(which){
-			
+		$scope.clearAmt = function(which){//mousedown handler			
 			which == 'payment' ? $scope.item.payment = 0 : $scope.item.deposit = 0
 			}		
 	$scope.dialog.dialog( "open" )
@@ -35,7 +35,7 @@ app.factory( 'getEntries', [ '$http', function($http) {
     return $http.get('/entries')	
 	}])
 	//form with controls for new entries to the check register
-app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
+app.controller('entryFormCtl', ['$scope', '$http', function($scope, $http){
 	$scope.entry = {}	
 	var myDate = new Date();
 	var imonth = myDate.getMonth()+1
@@ -89,10 +89,8 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $
 		location.reload(false)
 		}	
 	$scope.validDate = function(){
-        var val = $scope.entry.date
-		
-        var val1 = Date.parse(val);
-		
+        var val = $scope.entry.date		
+        var val1 = Date.parse(val);		
         if (isNaN(val1)==true && val!==''){
 			$scope.entry.date = ""
            alert("Please enter a valid date!")
@@ -107,8 +105,7 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $
 app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $http, $filter){		
 	$scope.openSearch = function(){
 		$scope.dialog.dialog( "open" )
-		}
-		
+		}		
 	$scope.obj = {}
 	$scope.items = [ 'date', 'amount', 'payee', 'account' ]
 	$scope.obj.key = $scope.items[0];	
@@ -170,7 +167,6 @@ app.directive('listaccts', [ '$http', function($http){
 				if (accounts.indexOf(val) == -1  )			
 				{
 				alert(val + ' not in list of Accounts')	
-				//scope.entry.account = ""
 				angular.element(event.target).val("")
 				return
 				}//if
@@ -195,7 +191,7 @@ app.directive('wdialog', [ '$http', function($http){
       height: 600,
       width: 1040,
       modal: true,
-    buttons: [  //button label : callback
+    buttons: [  //button label/text : callback
 	  { 
 	  text : 'Update',
 	  id : 'schUpdate',
@@ -226,7 +222,7 @@ app.directive('wdialog', [ '$http', function($http){
 	 text : 'Find',
 	 id : 'schFind',	  
 	 click: function(){		
-		alert( scope.obj.key + ' ' + scope.obj.val )
+		//alert( scope.obj.key + ' ' + scope.obj.val )
 		scope.$apply( function() {			
 		$http( {
     	url: '../find',

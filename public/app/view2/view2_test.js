@@ -1,15 +1,16 @@
 'use strict';
 
-describe('myApp.view3 module', function() {
+describe('myApp.view2 module', function() {
 
-  beforeEach(module('myApp.view3'));
+  beforeEach(module('myApp.view2'));
 
-  describe('view3 controller', function(){
+  describe('view2 controller', function(){
 
-    it('should ....', inject(function($controller) {
+    it('should ....', inject(function($controller, $rootScope) {
       //spec body
-      var view3Ctrl = $controller('View3Ctrl');
-      expect(view3Ctrl).toBeDefined();
+	  var scope = $rootScope.$new()
+      var view2Ctrl = $controller('View2Ctrl', { $scope: scope });
+      expect(view2Ctrl).toBeDefined();
     }));
 
   });

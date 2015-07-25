@@ -8,9 +8,10 @@ describe('myApp.view3 module', function() {
 
   describe('view3 controller', function(){
 
-    it('should ....', inject(function($controller) {
+    it('should ....', inject(function($controller, $rootScope) {
       //spec body
-      var view3Ctrl = $controller('View3Ctrl');
+	   var scope = $rootScope.$new()
+      var view3Ctrl = $controller('View3Ctrl', { $scope: scope });
       expect(view3Ctrl).toBeDefined();
     }));
 

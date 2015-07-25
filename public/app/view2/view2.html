@@ -9,7 +9,7 @@
     <th scope="col">Action</th>
   </tr>
   <tbody class="tbody">
-  <tr ng-repeat="customer in customers" ng-class-odd="'odd'" ng-click="customerDetail()" id={{item.id}}>
+  <tr ng-repeat="customer in customers" ng-class-odd="'odd'" ng-click="customerDetails(customer)" class="customerRow"}>
   	<td>{{customer.name}}</td>
     <td class="rtalign">{{customer.balance | number : 2}}</td>
     <td class="rtalign">Create Invoice</td>

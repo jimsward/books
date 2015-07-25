@@ -18,7 +18,6 @@ app.use(sessionHandler.isLoggedInMiddleware);
 
 app.get('/', contentHandler.displayLayout);
 app.get('/entries', contentHandler.displayMainPage);
-
 app.post('/newentry', contentHandler.handleNewEntry);
 app.post('/delete', contentHandler.deleteRow)
 app.get( '/find', contentHandler.findRow )
