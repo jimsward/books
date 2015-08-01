@@ -20,6 +20,14 @@ function CustomersDAO(db) {
 		   callback(null, items);
 		   })
    }
+   this.getACustomer = function( reqName, callback ){
+	   customers.findOne( { name: reqName }, function( err, item ){
+		   console.log(item)
+   if (err) return callback(err, null)
+   callback( null, item )
+	   })
+   
+   }
 
    
 }

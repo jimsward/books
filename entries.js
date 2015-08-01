@@ -135,6 +135,8 @@ function EntriesDAO(db) {
 				}) 
 		
 		}
+		
+	
 
 
 		

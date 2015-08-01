@@ -27,10 +27,13 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 		require : 'ngModel',
 	link : function(scope,element,attrs, ngModel){
 		getCustomers.then(function(response) {
+		if (response)
+		{	
 		var cusArr = []
 	angular.forEach( response.data, function(value, key){
+		//console.log(value + '  ' + key)
 		cusArr.push( value.name )}	)
-		console.log(cusArr[0])		
+				
 		element.autocomplete({
   				    source : cusArr								
 					})
@@ -44,7 +47,7 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 				scope.$apply(function(){
 				ngModel.$setViewValue(val)					
 				var param = response.data[i]
-				console.log(param)
+				//console.log(param)
 				$location.path('/customer').search(param);
 				})
 				}
@@ -53,10 +56,12 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 					scope.$apply(function(){
 					ngModel.$setViewValue('')})
 					alert( 'Name is not in Customer List' )
-					}				
+				}				
 		 }				
 		})//keypress handler
+		}
 		})//then
+		
 		}//callback
 	}//return
 }]);

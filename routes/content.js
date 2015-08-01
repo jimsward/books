@@ -1,7 +1,8 @@
- var qs = require('querystring');
+var qs = require('querystring');
 var EntriesDAO = require('../entries').EntriesDAO
 var AccountsDAO = require('../accounts').AccountsDAO
 var CustomersDAO = require('../customers').CustomersDAO
+var InvoicesDAO = require('../invoices').InvoicesDAO
 var toDecimal = require('../public/javascripts/toDecimal')
 var toInt = require('../public/javascripts/toInt')
 
@@ -13,6 +14,7 @@ function ContentHandler (app, db) {
     var entries = new EntriesDAO(db);
 	var accounts = new AccountsDAO(db);
 	var customers = new CustomersDAO(db);
+	var invoices = new InvoicesDAO(db);
 	
 	this.displayLayout = function(req, res, next){
 	return res.redirect( 'app/index.html' )}
@@ -155,21 +157,31 @@ function ContentHandler (app, db) {
 		{
 			
 		if (err) return next(err)
-		console.log(results)		
+		//console.log(results)		
 		return res.end()
 		})	
 	}
 	this.displayCustomersPage = function( req, res, next ){
 		customers.getCustomers( function( err, results ){
 			if (err) return next(err)
-			console.log(results.length)
+			//console.log(results.length)
 			return res.send( results )
 			} )
 		}
-	
-	
-}
-
-	
+	this.getCustomer = function( req, res, next ){
+		var name = req.query.name
+		customers.getACustomer( name, function( err, result ){
+			if (err) return next(err)
+			
+			console.log(result.entries)
+			for ( var i = 0; i < result.entries.length; i++ )
+			{result.entries[i].amount = (result.entries[i].payment + result.entries[i].deposit)/100
+			result.entries[i].name = result.entries[i].payee
+			result.entries[i].type = result.entries[i].reference
+			}			
+			return res.send(result)
+			})
+		}
+	}
 
 module.exports = ContentHandler;

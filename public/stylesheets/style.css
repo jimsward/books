@@ -109,3 +109,7 @@ text-decoration:none;width:150px; text-align : center; border: 1px #fff solid; f
 table#resultTable th, table#resultTable td { padding-right : 40px; } 
 
 table .tbody tr.customerRow:nth-child(2) { background-color : red !important}
+
+
+
+table#dtlTable { width : 900px; }

@@ -1,9 +1,60 @@
 <p>This is the partial for view 3.</p>
 <div class="container" id="customerDetail">
 <div ng-controller="View3Ctrl">
-<div>{{customer.name}}</div>
-<div>{{customer.address}}</div>
 
+<div id="tabs">
+<ul>
+<li><a href="#tabs-1">Customer Details</a></li>
+<li><a href="#tabs-2">Transaction List</a></li>
+</ul>
+<div id="tabs-1">
+<table width="400" border="1" cellpadding="2" id="custDtlTable">
+  <tr>
+    <td scope="col">Customer</td>
+    <td scope="col">{{customer.name}}</td>
+  </tr>
+  <tr>
+    <td>Company</td>
+    <td>{{customer.company}}</td>
+  </tr>
+  <tr>
+    <td>Address</td>
+    <td>{{customer.address}}</td>
+  </tr>
+  <tr>
+    <td>Phone</td>
+    <td>{{customer.company}}</td>
+  </tr>
+  <tr>
+    <td>email</td>
+    <td>{{customer.email}}</td>
+  </tr>
+  <tr>
+    <td>Balance</td>
+    <td>{{customer.balance}}</td>
+  </tr>
+</table>
+</div>
+<div id="tabs-2">
+
+<table width="800" border="1" cellpadding="2" id="dtlTable">
+  <tr>
+    <th scope="col">Date</th>
+    <th scope="col">Type</th>
+    <th scope="col">Number</th>
+    <th scope="col">Amount</th>
+  </tr>
+  <tr ng-repeat="detail in details" ng-class-odd="'odd'">
+  	<td>{{detail.date}}</td>
+  	<td>{{detail.type}}</td>
+  	<td class="rtalign">{{detail.number}}</td>
+  	<td class="rtalign">{{detail.amount | number : 2}}</td>
+  </tr>
+</table>
+
+
+</div>
+</div>
 
 </div>
 </div>
