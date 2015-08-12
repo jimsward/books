@@ -15,9 +15,17 @@ app.controller('View2Ctrl', ['$scope', 'getCustomers', '$http', '$location', fun
 	$scope.customerDetails = function(customer){
 					$location.path('/customer').search(customer);
 		}
-		})//then	
+		})//then
+		//let view3 ('/customer') know to open new customr dialog	
+	$scope.openNewCustomer = function(){
+		$scope.customer = {}
+		$scope.customer.entries = []
+		$scope.customer.invoices = []
+		$scope.customer.name = 'NEW'
+		var customer = $scope.customer
+					$location.path('/view3').search(customer);
+		} 
 	}//callback
-	
 ]);//controller
 app.factory( 'getCustomers', [ '$http', function($http) {	 
     return $http.get('/customers')	

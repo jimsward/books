@@ -69,7 +69,7 @@ button#save { opacity :0.5; }
 
 .buttons { width:460px; }
 
-#search-register { width : 220px; height : 42px; position : fixed; top : 0; left : 450px; font-size:14px; margin: 0 0 40px 0 }
+#search-register, #new-customer, #to-new-customer { width : 220px; height : 42px; position : fixed; top : 0; left : 450px; font-size:14px; margin: 0 0 40px 0 }
 
 fieldset { height : 140px; }
 
@@ -110,6 +110,6 @@ table#resultTable th, table#resultTable td { padding-right : 40px; }
 
 table .tbody tr.customerRow:nth-child(2) { background-color : red !important}
 
-
+form#newCustomer input { width : 500px; }
 
 table#dtlTable { width : 900px; }

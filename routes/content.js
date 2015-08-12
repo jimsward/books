@@ -182,6 +182,16 @@ function ContentHandler (app, db) {
 			return res.send(result)
 			})
 		}
+	
+	this.customerUpdate = function( req, res, next ){
+		
+		var obj = req.body
+		console.log(obj)
+		customers.updateCustomer( obj, function( err, result ){
+			if (err) return next(err)
+			return res.end()
+			})
 	}
+		}
 
 module.exports = ContentHandler;

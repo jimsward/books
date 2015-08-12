@@ -28,6 +28,15 @@ function CustomersDAO(db) {
 	   })
    
    }
+   this.updateCustomer = function( obj, callback ){
+	   var customer = obj.name
+	   customers.update( { name : customer }, obj, { upsert : true }, function( err, doc ){
+		   if (err) {
+					return callback(err, null)
+						}						
+					return callback( null, doc )
+		   })   
+	   } 
 
    
 }
