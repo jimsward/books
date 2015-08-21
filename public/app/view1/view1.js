@@ -222,7 +222,7 @@ app.directive('wdialog', [ '$http', function($http){
 	 text : 'Find',
 	 id : 'schFind',	  
 	 click: function(){		
-		//alert( scope.obj.key + ' ' + scope.obj.val )
+		alert( scope.obj.key + ' ' + scope.obj.val )
 		scope.$apply( function() {			
 		$http( {
     	url: '../find',

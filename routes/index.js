@@ -23,6 +23,7 @@ app.post('/delete', contentHandler.deleteRow)
 app.get( '/find', contentHandler.findRow )
 app.get('/customers', contentHandler.displayCustomersPage);
 app.get('/customer', contentHandler.getCustomer);
+app.post('/newCustomer', contentHandler.newCustomer);
 app.post('/customerUpdate', contentHandler.customerUpdate)
 app.get( '/accounts', contentHandler.listAccounts )
 app.post( '/chkUpdate', contentHandler.chkUpdate )

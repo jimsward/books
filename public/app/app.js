@@ -7,7 +7,8 @@ angular.module('myApp', [
   'myApp.view2',
   'myApp.view3',
   'myApp.version',
-  'ngResource'  
+  'ngResource'
+ /* ,  'ngMessages'*/
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/customer', {

@@ -8,33 +8,56 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'View2Ctrl'
   });
 }])
-app.controller('View2Ctrl', ['$scope', 'getCustomers', '$http', '$location', function($scope, getCustomers, $http, $location){		
+app.controller('View2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', '$location', function($scope, getCustomers, customerInit, $http, $location){		
 	getCustomers.then(function(response) {		
 	$scope.customers = response.data
+	
 	//user clicked on a customer x in the list; redirect to customer details page with customer x's document
 	$scope.customerDetails = function(customer){
+		alert('this customer : ' + customer.name)
 					$location.path('/customer').search(customer);
 		}
 		})//then
-		//let view3 ('/customer') know to open new customr dialog	
+		
 	$scope.openNewCustomer = function(){
-		$scope.customer = {}
+		/*$scope.customer = {}
 		$scope.customer.entries = []
 		$scope.customer.invoices = []
-		$scope.customer.name = 'NEW'
-		var customer = $scope.customer
-					$location.path('/view3').search(customer);
+		$scope.customer.name = ''
+		$scope.customer.company = ''
+		$scope.customer.address = ''
+		$scope.customer.phone = ''
+		$scope.customer.email = ''
+		$scope.customer.balance = 0*/
+		$scope.customer = customerInit
+		console.log($scope.customer)
+		$scope.dialog.dialog( "open" )
 		} 
 	}//callback
 ]);//controller
 app.factory( 'getCustomers', [ '$http', function($http) {	 
     return $http.get('/customers')	
-	}])	
+	}])
+app.factory( 'customerInit', [  function($http) {	 
+    var customer = {}
+	customer.entries = []
+	customer.invoices = []
+	customer.name = ''
+	customer.company = ''
+	customer.address = ''
+	customer.phone = ''
+	customer.email = ''
+	customer.balance = 0
+	return customer	
+	}])
+	
 app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function( $location, $http, getCustomers ){		
 	return {
 		require : 'ngModel',
 	link : function(scope,element,attrs, ngModel){
+		
 		getCustomers.then(function(response) {
+			console.log(response)
 		if (response)
 		{	
 		var cusArr = []
@@ -73,3 +96,68 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 		}//callback
 	}//return
 }]);
+ app.directive( 'custdialog', [ '$http', '$location', 'customerInit', function($http, $location, customerInit){	      
+	return {
+	/*templateUrl: "custDetailsDialog.html",*/
+	link : function(scope,element,attrs, ngModel){
+		 scope.dialog = $( "#new-customer-form" ).dialog({
+      autoOpen: false,
+      height: 600,
+      width: 1040,
+      modal: true,
+	  close : function(){
+		  $location.path('/customers')
+		  },
+    buttons: [  //button label/text : callback
+	 {text : 'Save',
+	  id : 'custDialogSave',
+	  click: function() {
+		  
+		  
+		  
+		  if ( scope.customer.name && scope.customer.address )
+		  {
+		  var params = scope.customer
+		  console.log(params)
+		  $http( {
+		url : "/newCustomer",
+		method : 'POST',
+		data : params
+		} ).success
+		( function( response ){
+			/*scope.customer = customerInit
+			console.log(scope.customer)*/
+			/*var val = customerInit
+			scope.$apply(function(){
+					ngModel.$setViewValue(val)})*/
+					
+					element.dialog( "close" );
+			})
+			
+		  }
+		  else
+		  {
+			  alert( 'Please enter a name and an address!' )
+		  }
+		  }
+	 },
+	  {text : 'Cancel',
+	  id : 'custDialogCancel',
+	  click: function() {
+		  $( "#newCustomer" )[0].reset()
+		  $(this).dialog( "close" );
+		  }
+	  },
+	  {text : 'Reset',
+	  id : 'custDialogReset',
+	  click: function() {
+		  console.log('the reset button')
+		  $( "#newCustomer" )[0].reset()
+		  }	  
+	  }	 
+		]
+		})
+		}//link
+		}//return
+		} ] )//directive
+ 

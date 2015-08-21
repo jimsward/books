@@ -12,13 +12,6 @@ app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', funct
 	$scope.customer = $routeParams	
 	console.log($scope.customer)
 	angular.element( '#tabs' ).tabs()
-	if ( $scope.customer.name == 'NEW' ){
-		$timeout(function(){
-		angular.element('#new-customer').trigger('click')},
-		100)
-	}
-	else
-	{
 	var params = {}
 	$scope.details = {}
 	params.name = $scope.customer.name
@@ -50,64 +43,65 @@ app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', funct
 			}			
 			$scope.details = detailsArr
 			})
-	}
-	$scope.openNewCustomer = function(){
-		console.log('button')
-		$scope.customer = {}
-		$scope.customer.entries = []
-		$scope.customer.invoices = []
-		$scope.dialog.dialog( "open" )
-		}
+	
 	$scope.openEdit = function(){
+		console.log('clickhandler')		
 		$scope.dialog.dialog( "open" )
 		}
 
 }]);//controller
 
 	
-app.directive( 'newcustdialog', [ '$http', '$location', function($http, $location){	      
+app.directive( 'custedit', [ '$http', '$location', function($http, $location){	      
 	return {
+		
 	link : function(scope,element,attrs, ngModel){
-		 scope.dialog = $( "#new-customer-form" ).dialog({
+		
+	scope.dialog = $( "#edit-customer-form" ).dialog({
       autoOpen: false,
       height: 600,
       width: 1040,
       modal: true,
+	  open: function( event, ui ) {console.log('OPEN')},
 	  close : function(){
 		  $location.path('/customers')
 		  },
     buttons: [  //button label/text : callback
 	 {text : 'Save',
 	  id : 'custDialogSave',
-	  click: function() {
-		  scope.customer.entries = []
-		  scope.customer.invoices = []
-		  var params = scope.customer
+	  click: function() {		  
+		var params = scope.customer
 		  console.log(params)
-		  $http( {
-		url : '/customerUpdate',
+		$http( {
+		url : "/customerUpdate",
 		method : 'POST',
 		data : params
-		} ).then
+		} ).success
 		( function( response ){
-			$( "#newCustomer" )[0].reset()
-			console.log($(this))
-		  $(this).dialog( "close" );
+			console.log(response)
+			$( "#editCustomer" )[0].reset()
+			console.log('this : ' + $(this))
+			element.dialog( "close" );
 			} )
-		  
-		  }
+		  }		 
 	 },
 	  {text : 'Cancel',
 	  id : 'custDialogCancel',
 	  click: function() {
-		  $( "#newCustomer" )[0].reset()
+		  $( "#editCustomer" )[0].reset()
 		  $(this).dialog( "close" );
 		  }
-	  }
-	 
+	  },
+	  {text : 'Reset',
+	  id : 'custDialogReset',
+	  click: function() {
+		  console.log('the reset button')
+		  $( "#editCustomer" )[0].reset()
+		  }	  
+	  }	 
 		]
 		})
 		}//link
-	
 		}//return
 		} ] )//directive
+

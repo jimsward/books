@@ -1,3 +1,4 @@
+var ObjectID = require('mongodb').ObjectID //need this to turn the serialized _id back to an object for updates
 /* The EntriesDAO must be constructed with a connected database object */
 function CustomersDAO(db) {
     "use strict";
@@ -17,7 +18,7 @@ function CustomersDAO(db) {
 	   {
 		   if (err) return callback(err, null);
 		   //console.log(items.length)
-		   callback(null, items);
+		   callback(null, items); 
 		   })
    }
    this.getACustomer = function( reqName, callback ){
@@ -29,14 +30,25 @@ function CustomersDAO(db) {
    
    }
    this.updateCustomer = function( obj, callback ){
-	   var customer = obj.name
-	   customers.update( { name : customer }, obj, { upsert : true }, function( err, doc ){
-		   if (err) {
-					return callback(err, null)
-						}						
-					return callback( null, doc )
+	   console.log('customer update method')
+	   var query = {}
+	   console.log(obj._id)	  
+	   var _id = new ObjectID.createFromHexString(obj._id)			
+	   query = { "_id" : _id }
+	   console.log(query)
+	   delete obj._id
+	   customers.update( query, obj, function( err, doc ){
+		   if (err) return callback(err, null)
+			return callback( null, doc )
 		   })   
 	   } 
+	   
+	this.insertCustomer = function( obj, callback ){
+		customers.insert( obj, function( err, doc ){
+			if (err) return callback( err, null )
+			return callback( null, doc )
+			} )
+		}
 
    
 }

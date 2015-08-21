@@ -8,7 +8,9 @@
 <li><a href="#tabs-2">Transaction List</a></li>
 </ul>
 <div id="tabs-1">
-<button id="edit-customer-form" ng-click="openEdit()">Edit</button>
+<!--<button id="edit-customer-form" ng-click="openEdit()">Edit</button>
+-->
+<button id="editcustomer" ng-click="openEdit()" title="Opens a dialog where you can edit the details for a customer">Edit</button>
 <table width="400" border="1" cellpadding="2" id="custDtlTable">
   <tr>
     <td scope="col">Customer</td>
@@ -55,18 +57,17 @@
 </div>
 </div><!--#tabs-->
 </div><!--View3Ctrl-->
-<div>
-<button id="new-customer" ng-click="openNewCustomer()" title="Opens a dialog where you can add all the details for a new customer">New Customer</button>
-<div id="new-customer-form" title="Customer Information" newcustdialog>
-<p class="title">Customer Information</p>
-<form id="newCustomer" name="newCustomer">
+
+<div id="edit-customer-form" title="Customer Information" custedit>
+<p class="title">Edit Customer Information</p>
+<form id="editCustomer" name="editCustomer">
     <fieldset>
      <label for="name">Name</label>
-     <input type="text" ng-model="customer.name" id="name" required/> 
+     <input type="text" ng-model="customer.name" id="name" name="name" required/>
      <label for="company">Company</label>
      <input type="text" ng-model="customer.company" id="company"/> 
      <label for="address">Address</label>
-     <input type="text" ng-model="customer.address" id="address" required/> 
+     <input type="text" ng-model="customer.address" id="address" name="address" required/>     
      <label for="phone">Phone</label>
      <input type="text" ng-model="customer.phone" id="phone"/> 
      <label for="email">email</label>
@@ -75,5 +76,6 @@
      <input type="text" ng-model="customer.balance" id="balance"/>       
    </fieldset>
  </form>
-</div><!--newcust-->
+ 
+</div><!--editcust-->
 </div><!--.container-->

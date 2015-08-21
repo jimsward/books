@@ -18,6 +18,31 @@
   </tbody>
 </table>
 
-
-</div><!--customerCtrl-->
+<div id="new-customer-form" title="Customer Information" custdialog>
+<p class="title">Customer Information</p>
+<form id="newCustomer" name="newCustomer">
+    <fieldset>
+     <label for="name">Name</label>
+     <input type="text" ng-model="customer.name" id="name" name="name" required/> 
+     <div role="alert">
+      <span class="error" ng-show="newCustomer.name.$error.required">
+       Required!</span>
+    </div> 
+     <label for="company">Company</label>
+     <input type="text" ng-model="customer.company" id="company"/> 
+     <label for="address">Address</label>
+     <input type="text" ng-model="customer.address" id="address" name="address" required/>
+     <div role="alert">
+      <span class="error" ng-show="newCustomer.address.$error.required">
+       Required!</span>
+    </div> 
+     <label for="phone">Phone</label>
+     <input type="text" ng-model="customer.phone" id="phone"/> 
+     <label for="email">email</label>
+     <input type="text" ng-model="customer.email" id="email"/
+     <label for="balance">Balance</label>
+     <input type="text" ng-model="customer.balance" id="balance"/>       
+   </fieldset>
+ </form>
 </div>
+</div><!--customerCtrl-->

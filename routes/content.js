@@ -172,16 +172,16 @@ function ContentHandler (app, db) {
 		var name = req.query.name
 		customers.getACustomer( name, function( err, result ){
 			if (err) return next(err)
-			
-			console.log(result.entries)
-			for ( var i = 0; i < result.entries.length; i++ )
-			{result.entries[i].amount = (result.entries[i].payment + result.entries[i].deposit)/100
-			result.entries[i].name = result.entries[i].payee
-			result.entries[i].type = result.entries[i].reference
-			}			
 			return res.send(result)
-			})
+			})			
 		}
+	this.newCustomer = function( req, res, next ){
+		var obj = req.body
+		customers.insertCustomer( obj, function ( err, result ){
+		if (err) return next(err)
+		return res.send(result)
+		})
+	}
 	
 	this.customerUpdate = function( req, res, next ){
 		
