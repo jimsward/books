@@ -14,7 +14,7 @@ app.controller('View2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', 
 	
 	//user clicked on a customer x in the list; redirect to customer details page with customer x's document
 	$scope.customerDetails = function(customer){
-		alert('this customer : ' + customer.name)
+		
 					$location.path('/customer').search(customer);
 		}
 		})//then

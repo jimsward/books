@@ -11,7 +11,7 @@ app.config(['$routeProvider', function($routeProvider) {
 app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', function($scope, $routeParams, $http, $timeout){	
 	$scope.customer = $routeParams	
 	console.log($scope.customer)
-	angular.element( '#tabs' ).tabs()
+	//$( '#tabs' ).tabs()
 	var params = {}
 	$scope.details = {}
 	params.name = $scope.customer.name
@@ -22,8 +22,7 @@ app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', funct
 		} )
 		.then( function(response){
 			console.log('data ' + response.data.invoices.length)
-			var detailsArr = response.data.invoices.concat(response.data.entries)
-			
+			var detailsArr = response.data.invoices.concat(response.data.entries)			
 			detailsArr.sort( function(a,b){
 				if ( a.date > b.date )
 				{
@@ -34,29 +33,28 @@ app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', funct
 				return -1;
 				}
 				return 0;
-			})
-			
+			})			
 			for ( var i = 0; i < detailsArr.length; i++ )
 			{
 			var dateArr = detailsArr[i].date.split('/')
 			detailsArr[i].date = dateArr[1] + '/' +dateArr[2] + '/' + dateArr[0]
 			}			
 			$scope.details = detailsArr
-			})
-	
+			})	
 	$scope.openEdit = function(){
-		console.log('clickhandler')		
 		$scope.dialog.dialog( "open" )
 		}
-
 }]);//controller
-
-	
-app.directive( 'custedit', [ '$http', '$location', function($http, $location){	      
+app.directive( 'tabs', function(){
 	return {
-		
-	link : function(scope,element,attrs, ngModel){
-		
+		link : function(scope, element, attrs){
+			element.tabs()
+			}		
+		}
+	} )	
+app.directive( 'custedit', [ '$http', '$location', function($http, $location){	      
+	return {		
+	link : function(scope,element,attrs, ngModel){		
 	scope.dialog = $( "#edit-customer-form" ).dialog({
       autoOpen: false,
       height: 600,

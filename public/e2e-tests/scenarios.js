@@ -70,21 +70,50 @@ describe('my app', function() {
 	beforeEach(function(){
 		element( by.css( 'table .tbody tr.customerRow:nth-child(2)' )).click().then( function(){
 			console.log('cccccccccccc')
-			})
+			}) })
 		it('should render the Customer Detail Page', function(){
 			expect(element(by.id('customerDetail')).isDisplayed()).toBe(true)
 			})
 		})
-  })
   
   describe('listcustomers', function(){
-	  beforeEach(function(){		 
-		  var inpt = element(By.model('customer.name'))
+	  beforeEach(function(){
+		  browser.get('index.html#/view2');		 
+		  var inpt = element(by.id('customername'))
 		  inpt.sendKeys('test\n')
+		  browser.driver.sleep(1000);
 		  })
-		  it('should open view3', function(){
-			  expect($('#customerDetail').isDisplayed()).toBe(true)
-			  })
-	  })  
-  });
+it('should render view3 when user navigates to /view3', function() {
+      expect(element.all(by.css('[ng-view] p')).first().getText()).
+        toMatch(/partial for view 3/);
+    });	  })  
+  
 
+describe( 'to-new-customer', function(){
+	beforeEach(function(){
+		browser.get('index.html#/view2');
+		element( by.css('button#to-new-customer')).click().then( function(){
+			browser.driver.sleep(1000);
+			browser.waitForAngular();
+			console.log('zzzzzzzzz')
+			} ) })
+		it('should render the New Customer Detail Page', function(){
+			expect(element(by.id('newCustomer')).isDisplayed()).toBe(true)
+			})
+		})
+		
+		describe( 'editcustomer', function(){
+	beforeEach(function(){
+		browser.get('index.html#/view3');
+		element( by.css('button#editcustomer')).click().then( function(){
+			browser.driver.sleep(1000);
+			browser.waitForAngular();
+			console.log('99999999')
+			} ) })
+		it('should render the Edit Customer Page', function(){
+			expect(element(by.id('edit-customer-form')).isDisplayed()).toBe(true)
+			})
+		})
+		
+  })
+  			

@@ -203,7 +203,7 @@ app.directive('wdialog', [ '$http', function($http){
    	 	method: "POST",
     	data : scope.entry } )
 		.success(  function(data){			
-		alert('Document Updated!')
+		//alert('Document Updated!')
 			})
 		})
 		}},
@@ -222,7 +222,7 @@ app.directive('wdialog', [ '$http', function($http){
 	 text : 'Find',
 	 id : 'schFind',	  
 	 click: function(){		
-		alert( scope.obj.key + ' ' + scope.obj.val )
+		
 		scope.$apply( function() {			
 		$http( {
     	url: '../find',
