@@ -3,8 +3,12 @@ var EntriesDAO = require('../entries').EntriesDAO
 var AccountsDAO = require('../accounts').AccountsDAO
 var CustomersDAO = require('../customers').CustomersDAO
 var InvoicesDAO = require('../invoices').InvoicesDAO
+var ServicesDAO = require('../services').ServicesDAO
+var TransactionsDAO = require('../transactions').TransactionsDAO
+
 var toDecimal = require('../public/javascripts/toDecimal')
 var toInt = require('../public/javascripts/toInt')
+var pivot = require('../public/javascripts/pivot')
 
   //, sanitize = require('validator').sanitize; // Helper to sanitize form input
 
@@ -15,7 +19,8 @@ function ContentHandler (app, db) {
 	var accounts = new AccountsDAO(db);
 	var customers = new CustomersDAO(db);
 	var invoices = new InvoicesDAO(db);
-	
+	var services = new ServicesDAO(db);
+	var transactions = new TransactionsDAO(db)
 	this.displayLayout = function(req, res, next){
 	return res.redirect( 'app/index.html' )}
 
@@ -192,6 +197,40 @@ function ContentHandler (app, db) {
 			return res.end()
 			})
 	}
+	this.newInvoice = function( req, res, next ){
+		var obj = req.body
+		
+		obj.date = pivot(obj.date)
+		console.log(obj.date)
+		invoices.addInvoice( obj, function( err, result ){
+			if (err) return next(err)
+			return res.end()
+			} )
 		}
+	this.getInvoice = function( req, res, next ){
+		var number = req.query
+		console.dir(number)
+		number.number = parseInt(number.number)
+		invoices.getInvoice( number, function( err, result ){
+			if (err) return next(err)
+			result.date = pivot(result.date)
+			return res.send( result )
+			} )
+		}
+	this.listServices = function( req, res, next )
+	{
+		services.getList( function(err, results)
+		{
+			return res.send(results)
+		})
+	}
+	this.listTransactions = function( req, res, next ){
+		transactions.getList( function( err, results ){
+			if (err) return next(err)
+			console.log('length : ' + results.length)
+			res.send( results )
+			})
+		}
+	}
 
 module.exports = ContentHandler;

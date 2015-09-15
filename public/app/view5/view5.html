@@ -1,0 +1,56 @@
+<p>This is the partial for view 5.</p>
+<div class="container" id="transactionDetail">
+<div ng-controller="View5Ctrl">
+
+
+
+<div>
+
+
+<table width="400" border="1" cellpadding="2" id="transactionsTable">
+  <tr>
+  	
+    <th >Date</th>
+    
+ 
+    <th>Type</th>
+  
+    <th>Number</th>
+    
+  
+    <th>Name</th>
+    
+  
+    <th>Memo</th>
+    
+  
+    <th>Account</th>
+    
+    <th>Amount</th>
+    
+  </tr>
+ 
+ 
+ 
+  
+  <tr ng-repeat="transaction in transactions" ng-class-odd="'odd'" >
+  	
+    <td>{{transaction.date}}</td>  
+    <td>{{transaction.type}}</td> 
+    <td>{{transaction.number}}</td>   
+    <td>{{transaction.name}}</td>    
+    <td>{{transaction.memo}}</td>
+    <td>{{transaction.account}}</td>    
+    <td>{{transaction.amount}}</td>
+  </tr>
+  
+</table>
+
+
+</div>
+
+
+</div><!--View5Ctrl-->
+
+
+</div><!--.container-->

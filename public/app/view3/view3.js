@@ -8,10 +8,8 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'View3Ctrl'
   });
 }])
-app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', function($scope, $routeParams, $http, $timeout){	
+app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$location', function($scope, $routeParams, $http, $timeout, $location){	
 	$scope.customer = $routeParams	
-	console.log($scope.customer)
-	//$( '#tabs' ).tabs()
 	var params = {}
 	$scope.details = {}
 	params.name = $scope.customer.name
@@ -21,7 +19,7 @@ app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', funct
 		params : params
 		} )
 		.then( function(response){
-			console.log('data ' + response.data.invoices.length)
+			
 			var detailsArr = response.data.invoices.concat(response.data.entries)			
 			detailsArr.sort( function(a,b){
 				if ( a.date > b.date )
@@ -44,7 +42,17 @@ app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', funct
 	$scope.openEdit = function(){
 		$scope.dialog.dialog( "open" )
 		}
+	$scope.getInvoice = function(obj){
+		obj.name = $scope.customer.name
+		obj.address= $scope.customer.address
+		console.dir('obj : ' + obj)		
+		$location.path('/invoice').search(obj);
+	}	
 }]);//controller
+
+	
+	
+	
 app.directive( 'tabs', function(){
 	return {
 		link : function(scope, element, attrs){
@@ -69,14 +77,12 @@ app.directive( 'custedit', [ '$http', '$location', function($http, $location){
 	  id : 'custDialogSave',
 	  click: function() {		  
 		var params = scope.customer
-		  console.log(params)
 		$http( {
 		url : "/customerUpdate",
 		method : 'POST',
 		data : params
 		} ).success
 		( function( response ){
-			console.log(response)
 			$( "#editCustomer" )[0].reset()
 			console.log('this : ' + $(this))
 			element.dialog( "close" );
@@ -93,7 +99,6 @@ app.directive( 'custedit', [ '$http', '$location', function($http, $location){
 	  {text : 'Reset',
 	  id : 'custDialogReset',
 	  click: function() {
-		  console.log('the reset button')
 		  $( "#editCustomer" )[0].reset()
 		  }	  
 	  }	 
@@ -102,4 +107,5 @@ app.directive( 'custedit', [ '$http', '$location', function($http, $location){
 		}//link
 		}//return
 		} ] )//directive
+
 

@@ -40,9 +40,9 @@ app.controller('entryFormCtl', ['$scope', '$http', function($scope, $http){
 	var myDate = new Date();
 	var imonth = myDate.getMonth()+1
 	if ( imonth < 10 ) imonth = '0' + imonth	
-	var today =( myDate.getFullYear() + '-' + imonth  + '-' + myDate.getDate())
-	$scope.entry.date = today
-	angular.element( '#datepicker' ).focus()
+	//var today =( myDate.getFullYear() + '-' + imonth  + '-' + myDate.getDate())
+	//$scope.entry.date = today
+	//angular.element( '#datepicker' ).focus()
 	$scope.entry.payment = 0
 	$scope.entry.deposit = 0
 	$scope.disablePayment = true
@@ -64,6 +64,7 @@ app.controller('entryFormCtl', ['$scope', '$http', function($scope, $http){
 		}
 	$scope.add = function(){
 		//validate
+		alert('date : ' + $scope.entry.date)
 		if ( angular.element( '#reference option:selected' ).val() == '' )
 		{
 			alert('You must choose Deposit or Payment')

@@ -10,8 +10,20 @@ function InvoicesDAO(db) {
     }
 
     var invoices = db.collection("invoices");
-
-    
+	this.addInvoice = function( obj, callback ){
+		invoices.insert( obj, function( err, doc ){
+			if (err) return callback( err, null )
+			return callback( null, doc )
+			} )
+		}
+	this.getInvoice = function( number, callback ){
+		console.log('number : ' + number)
+		invoices.findOne(  number , function( err, item ){
+			
+			if (err) return callback( err, null )
+			return callback( null, item )
+			} )
+		}
 }
 
 module.exports.InvoicesDAO = InvoicesDAO;

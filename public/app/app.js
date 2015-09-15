@@ -6,6 +6,8 @@ angular.module('myApp', [
   'myApp.view1',
   'myApp.view2',
   'myApp.view3',
+  'myApp.view4',
+  'myApp.view5',
   'myApp.version',
   'ngResource'
  /* ,  'ngMessages'*/
@@ -15,5 +17,14 @@ config(['$routeProvider', function($routeProvider) {
         templateUrl: 'view3/view3.html',
         controller: 'View3Ctrl'
       })
+	  .when('/invoice', {
+        templateUrl: 'view4/view4.html',
+        controller: 'View4Ctrl'
+      })
+	  .when('/transactions', {
+        templateUrl: 'view5/view5.html',
+        controller: 'View5Ctrl'
+      })
+	  
   .otherwise({redirectTo: '/view1'});
 }]);

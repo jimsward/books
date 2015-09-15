@@ -26,7 +26,7 @@ input { color:#000000}
 
 input[placeholder] {color : #000000;}
 
-input#datepicker.hasDatepicker { width : 120px; }
+input#datepicker.hasDatepicker { width : 120px; z-index:1000 !important }
 
 input#datepicker { margin-left : 1px }
 
@@ -108,8 +108,6 @@ text-decoration:none;width:150px; text-align : center; border: 1px #fff solid; f
 	
 table#resultTable th, table#resultTable td { padding-right : 40px; } 
 
-/*table .tbody tr.customerRow:nth-child(2) { background-color : red !important}*/
-
 form#newCustomer input, form#editCustomer input { width : 500px; }
 
 table#dtlTable { width : 900px; }
@@ -117,3 +115,48 @@ table#dtlTable { width : 900px; }
 .error { color : #FF0000 }
 
 table#custDtlTable { width : 400px }
+
+#invoicediv { width : 612px; height: 792px; border : 1px #888888 solid; padding : 20px}
+
+button#to-invoice { float : right }
+
+textarea#billto { width : 160px; height: 100px; border : 1px #000 solid; float : left; padding : 10px; margin-bottom : 60px }
+
+h1 { text-align : center }
+
+div#invdate { width : 80px; height : 30px; border : 1px #000 solid; padding : 0 5px   }
+
+div#invnum { width : 80px; height : 30px; border : 1px #000 solid; padding : 0 5px     }
+
+table#invtbl { clear:both; width : 600px; margin-top : 300px; }
+
+div#footer { width : 654px; }
+
+button#cancel-invoice { float : left }
+
+.outer1 { width : 160px; float : left }
+
+.outer2 { width : 80px; float : right; padding:   10px }
+
+button#print-invoice { float :right }
+
+@media print { 
+#invoicediv {width :960px; height : 1100px }
+table#invtbl { width : 960px; }
+ }
+
+input#activity, input#invmemo, input#invamt { width : 199px; text-align:right; border:hidden; }
+
+#custnum { width : 80px; text-align:right; border:hidden }
+
+input#invnum  { width : 80px; text-align:right; border:hidden; }
+
+#invtotal { text-align : right }
+
+input#invamt { float:right }
+
+input#activity, input#invmemo, input#invamt { width : 140px }
+
+/*input[type="text"], select { background-color : transparent; border : transparent }*/
+
+form#entryForm input[type="text"], select#reference { background-color : transparent; border : 1px solid #aaaaaa }

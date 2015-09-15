@@ -27,6 +27,13 @@ app.post('/newCustomer', contentHandler.newCustomer);
 app.post('/customerUpdate', contentHandler.customerUpdate)
 app.get( '/accounts', contentHandler.listAccounts )
 app.post( '/chkUpdate', contentHandler.chkUpdate )
+app.post( '/newInvoice', contentHandler.newInvoice )
+app.get( '/invoice', contentHandler.getInvoice )
+app.get( '/services', contentHandler.listServices )
+app.get( '/transactions', contentHandler.listTransactions )
+//app.post( '/newTransaction', contentHandler.newTransaction )
+
+
 console.log("HERE")
 
 app.get('/home', function(req, res, next) {

@@ -2,7 +2,10 @@
 <div class="container">
 <div ng-controller="View2Ctrl">
 <button id="to-new-customer" ng-click="openNewCustomer()" title="Opens a dialog where you can add all the details for a new customer">New Customer</button>
+
+
 <input type="text" ng-model="customer.name" id="customername" placeholder="Find a customer" listcustomers>
+<button id="to-invoice" ng-click="createInvoice()" title="Opens a page where you can add an invoice for a customer">Create Invoice</button>
 <table width="1000" border="1" cellpadding="2">
   <tr>
     <th scope="col">Name</th>

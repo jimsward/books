@@ -20,25 +20,18 @@ app.controller('View2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', 
 		})//then
 		
 	$scope.openNewCustomer = function(){
-		/*$scope.customer = {}
-		$scope.customer.entries = []
-		$scope.customer.invoices = []
-		$scope.customer.name = ''
-		$scope.customer.company = ''
-		$scope.customer.address = ''
-		$scope.customer.phone = ''
-		$scope.customer.email = ''
-		$scope.customer.balance = 0*/
 		$scope.customer = customerInit
-		console.log($scope.customer)
 		$scope.dialog.dialog( "open" )
+		}
+	$scope.createInvoice = function(){
+		$location.path('/invoice')
 		} 
 	}//callback
 ]);//controller
 app.factory( 'getCustomers', [ '$http', function($http) {	 
     return $http.get('/customers')	
 	}])
-app.factory( 'customerInit', [  function($http) {	 
+app.factory( 'customerInit', [ '$http', function($http) {	 
     var customer = {}
 	customer.entries = []
 	customer.invoices = []
@@ -55,33 +48,42 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 	return {
 		require : 'ngModel',
 	link : function(scope,element,attrs, ngModel){
-		
 		getCustomers.then(function(response) {
-			console.log(response)
 		if (response)
 		{	
 		var cusArr = []
-	angular.forEach( response.data, function(value, key){
-		//console.log(value + '  ' + key)
-		cusArr.push( value.name )}	)
-				
+		var addressArr = []//kluge
+	angular.forEach( response.data, function(value, key){		
+		cusArr.push( value.name )
+		addressArr.push( value.address )
+		
+		}		
+			)				
 		element.autocomplete({
   				    source : cusArr								
 					})
-					.keypress( "autocompleteselect", function(event){
+					.input( "autocompletechange", function(event){
           if (event.keyCode === 13) 
           {					
 				var val = element.val()
-				var i = cusArr.indexOf(val)
+				var i = cusArr.indexOf(val)				 
 				if ( i > -1 )
 				{
 				scope.$apply(function(){
-				ngModel.$setViewValue(val)					
+				ngModel.$setViewValue(val)})					
 				var param = response.data[i]
-				//console.log(param)
+				if ( attrs.id == "customername" )//retrieving customer document
+				{
 				$location.path('/customer').search(param);
-				})
 				}
+				else
+				{
+				//we are creating an invoice
+				scope.invoice.name = response.data[i].name
+				scope.invoice.address = response.data[i].address
+				}
+		
+			}
 				else
 				{
 					scope.$apply(function(){
@@ -111,27 +113,17 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
     buttons: [  //button label/text : callback
 	 {text : 'Save',
 	  id : 'custDialogSave',
-	  click: function() {
-		  
-		  
-		  
+	  click: function() {		  
 		  if ( scope.customer.name && scope.customer.address )
 		  {
 		  var params = scope.customer
-		  console.log(params)
 		  $http( {
 		url : "/newCustomer",
 		method : 'POST',
 		data : params
 		} ).success
 		( function( response ){
-			/*scope.customer = customerInit
-			console.log(scope.customer)*/
-			/*var val = customerInit
-			scope.$apply(function(){
-					ngModel.$setViewValue(val)})*/
-					
-					element.dialog( "close" );
+			element.dialog( "close" );
 			})
 			
 		  }
@@ -151,7 +143,6 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 	  {text : 'Reset',
 	  id : 'custDialogReset',
 	  click: function() {
-		  console.log('the reset button')
 		  $( "#newCustomer" )[0].reset()
 		  }	  
 	  }	 

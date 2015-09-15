@@ -1,0 +1,63 @@
+<p>This is the partial for view 4.</p>
+<div class="container" id="customerDetail">
+<div ng-controller="View4Ctrl">
+<form name="nameform" id="nameform">
+<input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Find a customer" name="name" listcustomers required>
+<div role="alert">
+      <span class="error" ng-show="nameform.name.$error.required">
+       Required!</span>
+    </div>
+</form> 
+<div id="invoicediv">
+<h1>Invoice</h1>
+<form name="invhdr" id="invhdr">
+<div>
+<div class="outer1">
+<div class="property">Billing Address</div>
+<textarea id="billto">{{invoice.address}}</textarea>
+</div>
+<div class="outer2">
+<div class="property">Date</div>
+<div id="invdate"><input type="text" ng-model="invoice.date" id="invnum" datepicker></div>
+</div>
+<div class="outer2">
+<div class="property">Invoice #</div>
+<div id="invnum"><input type="text" ng-model="invoice.number" id="custnum" name="number" required></div>
+ <div role="alert">
+      <span class="error" ng-show="invhdr.number.$error.required">
+       Required!</span>
+    </div> 
+</div>
+</form>
+<table width="600" border="1" cellpadding="2" id="invtbl">
+  <tr>
+  <th scope="col">Number</th>
+    <th scope="col">Product/Service</th>
+    <th scope="col">Description</th>
+    <th scope="col">Amount</th>
+  </tr>
+  <tr ng-repeat="line in invoice.lines"><!--this array will be saved to the transactions collection-->
+  <td>{{$index + 1}}</td>
+    <td><input type="text" ng-model="line.activity" id="activity" listservices></td>
+    <td><input type="text" ng-model="line.memo" id="invmemo"></td>
+    <td><input type="text" ng-model="line.amount" id="invamt" ng-keydown="tabfwd($event)" maskmoney filtercur></td>
+  </tr>
+  <tr>
+  <td>Total</td>
+  <td></td>
+  <td></td>
+  <td id="invtotal">{{invoice.total | currency}}</td>
+  </tr>
+</table>
+
+<!--<div id="invtotal">{{runningttl( $index ) | currency}}</div>-->
+
+
+</div>
+</div>
+<div id="footer">
+<button id="cancel-invoice" ng-click="cancelInvoice()">Cancel</button>
+<button id="save-invoice" ng-click="saveInvoice()">Save</button>
+<button id="print-invoice" ng-click="printInvoice()">Print</button>
+</div>
+</div>
