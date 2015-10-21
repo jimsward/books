@@ -4,7 +4,7 @@ body { background-color:#fff; font:Gotham, "Helvetica Neue", Helvetica, Arial, s
 
 .container { width : 1000px; margin:auto;  margin-bottom:100px }
 
-table { width:1000px; border-collapse: collapse; }
+table { width:100%; border-collapse: collapse; }
 
 /* Extra selectors needed to override the default styling */
 /*table.tablesorter tbody tr.normal-row td {
@@ -42,20 +42,20 @@ button.reset { right : 4px; }
 
 #ui-datepicker-div { background-color:#FFFFFF; }
 
-form#entryForm { height:84px;width:1000px; background-color:#3868bc; border: 0;}
+form#entryForm { height:84px;width:100%; background-color:#3868bc; border: none;}
 
 td.rtalign {  text-align:right; }
 
 select#reference { width : 113px; height:26px; border: gray solid 1px; background-color : white }
 
-input#datepicker { width : 148px; padding:0; border :1px solid gray }
+input#datepicker { width : 148px; padding:0; border :1px solid gray; margin : 0px; display : inline; color:#fff }
 
 
 input#editdeposit, input#editpayment { width : 66px }
 
 #resultsForm input[type="text"], #resultsForm label { width : 150px; height : 20px; display:block; font-size:12px; background-color:#dddddd }
 
-#chkEntryForm input[type="text"], #chkEntryForm label { width : 200px; height : 20px; display:block; font-size:12px; background-color:#dddddd }
+#entryForm input { width : 146px; height : 34px; margin : 0 !important; }
 
 #resultsForm label, #chkEntryForm label { display : inline; background-color:white }
 
@@ -69,7 +69,7 @@ button#save { opacity :0.5; }
 
 .buttons { width:460px; }
 
-#search-register, #new-customer, #to-new-customer { width : 220px; height : 42px; position : fixed; top : 0; left : 450px; font-size:14px; margin: 0 0 40px 0 }
+#search-register, #new-customer, #to-new-customer { width : 220px; height : 42px; position : fixed; top : 0; left : 380px; font-size:18px; margin: 0 0 40px 0 }
 
 fieldset { height : 140px; }
 
@@ -138,7 +138,7 @@ button#cancel-invoice { float : left }
 
 .outer2 { width : 80px; float : right; padding:   10px }
 
-button#print-invoice { float :right }
+
 
 @media print { 
 #invoicediv {width :960px; height : 1100px }
@@ -149,7 +149,7 @@ input#activity, input#invmemo, input#invamt { width : 199px; text-align:right; b
 
 #custnum { width : 80px; text-align:right; border:hidden }
 
-input#invnum  { width : 80px; text-align:right; border:hidden; }
+input#invnum  { width : 72px; text-align:right; border:hidden; }
 
 #invtotal { text-align : right }
 
@@ -157,6 +157,28 @@ input#invamt { float:right }
 
 input#activity, input#invmemo, input#invamt { width : 140px }
 
+table#invtbl { width : 570px; }
+
 /*input[type="text"], select { background-color : transparent; border : transparent }*/
 
-form#entryForm input[type="text"], select#reference { background-color : transparent; border : 1px solid #aaaaaa }
+form#entryForm input[type="text"], select#reference { background-color : transparent; border : 1px solid #05f }
+
+[ng-message|="required"] { color : red; font-size : 1.1 em; box-sizing:border-box }
+
+.ng-invalid { border : 1px solid red !important }
+
+form div[role|="alert"].ng-valid { border : none } 
+
+div#footer button { width : 120px; margin-right: 20px; height : 40px; font-size:18px}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+input[type=number] {
+-moz-appearance: textfield;
+}

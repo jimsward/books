@@ -35,16 +35,16 @@ app.factory( 'getEntries', [ '$http', function($http) {
     return $http.get('/entries')	
 	}])
 	//form with controls for new entries to the check register
-app.controller('entryFormCtl', ['$scope', '$http', function($scope, $http){
+app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 	$scope.entry = {}	
 	var myDate = new Date();
 	var imonth = myDate.getMonth()+1
 	if ( imonth < 10 ) imonth = '0' + imonth	
-	//var today =( myDate.getFullYear() + '-' + imonth  + '-' + myDate.getDate())
-	//$scope.entry.date = today
+	var today =(   imonth  + '/' + myDate.getDate() + '/' + myDate.getFullYear())
+	$scope.entry.date = today
 	//angular.element( '#datepicker' ).focus()
-	$scope.entry.payment = 0
-	$scope.entry.deposit = 0
+	$scope.entry.payment = ''
+	$scope.entry.deposit = ''
 	$scope.disablePayment = true
 	$scope.disableDeposit = true
 	$scope.change = function(){
@@ -100,6 +100,7 @@ app.controller('entryFormCtl', ['$scope', '$http', function($scope, $http){
            console.log(val1);
         }
 	}
+
 	}])	
 	//controller for wdialog directive; launches dialog with search on several fields;allows selction of a single record
 	//and allows update, delete
@@ -120,7 +121,10 @@ app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $
 		}
 	$scope.clearAmt = function(which){
 			which == 'payment' ? $scope.entry.payment = 0 : $scope.entry.deposit = 0
-			}		
+			}
+	$scope.filterAmt = function(){		
+		$scope.obj.val = $filter('number')($scope.obj.val, 2)
+		}		
 	}])	//schRegDialog controller
 app.directive('datepicker', function(){	      
 	return {
@@ -130,6 +134,7 @@ app.directive('datepicker', function(){
 				onSelect: function(dateText) {
 				  scope.$apply(function() {
 					ngModel.$setViewValue(dateText);
+					console.log('datetext : ' + dateText)
 				  });
 				},
 				dateFormat: "mm/dd/yy"

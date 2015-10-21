@@ -9,8 +9,11 @@ angular.module('myApp', [
   'myApp.view4',
   'myApp.view5',
   'myApp.version',
+  'ngMessages',
   'ngResource'
- /* ,  'ngMessages'*/
+ /* ,
+  'ui.bootstrap'*/
+ 
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/customer', {

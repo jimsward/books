@@ -22,6 +22,7 @@ function ContentHandler (app, db) {
 	var services = new ServicesDAO(db);
 	var transactions = new TransactionsDAO(db)
 	this.displayLayout = function(req, res, next){
+		console.log('displaylayout')
 	return res.redirect( 'app/index.html' )}
 
     this.displayMainPage = function(req, res, next) {
@@ -73,9 +74,9 @@ function ContentHandler (app, db) {
 		newE.deposit = toInt( newE.deposit )
 		newE.payment = toInt( newE.payment )
 				
-		var parts = newE.date.split('-');
+		var parts = newE.date.split('/');
 		
-		newE.date =  parts[0] + '/' + parts[1] + '/' + parts[2] 		
+		newE.date =  parts[2] + '/' + parts[0] + '/' + parts[1] 		
 		
 			entries.insertEntry( newE, function(err) {
             "use strict";

@@ -52,15 +52,17 @@
 </div><!--chkEntryDlg-->
 </div><!--View1Ctrl-->
 <div ng-controller="entryFormCtl">
-<form  novalidate method="POST" name="entryForm" id="entryForm">
-<input name="date" type="text" datepicker ng-model="entry.date" id="datepicker" placeholder="mm/dd/yyyy">
+<form  method="POST" name="entryForm" id="entryForm">
+
+<input name="date" type="text" datepicker ng-model="entry.date" id="datepicker" class="form-control" required>
+
 <select name="reference" ng-model="entry.reference" id="reference" ng-change="change()"><option value="">Choose</option><option value="payment"  selected>Payment</option><option value="deposit">Deposit</option></select>
 <input name="number" type="text" ng-model="entry.number" id="number" placeholder="number">
 <input name="payee" type="text" ng-model="entry.payee" id="payee" placeholder="payee">
 <input name="memo" type="text" ng-model="entry.memo" id="memo" placeholder="memo">
 <input name="account" type="text" ng-model="entry.account" id="account" placeholder="account" listaccts required>
 <input name="payment" type="text" ng-model="entry.payment" ng-disabled="disablePayment" id="payment" placeholder="payment" title="Payment" maskmoney/>
-<input name="deposit" type="text" ng-model="entry.deposit" ng-disabled="disableDeposit" id="deposit" placeholder="deposit" readonly title="Deposit" maskmoney/>
+<input name="deposit" type="text" ng-model="entry.deposit" ng-disabled="disableDeposit" id="deposit" placeholder="deposit" title="Deposit" maskmoney/>
 <input type="reset" class="cancel" class="ui-button" value="Cancel" ng-click="cancel()">
 <input type="submit" class="submit" class="ui-button" value="Add"  ng-click="add()">
 </form>
@@ -76,10 +78,10 @@
      <select id="search" ng-model="obj.key" ng-options="item for item in items"></select>       
      <label for="find">Find</label>
      <div id="find" class="wrapdiv" ng-switch on="obj.key">
-     <div ng-switch-when="date"><input type="text" ng-model="obj.val" name="searchdate" datepicker id="datepicker2"/></div>
-     <div ng-switch-when="amount"><input type="text" ng-model="obj.val" id="dialogAmt" maskmoney/></div>
-     <div ng-switch-when="payee"><input type="text" ng-model="obj.val"  /></div>
-     <div ng-switch-when="account"> <input type="text" ng-model="obj.val" listaccts  /></div>
+     <div ng-switch-when="date"><input type="text" ng-model="obj.val" name="searchdate" datepicker id="datepicker2" required/></div>
+     <div ng-switch-when="amount"><input type="text" ng-model="obj.val" id="dialogAmt" maskmoney required/></div>
+     <div ng-switch-when="payee"><input type="text" ng-model="obj.val" required /></div>
+     <div ng-switch-when="account"> <input type="text" ng-model="obj.val" listaccts required /></div>
      </div>      
    </fieldset>
  </form>  

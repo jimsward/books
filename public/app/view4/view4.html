@@ -1,15 +1,17 @@
 <p>This is the partial for view 4.</p>
 <div class="container" id="customerDetail">
 <div ng-controller="View4Ctrl">
-<form name="nameform" id="nameform">
-<input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Find a customer" name="name" listcustomers required>
-<div role="alert">
-      <span class="error" ng-show="nameform.name.$error.required">
-       Required!</span>
-    </div>
+
+
 </form> 
 <div id="invoicediv">
 <h1>Invoice</h1>
+<form name="nameform" id="nameform">
+<input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Find a customer" name="name" listcustomers required>
+<!--<div role="alert">
+      <span class="error" ng-show="nameform.name.$error.required">
+       Required!</span>
+    </div>-->
 <form name="invhdr" id="invhdr">
 <div>
 <div class="outer1">
@@ -22,14 +24,14 @@
 </div>
 <div class="outer2">
 <div class="property">Invoice #</div>
-<div id="invnum"><input type="text" ng-model="invoice.number" id="custnum" name="number" required></div>
- <div role="alert">
+<div id="invnum"><input type="text" ng-model="invoice.number" id="invnum" name="number" required></div>
+<!-- <div role="alert">
       <span class="error" ng-show="invhdr.number.$error.required">
-       Required!</span>
+       Required!</span>-->
     </div> 
 </div>
 </form>
-<table width="600" border="1" cellpadding="2" id="invtbl">
+<table width="550" border="1" cellpadding="2" id="invtbl">
   <tr>
   <th scope="col">Number</th>
     <th scope="col">Product/Service</th>
@@ -40,21 +42,21 @@
   <td>{{$index + 1}}</td>
     <td><input type="text" ng-model="line.activity" id="activity" listservices></td>
     <td><input type="text" ng-model="line.memo" id="invmemo"></td>
-    <td><input type="text" ng-model="line.amount" id="invamt" ng-keydown="tabfwd($event)" maskmoney filtercur></td>
+    <td><input type="text"  min="0" ng-model="line.amount" id="invamt"  required maskmoney ng-keydown="tabfwd($event)"></td>
   </tr>
   <tr>
   <td>Total</td>
   <td></td>
   <td></td>
+  
+  
   <td id="invtotal">{{invoice.total | currency}}</td>
   </tr>
 </table>
 
-<!--<div id="invtotal">{{runningttl( $index ) | currency}}</div>-->
-
-
 </div>
 </div>
+
 <div id="footer">
 <button id="cancel-invoice" ng-click="cancelInvoice()">Cancel</button>
 <button id="save-invoice" ng-click="saveInvoice()">Save</button>

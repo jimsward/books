@@ -31,7 +31,7 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	//add a new invoice
 	else {
 	$scope.invoice = {}	
-	$scope.invoice.lines = [ { activity : "", memo : "", amount : 0 } ]
+	$scope.invoice.lines = [ { activity : "", memo : "", amount : "" } ]
 	$scope.invoice.total = 0
 	var today = new Date()
 	$scope.invoice.date = $filter('date')(today, "MM/dd/yyyy")	
@@ -73,25 +73,22 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	$scope.tabfwd = function( event ){			
 		if (event.which == 9)
 		{	
-		$scope.invoice.lines.push( { activity : "", memo : "", amount : 0 } )
-		console.log($(event.target).val())
-		var re = /\.|\,/g
-		var num = $(event.target).val()
+		var num = angular.element(event.target).val()	
+		var re = /\,/g		
 		num = num.replace(re, "")
-		console.log(num)
-		var whole = parseInt(num)
-		$scope.invoice.total += whole/100		
+		num = parseFloat(num)
+		$scope.invoice.total += num
+		$scope.invoice.lines.push( { activity : "", memo : "", amount : 0 } )
 		}
-	}			
+	}
+	
+	
+	
 }])
 app.factory( 'addInvoice', [ '$http', function($http) {		 
     return function(invoice){
 	$http.post('/newInvoice', invoice).success( function(){
-		/*document.getElementById("nameform").reset();
-		document.getElementById("invhdr").reset();
 		
-		angular.element('table#invtbl tr td input[type="text"]').val('')
-		angular.element('table#invtbl tr td #invtotal').val(0)*/
 	console.log('success')
 			} )
 	}	
@@ -129,7 +126,7 @@ app.directive('listservices', [ '$http', function($http){
 		}//link
 	}//return
 	}])//directive
-app.directive('filtercur', [ '$filter', function( $filter ){
+/*app.directive('filtercur', [ '$filter', function( $filter ){
 	return {
 	link : function(scope,element,attrs, ngModel){
 		element.remove( 'maskmoney' )
@@ -138,4 +135,17 @@ app.directive('filtercur', [ '$filter', function( $filter ){
 		})
 		}
 	}
-	}])
+	}])*/
+	app.directive('stringToNumber', function($timeout) {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(value) {
+        return '' + value;
+      });
+      ngModel.$formatters.push(function(value) {
+        return parseFloat(value, 10);
+      });	 
+    }
+  };
+});

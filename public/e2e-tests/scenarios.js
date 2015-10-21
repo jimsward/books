@@ -80,7 +80,7 @@ describe('my app', function() {
 	  beforeEach(function(){
 		  browser.get('index.html#/view2');		 
 		  var inpt = element(by.id('customername'))
-		  inpt.sendKeys('test\n')
+		  inpt.sendKeys('test\n\n')
 		  browser.driver.sleep(1000);
 		  })
 it('should render view3 when user navigates to /view3', function() {
@@ -115,5 +115,20 @@ describe( 'to-new-customer', function(){
 			})
 		})
 		
-  })
+		describe( 'custinvoice', function(){
+	beforeEach(function(){
+		browser.get('index.html#/view4');
+		 var inpt = element(by.id('customername'))
+		  inpt.sendKeys('test\n')
+		  browser.driver.sleep(1000);
+		  
+			}) })
+		it('should render the Invoice', function(){
+			expect(element(by.id('customerDetail')).isDisplayed()).toBe(true)
+			})
+		})
+		
+		
+		
+//  })
   			

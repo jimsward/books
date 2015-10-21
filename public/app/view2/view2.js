@@ -62,7 +62,7 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 		element.autocomplete({
   				    source : cusArr								
 					})
-					.input( "autocompletechange", function(event){
+					.keypress( "autocompletechange", function(event){
           if (event.keyCode === 13) 
           {					
 				var val = element.val()
@@ -129,7 +129,7 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 		  }
 		  else
 		  {
-			  alert( 'Please enter a name and an address!' )
+			 // alert( 'Please enter a name and an address!' )
 		  }
 		  }
 	 },

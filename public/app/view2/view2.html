@@ -26,11 +26,11 @@
 <form id="newCustomer" name="newCustomer">
     <fieldset>
      <label for="name">Name</label>
-     <input type="text" ng-model="customer.name" id="name" name="name" required/> 
-     <div role="alert">
-      <span class="error" ng-show="newCustomer.name.$error.required">
-       Required!</span>
-    </div> 
+     <input type="text" ng-model="customer.name" id="name" name="name" required/>
+     <div ng-messages="newCustomer.name.$error" role="alert">
+<div ng-message="required">Please enter a name</div>
+</div> 
+     
      <label for="company">Company</label>
      <input type="text" ng-model="customer.company" id="company"/> 
      <label for="address">Address</label>
