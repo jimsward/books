@@ -70,17 +70,41 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		}
 		
 	
-	$scope.tabfwd = function( event ){			
+	$scope.tabfwd = function( event ){
+		
+		var accept = [ 9, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 ]	//dot, tab, and 0-9
+		if ( accept.indexOf( event.which ) == -1 ) return		
 		if (event.which == 9)
+		{
+		var re = /(\d+)\.*(\d*)/
+		var val = angular.element( event.target ).val()
+		if (isNaN(val))
+		{
+			 angular.element( event.target ).val("")
+			 return			 
+		}
+		console.log(val)
+		if (re.test(val))
 		{	
-		var num = angular.element(event.target).val()	
-		var re = /\,/g		
-		num = num.replace(re, "")
-		num = parseFloat(num)
-		$scope.invoice.total += num
+		var num = angular.element(event.target).val()
+		num = $filter('number')(num, 2)
+		console.log(num)
+		angular.element(event.target).val(num )	
+		var re = /\,/g	
+		var totnum = num	
+		totnum = totnum.replace(re, "")
+		
+		totnum = parseFloat(totnum)
+		$scope.invoice.total += totnum
 		$scope.invoice.lines.push( { activity : "", memo : "", amount : 0 } )
 		}
+		else
+		{
+		angular.element(event.target).val( "" ).focus()	
+		}//else
+		}//if
 	}
+	
 	
 	
 	
@@ -126,26 +150,5 @@ app.directive('listservices', [ '$http', function($http){
 		}//link
 	}//return
 	}])//directive
-/*app.directive('filtercur', [ '$filter', function( $filter ){
-	return {
-	link : function(scope,element,attrs, ngModel){
-		element.remove( 'maskmoney' )
-		angular.forEach(scope.invoice.lines, function(value, key){ 
-		value.amount = $filter('currency')( value.amount, "", 2 ) 
-		})
-		}
-	}
-	}])*/
-	app.directive('stringToNumber', function($timeout) {
-  return {
-    require: 'ngModel',
-    link: function(scope, element, attrs, ngModel) {
-      ngModel.$parsers.push(function(value) {
-        return '' + value;
-      });
-      ngModel.$formatters.push(function(value) {
-        return parseFloat(value, 10);
-      });	 
-    }
-  };
-});
+
+

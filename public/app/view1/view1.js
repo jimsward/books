@@ -330,3 +330,49 @@ app.directive( 'editable', [ '$http', function($http){
 			}//link function
 		}//return
 	}])//editable
+app.directive('stringToNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(value) {
+        return '' + value;
+      });
+      ngModel.$formatters.push(function(value) {
+        return parseFloat(value, 10);
+      });
+    }
+  };
+});
+app.directive('numberfilt', [ '$filter', '$timeout', function( $filter, $timeout ){
+	return {
+		require : '?ngModel',
+		priority : 1000,
+		link : function( scope, element, attrs, ngModel ){
+			   element.on('blur keyup change', function() {
+				   console.log('eventHandler')
+        scope.$evalAsync(read);
+      });
+      read(); // initialize
+
+      // Write data to the model
+      function read() {
+        var html = element.val() ;
+		html = $filter('number')(html, 2)
+		console.log(html )
+        // When we clear the content editable the browser leaves a <br> behind
+        // If strip-br attribute is provided then we strip this out
+       /* if ( attrs.stripBr && html == '<br>' ) {
+          html = '';
+        }*/
+        ngModel.$setViewValue(html);
+		/*scope.$applyAsync(function(){
+			
+					ngModel.$setViewValue('357')
+				})				*/
+		
+      }
+			
+			
+			}//link
+		}//return
+	}])

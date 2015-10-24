@@ -128,6 +128,15 @@ describe( 'to-new-customer', function(){
 			})
 		})
 		
+		describe( 'transactionsTable', function(){
+	beforeEach(function(){
+		browser.get('index.html#/view5');
+		 })
+		it('should render the Reports Page', function(){
+			expect(element(by.id('transactionsTable')).isDisplayed()).toBe(true)
+			})
+		})
+		
 		
 		
 //  })

@@ -32,22 +32,24 @@
 </table>
 <div id="chkEntryDlg" title="Check Register Entry" editable>
 <form novalidate method="POST" id="chkEntryForm" name="chkEntryForm">
+<fieldset>
 <label>Date</label>
-<input type="text" name="date" ng-model="item.date" readonly>
+<input type="text" name="date" ng-model="item.date" readonly><br>
 <label>Reference</label>
-<input type="text" name="reference" ng-model="item.reference" readonly>
+<input type="text" name="reference" ng-model="item.reference" readonly><br>
 <label>Number</label>
-<input type="text" name="number" ng-model="item.number">
+<input type="text" name="number" ng-model="item.number"><br>
 <label>Payee</label>
-<input type="text" name="payee" ng-model="item.payee" >
+<input type="text" name="payee" ng-model="item.payee" ><br>
 <label>Memo</label>
-<input type="text" name="memo" ng-model="item.memo">
+<input type="text" name="memo" ng-model="item.memo"><br>
 <label>Account</label>
-<input type="text" name="account" ng-model="item.account" listaccts>
+<input type="text" name="account" ng-model="item.account" listaccts><br>
 <label>Payment</label>
-<input type="text" name="payment" ng-model="item.payment" ng-disabled="disablePayment" ng-mousedown="clearAmt('payment')" maskmoney >
+<input type="text" name="payment" ng-model="item.payment" ng-disabled="disablePayment" ng-mousedown="clearAmt('payment')" maskmoney ><br>
 <label>Deposit</label>
-<input type="text" name="deposit" ng-model="item.deposit" ng-disabled="disableDeposit" ng-mousedown="clearAmt('deposit')" maskmoney>
+<input type="text" name="deposit" ng-model="item.deposit" ng-disabled="disableDeposit" ng-mousedown="clearAmt('deposit')" maskmoney><br>
+<fieldset>
 </form>
 </div><!--chkEntryDlg-->
 </div><!--View1Ctrl-->
