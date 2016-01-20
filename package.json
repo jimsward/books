@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.10.2",
     "consolidate": "0.12.1",
     "cookie-parser": "~1.3.3",
@@ -30,7 +31,7 @@
     "mongDB",
     "angular"
   ],
-  "author": "jim sward",
+  "author": "Jim Sward",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jimsward/books/issues"

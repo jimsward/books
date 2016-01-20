@@ -9,7 +9,8 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }])
 app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$location', function($scope, $routeParams, $http, $timeout, $location){	
-	$scope.customer = $routeParams	
+	$scope.customer = $routeParams
+	console.dir($scope.customer)	
 	var params = {}
 	$scope.details = {}
 	params.name = $scope.customer.name
@@ -19,7 +20,7 @@ app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$loc
 		params : params
 		} )
 		.then( function(response){
-			
+			$scope.customer = response.data
 			var detailsArr = response.data.invoices.concat(response.data.entries)			
 			detailsArr.sort( function(a,b){
 				if ( a.date > b.date )

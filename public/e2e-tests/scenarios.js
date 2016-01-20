@@ -20,7 +20,7 @@ describe('my app', function() {
     });	
 	describe( 'chkEntryDlg', function(){
 	beforeEach(function(){
-		element( by.id('12160')).click().then( function(){
+		element( by.id('12219')).click().then( function(){
 			console.log('XXXXXXXXOOOOOOOOXXXXX')
 			} )
 		})	

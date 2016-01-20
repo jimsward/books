@@ -26,6 +26,11 @@ app.controller('View2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', 
 	$scope.createInvoice = function(){
 		$location.path('/invoice')
 		} 
+	$scope.custdetails = function(){
+		$scope.customer.name = $('#customername').val()
+		alert('name : ' + $scope.customer.name)
+		$location.path('/customer').search($scope.customer);
+		}
 	}//callback
 ]);//controller
 app.factory( 'getCustomers', [ '$http', function($http) {	 
@@ -60,11 +65,12 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 		}		
 			)				
 		element.autocomplete({
-  				    source : cusArr								
-					})
-					.keypress( "autocompletechange", function(event){
-          if (event.keyCode === 13) 
-          {					
+  				    source : cusArr,
+					select : function( event, ui ){
+					element.keypress(  function(event){										
+          if ( event.which == 13 ) 
+          {	
+		  console.log('here')				
 				var val = element.val()
 				var i = cusArr.indexOf(val)				 
 				if ( i > -1 )
@@ -92,6 +98,42 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 				}				
 		 }				
 		})//keypress handler
+						
+						
+						}								
+					})
+					/*.keypress(  function(event){
+						console.log('keycode : ' + event.which)
+						
+          if ( event.which == 13 ) 
+          {					
+				var val = element.val()
+				var i = cusArr.indexOf(val)				 
+				if ( i > -1 )
+				{
+				scope.$apply(function(){
+				ngModel.$setViewValue(val)})					
+				var param = response.data[i]
+				if ( attrs.id == "customername" )//retrieving customer document
+				{
+				$location.path('/customer').search(param);
+				}
+				else
+				{
+				//we are creating an invoice
+				scope.invoice.name = response.data[i].name
+				scope.invoice.address = response.data[i].address
+				}
+		
+			}
+				else
+				{
+					scope.$apply(function(){
+					ngModel.$setViewValue('')})
+					alert( 'Name is not in Customer List' )
+				}				
+		 }				
+		})//keypress handler*/
 		}
 		})//then
 		

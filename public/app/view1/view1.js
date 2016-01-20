@@ -39,9 +39,16 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $
 	$scope.entry = {}	
 	var myDate = new Date();
 	var imonth = myDate.getMonth()+1
-	if ( imonth < 10 ) imonth = '0' + imonth	
-	var today =(   imonth  + '/' + myDate.getDate() + '/' + myDate.getFullYear())
+	var idate = myDate.getDate()
+	if ( imonth < 10 ) imonth = '0' + imonth
+	if ( idate < 10 ) idate = '0' + idate		
+	var today =(   imonth  + '/' + idate + '/' + myDate.getFullYear())
 	$scope.entry.date = today
+	
+	$scope.filterDate = function(){
+	$scope.date = $filter('date')($scope.dt, 'MM/dd/yyyy')
+	console.log( $scope.dt )
+	}
 	//angular.element( '#datepicker' ).focus()
 	$scope.entry.payment = ''
 	$scope.entry.deposit = ''
@@ -132,10 +139,12 @@ app.directive('datepicker', function(){
 	link : function(scope,element,attrs, ngModel){
 		element.datepicker({
 				onSelect: function(dateText) {
+					var re = /(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d\d/
+					if (re.test(dateText))
 				  scope.$apply(function() {
-					ngModel.$setViewValue(dateText);
-					console.log('datetext : ' + dateText)
+					ngModel.$setViewValue(dateText);					
 				  });
+				  else alert( 'Date must be mm/dd/yyyy' )
 				},
 				dateFormat: "mm/dd/yy"
 			  });	
