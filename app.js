@@ -2,7 +2,7 @@ var express = require('express');
 
 var app = express();
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var MongoClient = require('mongodb').MongoClient // Driver for connecting to MongoDB
 var cookieParser = require('cookie-parser');
@@ -14,7 +14,7 @@ var users = require('./routes/users');
 var cons = require('consolidate') // Templating library adapter for Express
 app.use(express.static('public'));
 
-MongoClient.connect('mongodb://jimsward:polello1@ds045757.mongolab.com:45757/checking', function(err, db) {
+//MongoClient.connect('mongodb://guest:Dbguest1@ds045757.mongolab.com:45757/checking', function(err, db) {
 //MongoClient.connect('mongodb://localhost:27017/checking', {server: {poolSize: 1}}, function(err, db) {   
     if(err) throw err;
 
