@@ -89,8 +89,14 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $
 			return
 		}				
 		else		
-		$http.post('/newentry', $scope.entry).then( function(){
-		location.reload(true)})
+		$http.post('/newentry', $scope.entry).then( function successCallback(){
+		location.reload(true)},
+		function errorCallback(response){
+			alert(response.data.error.message)
+			}
+
+		
+		)
 		}	
 	$scope.cancel = function()
 		{

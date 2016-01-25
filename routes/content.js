@@ -80,12 +80,15 @@ function ContentHandler (app, db) {
 		
 			entries.insertEntry( newE, function(err) {
             "use strict";
-            if (err) return next(err);
-
+            if (err) //return next(err);
+{ console.log('error from mongo: ' + err)
+			  return next(err);
+			}
             entries.getEntries(function(err, results) {	
 			 "use strict";
-			 if (err) return next(err);
 			 
+			 if (err) return next(err);
+			
 			//to reduce clutter, no display of zero amounts
 			for ( var i = 0; i < results.length; i++ )
 			{ 
