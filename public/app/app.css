@@ -30,3 +30,5 @@
 }
 */
 .ng-invalid { border : 1px solid red }
+
+div#login {margin-left :100px !important;}

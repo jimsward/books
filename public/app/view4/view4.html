@@ -41,8 +41,8 @@
   <tr ng-repeat="line in invoice.lines"><!--this array will be saved to the transactions collection-->
   <td>{{$index + 1}}</td>
     <td><input type="text" ng-model="line.activity" id="activity" listservices></td>
-    <td><input type="text" ng-model="line.memo" id="invmemo"></td>
-    <td><input type="string"   ng-model="line.amount" step="0.01" id="invamt"  required  string-to-number ng-keydown="tabfwd($event)" class="formcontrol"></td>
+    <td><input type="text"  ng-model="line.memo" id="invmemo"></td>
+    <td><input type="string" ng-model="line.amount" step="0.01" id="invamt"  required  string-to-number ng-keydown="tabfwd($event)" class="formcontrol"></td>
   </tr>
   <tr>
   <td>Total</td>
@@ -58,8 +58,8 @@
 </div>
 
 <div id="footer">
-<button id="cancel-invoice" ng-click="cancelInvoice()">Cancel</button>
-<button id="save-invoice" ng-click="saveInvoice()">Save</button>
-<button id="print-invoice" ng-click="printInvoice()">Print</button>
+<button id="cancel-invoice" ng-disabled="!user" class="btn btn-info" ng-click="cancelInvoice()">Cancel</button>
+<button id="save-invoice" ng-disabled="!user" class="btn btn-info" ng-click="saveInvoice()">Save</button>
+<button id="print-invoice" ng-disabled="!user" class="btn btn-info" ng-click="printInvoice()">Print</button>
 </div>
 </div>

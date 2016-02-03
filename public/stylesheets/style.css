@@ -44,7 +44,7 @@ button.reset { right : 4px; }
 
 form#entryForm { height:84px;width:100%; background-color:#3868bc; border: none;}
 
-td.rtalign {  text-align:right; }
+td.rtalign, th.rtalign {  text-align:right; }
 
 select#reference { width : 113px; height:26px; border: gray solid 1px; background-color : white }
 
@@ -55,7 +55,7 @@ input#editdeposit, input#editpayment { width : 66px }
 
 #resultsForm input[type="text"], #resultsForm label { width : 150px; height : 20px; display:block; font-size:12px; background-color:#dddddd }
 
-#entryForm input { width : 146px; height : 34px; margin : 0 !important;  }
+/*#entryForm input[type="text"]  { width : 142px; height : 34px; margin : 0 !important;  }*/
 
 #resultsForm label, #chkEntryForm label { display : inline; background-color:white }
 
@@ -69,7 +69,7 @@ button#save { opacity :0.5; }
 
 .buttons { width:460px; }
 
-#search-register, #new-customer, #to-new-customer { width : 220px; height : 42px; position : fixed; top : 0; left : 380px; font-size:18px; margin: 0 0 40px 0 }
+#search-register, #new-customer, #to-new-customer { width : 220px; height : 42px; position : fixed; top : 0; left : 465px; font-size:18px; margin: 0 0 40px 0 }
 
 fieldset { height : 140px; }
 
@@ -165,7 +165,7 @@ form#entryForm input[type="text"], select#reference { background-color : transpa
 
 [ng-message|="required"] { color : red; font-size : 1.1 em; box-sizing:border-box }
 
-.ng-invalid { border : 1px solid red !important }
+/*.ng-invalid { border : 1px solid red !important }*/
 
 form div[role|="alert"].ng-valid { border : none } 
 
@@ -182,3 +182,11 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
 -moz-appearance: textfield;
 }
+
+div#login, div#signup {margin-left :40px }
+
+span.clickable { color : #3868bc; cursor : pointer; text-decoration:underline; margin-bottom:20px; }
+
+input:disabled {background-color:black}
+
+.btn[disabled] {cursor:not-allowed !important; }

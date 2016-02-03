@@ -22,7 +22,6 @@ function ContentHandler (app, db) {
 	var services = new ServicesDAO(db);
 	var transactions = new TransactionsDAO(db)
 	this.displayLayout = function(req, res, next){
-		console.log('displaylayout')
 	return res.redirect( 'app/index.html' )}
 
     this.displayMainPage = function(req, res, next) {
@@ -56,11 +55,12 @@ function ContentHandler (app, db) {
 			}
 			
 			var displArr = results.slice( results.length - 40 )
-			app.locals.entry = { "items" : displArr }
+			app.locals.entry = { "items" : displArr, "username" : req.username }
 			
 			
 			
            /* return res.render('entries', { items : displArr, username : req.username  } );*/
+		   console.log('username ' + req.username)
 		   return res.send( app.locals.entry )
         });
     }
@@ -69,7 +69,6 @@ function ContentHandler (app, db) {
 
 	this.handleNewEntry = function(req, res, next) {
 		
-		console.dir('req.body: ' + req.body.account)
 		var newE = req.body;  //need to store dollar amounts as integers
 		newE.deposit = toInt( newE.deposit )
 		newE.payment = toInt( newE.payment )
@@ -81,9 +80,9 @@ function ContentHandler (app, db) {
 			entries.insertEntry( newE, function(err) {
             "use strict";
             if (err) //return next(err);
-{ console.log('error from mongo: ' + err)
+
 			  return next(err);
-			}
+			
             entries.getEntries(function(err, results) {	
 			 "use strict";
 			 
@@ -122,7 +121,6 @@ function ContentHandler (app, db) {
 	var obj = req.query
 		entries.findEntries(obj, function(err, results)
 		{
-			//console.log(results)
 			for ( var i=0; i<results.length; i++ )
 			{
 			var parts = results[i].date.split('/');
@@ -158,22 +156,17 @@ function ContentHandler (app, db) {
 		obj.deposit = parseInt((obj.deposit*100))
 		obj.payment = parseInt((obj.payment*100))
 		var parts = obj.date.split('/');
-			obj.date = parts[2] + '/' + parts[0] + '/' + parts[1]
-		console.log(obj.deposit + '  ' + obj.payment)
-
-		
+		obj.date = parts[2] + '/' + parts[0] + '/' + parts[1]
 		entries.updateEntry( obj, function(err, results)
 		{
 			
 		if (err) return next(err)
-		//console.log(results)		
 		return res.end()
 		})	
 	}
 	this.displayCustomersPage = function( req, res, next ){
 		customers.getCustomers( function( err, results ){
 			if (err) return next(err)
-			//console.log(results.length)
 			return res.send( results )
 			} )
 		}
@@ -195,7 +188,6 @@ function ContentHandler (app, db) {
 	this.customerUpdate = function( req, res, next ){
 		
 		var obj = req.body
-		console.log(obj)
 		customers.updateCustomer( obj, function( err, result ){
 			if (err) return next(err)
 			return res.end()
@@ -205,7 +197,6 @@ function ContentHandler (app, db) {
 		var obj = req.body
 		
 		obj.date = pivot(obj.date)
-		console.log(obj.date)
 		invoices.addInvoice( obj, function( err, result ){
 			if (err) return next(err)
 			return res.end()
@@ -213,7 +204,6 @@ function ContentHandler (app, db) {
 		}
 	this.getInvoice = function( req, res, next ){
 		var number = req.query
-		console.dir(number)
 		number.number = parseInt(number.number)
 		invoices.getInvoice( number, function( err, result ){
 			if (err) return next(err)
@@ -231,7 +221,6 @@ function ContentHandler (app, db) {
 	this.listTransactions = function( req, res, next ){
 		transactions.getList( function( err, results ){
 			if (err) return next(err)
-			console.log('length : ' + results.length)
 			res.send( results )
 			})
 		}

@@ -149,6 +149,9 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
       height: 600,
       width: 1040,
       modal: true,
+	  focus : function(event, ui){
+		  $( "[id^=custDialog]").attr( "class", "btn btn-info").attr( "disabled", !scope.user )
+		  },
 	  close : function(){
 		  $location.path('/customers')
 		  },
@@ -171,7 +174,7 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 		  }
 		  else
 		  {
-			 // alert( 'Please enter a name and an address!' )
+			  alert( 'Please enter a name and an address!' )
 		  }
 		  }
 	 },

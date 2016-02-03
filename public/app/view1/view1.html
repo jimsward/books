@@ -1,7 +1,9 @@
 <p id="shadow">This is the partial for view 1.</p>
 <div class="container" >
 <div ng-controller="View1Ctrl">
-
+<div ng-hide="user"><p>You are not logged in!</p><span ng-click="login()" class="clickable">Login</span>|<span ng-click="signUp()" class="clickable">Sign  Up</span></div>
+<p></p>
+<div ng-show="user"><span>Welcome {{username}}</span><span ng-click="logout()" class="clickable"> | LOGOUT</span></div>
 <table class="tbl tablesorter" width="800" border="1" cellpadding="2">
 <thead>
   <tr>
@@ -11,9 +13,9 @@
     <th scope="col">Payee</th>
     <th scope="col">Memo</th>
     <th scope="col">Account</th>
-    <th scope="col">Payment</th>
-    <th scope="col">Deposit</th>
-    <th scope="col">Balance</th>
+    <th scope="col" class="rtalign">Payment</th>
+    <th scope="col" class="rtalign">Deposit</th>
+    <th scope="col" class="rtalign">Balance</th>
   </tr>
 </thead>
 <tbody class="tbody">
@@ -63,13 +65,13 @@
 <input name="account" type="text" ng-model="entry.account" id="account" placeholder="account" listaccts required>
 <input name="payment" type="text" ng-model="entry.payment" ng-disabled="disablePayment" id="payment" placeholder="payment" title="Payment" maskmoney/>
 <input name="deposit" type="text" ng-model="entry.deposit" ng-disabled="disableDeposit" id="deposit" placeholder="deposit" title="Deposit" maskmoney/>
-<input type="reset" class="cancel" class="ui-button" value="Cancel" ng-click="cancel()">
-<input type="submit" class="submit" class="ui-button" value="Add"  ng-click="add()">
+<input type="reset" class="cancel btn btn-info" value="Cancel" ng-click="cancel()">
+<input type="submit" ng-disabled="!user" class="submit btn btn-info" value="Add"  ng-click="add()">
 </form>
 </div>
 </div><!--container-->
 <div ng-controller="schRegDialog">
-<button id="search-register" ng-click="openSearch()" title="Opens a dialog where you can choose to search based on date, amount, payee, or account; then manipulate data">Search Register</button>
+<button id="search-register" class="btn btn-info" ng-click="openSearch()" title="Opens a dialog where you can choose to search based on date, amount, payee, or account; then manipulate data">Search Register</button>
 <div id="dialog-form" title="Find Checking Transactions" wdialog>
   <p class="title">Search the Check Register.</p> 
  <form id="dialogForm" name="dialogForm">

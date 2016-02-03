@@ -1,7 +1,7 @@
 <p>This is the partial for view 2.</p>
 <div class="container">
 <div ng-controller="View2Ctrl">
-<button id="to-new-customer" ng-click="openNewCustomer()" title="Opens a dialog where you can add all the details for a new customer">New Customer</button>
+<button id="to-new-customer" ng-click="openNewCustomer()" title="Opens a dialog where you can add all the details for a new customer" class="btn btn-info">New Customer</button>
 
 
 <input type="text" ng-model="customer.name" id="customername" placeholder="Find a customer" listcustomers>
@@ -28,25 +28,21 @@
     <fieldset>
      <label for="name">Name</label>
      <input type="text" ng-model="customer.name" id="name" name="name" required/>
-     <div ng-messages="newCustomer.name.$error" role="alert">
-<div ng-message="required">Please enter a name</div>
-</div> 
+    
      
      <label for="company">Company</label>
      <input type="text" ng-model="customer.company" id="company"/> 
      <label for="address">Address</label>
      <input type="text" ng-model="customer.address" id="address" name="address" required/>
-     <div role="alert">
-      <span class="error" ng-show="newCustomer.address.$error.required">
-       Required!</span>
-    </div> 
+     
+
      <label for="phone">Phone</label>
      <input type="text" ng-model="customer.phone" id="phone"/> 
      <label for="email">email</label>
      <input type="text" ng-model="customer.email" id="email"/
      <label for="balance">Balance</label>
-     <input type="text" ng-model="customer.balance" id="balance"/>       
-   </fieldset>
+     <input type="text" ng-model="customer.balance" id="balance"/>
+     </fieldset>       
  </form>
 </div>
 </div><!--customerCtrl-->

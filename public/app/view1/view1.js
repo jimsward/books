@@ -7,11 +7,25 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }])
 //Populate the table with checkbook entries
-app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, getEntries, $http){	
+app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$rootScope', function($scope, getEntries, $http, $location, $routeParams, $rootScope){	
 	
-	getEntries.then(function(response) {		
-	$scope.items = response.data.items
-	
+	//getEntries.success(function(response) {	
+	$http.get('/entries').success(function(response){	
+	$rootScope.username = 	response.username
+	$rootScope.user = $scope.username ? true : false	
+	$scope.items = response.items
+	})
+	$scope.login = function(){
+		$location.path('/view6')
+		}
+	$scope.signUp = function(){
+		$location.path('/view7')
+		}
+	$scope.logout = function(){		
+		$http.get( '/logout' ).then( function(response){
+			$location.path('/')
+			} )
+		}
 	$scope.openDlg =  function(item){
 		angular.element( '#' + item.id ).unbind().css( 'opacity', '0.5' )
 		$scope.item = item
@@ -29,13 +43,13 @@ app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', function($scope, 
 			}		
 	$scope.dialog.dialog( "open" )
 		}			
-	})//promise	
+		
 	}])//controller
 app.factory( 'getEntries', [ '$http', function($http) {	 
     return $http.get('/entries')	
 	}])
 	//form with controls for new entries to the check register
-app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
+app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', function($scope, $http, $filter, $rootScope){
 	$scope.entry = {}	
 	var myDate = new Date();
 	var imonth = myDate.getMonth()+1
@@ -71,7 +85,7 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', function($scope, $
 		}
 	$scope.add = function(){
 		//validate
-		alert('date : ' + $scope.entry.date)
+		alert($rootScope.user)
 		if ( angular.element( '#reference option:selected' ).val() == '' )
 		{
 			alert('You must choose Deposit or Payment')
@@ -212,6 +226,9 @@ app.directive('wdialog', [ '$http', function($http){
       height: 600,
       width: 1040,
       modal: true,
+	  focus : function(event, ui){
+		 $( "[id^=sch]").attr( "class", "btn btn-info").attr( "disabled", !scope.user )
+		 },
     buttons: [  //button label/text : callback
 	  { 
 	  text : 'Update',
@@ -231,6 +248,7 @@ app.directive('wdialog', [ '$http', function($http){
 	 { 
 	 text : 'Reset',
 	 id : 'schReset',
+	
 	 click : function()
 		{ $( '#dialogForm' )[0].reset()
 		$( '#resultsForm' )[0].reset()
@@ -299,7 +317,9 @@ app.directive( 'editable', [ '$http', function($http){
 		      height: 600,
 	 		  width: 400,
 		      modal: true,
-			  
+		focus : function(event, ui){
+			$( "[id^=editable]").attr( "class", "btn btn-info").attr( "disabled", !scope.user )
+			},	  
 		buttons : [
 			{
 		text : 'save',

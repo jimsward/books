@@ -15,7 +15,7 @@ function UsersDAO(db) {
 
     this.addUser = function(username, password, email, callback) {
         "use strict";
-
+console.log('username' + username)
         // Generate password hash
         var salt = bcrypt.genSaltSync();
         var password_hash = bcrypt.hashSync(password, salt);

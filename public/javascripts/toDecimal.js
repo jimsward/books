@@ -3,6 +3,7 @@
 module.exports = function(number)	//returns a string with the (integer) number divided by 100
 {									//and commas thus: ###,###,###,###.##
 		var str = number.toString()
+		if (str.length < 2) return ".0" + str
 		var part1 = str.substring(0, str.length - 2)
 		if (part1.length >3)
 		{

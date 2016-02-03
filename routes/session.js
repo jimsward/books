@@ -44,12 +44,15 @@ function SessionHandler (db) {
         users.validateLogin(username, password, function(err, user) {
             "use strict";
 
-            if (err) {
+             if (err) {
                 if (err.no_such_user) {
-                    return res.render("login", {username:username, password:"", login_error:"No such user"});
+					console.log('error handler')
+					var response = {"error" : "No such user"}
+                    return res.status(409).send(response);
                 }
                 else if (err.invalid_password) {
-                    return res.render("login", {username:username, password:"", login_error:"Invalid password"});
+					var response = {"error" : "Invalid password"}
+                    return res.status(409).send(response);
                 }
                 else {
                     // Some other kind of error
@@ -63,7 +66,7 @@ function SessionHandler (db) {
                 if (err) return next(err);
 
                 res.cookie('session', session_id);
-                return res.redirect('/welcome');
+                return res.send({"user":username});
             });
         });
     }
@@ -77,7 +80,7 @@ function SessionHandler (db) {
 
             // Even if the user wasn't logged in, redirect to home
             res.cookie('session', '');
-            return res.redirect('/');
+            return res.send({username : ""})
         });
     }
 
@@ -127,11 +130,11 @@ function SessionHandler (db) {
         var email = req.body.email
         var username = req.body.username
         var password = req.body.password
-        var verify = req.body.verify
+        
 
         // set these up in case we have an error case
         var errors = {'username': username, 'email': email}
-        if (validateSignup(username, password, verify, email, errors)) {
+		console.log(username)
             users.addUser(username, password, email, function(err, user) {
                 "use strict";
 
@@ -156,11 +159,8 @@ function SessionHandler (db) {
                     return res.redirect('/welcome');
                 });
             });
-        }
-        else {
-            console.log("user did not validate");
-            return res.render("signup", errors);
-        }
+        
+       
     }
 
     this.displayWelcomePage = function(req, res, next) {
