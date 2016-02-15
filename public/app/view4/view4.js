@@ -67,11 +67,8 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		$scope.invoice.lines = [ { activity : "", memo : "", amount : 0 } ]
 		alert('Invoice added')
 		}
-		}
-		
-	
-	$scope.tabfwd = function( event ){
-		
+		}	
+	$scope.tabfwd = function( event ){		
 		var accept = [ 9, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 ]	//dot, tab, and 0-9
 		if ( accept.indexOf( event.which ) == -1 ) return		
 		if (event.which == 9)
@@ -103,11 +100,7 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		angular.element(event.target).val( "" ).focus()	
 		}//else
 		}//if
-	}
-	
-	
-	
-	
+	}	
 }])
 app.factory( 'addInvoice', [ '$http', function($http) {		 
     return function(invoice){

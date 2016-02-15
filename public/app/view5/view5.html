@@ -5,10 +5,21 @@
 
 
 <div>
+<span>From:</span>
+<input name="from" type="text" datepicker ng-model="transaction.from" id="from" class="form-control" required>
+<span>To:</span>
+<input name="to" type="text" datepicker ng-model="transaction.to" id="to" class="form-control" required>
 
+<button class="btn btn-info" id="runbtn" ng-click="run()">Run Report</button>
 
 <table width="400" border="1" cellpadding="2" id="transactionsTable">
+<caption>PROFIT AND LOSS DETAIL</caption>
+<thead>
   <tr>
+  
+  	<th >Category</th>
+  
+  	<th id="wideaccount">Account</th>
   	
     <th >Date</th>
     
@@ -21,29 +32,32 @@
     <th>Name</th>
     
   
-    <th>Memo</th>
-    
+    <th>Memo</th>    
   
-    <th>Account</th>
+     <th>Split</th>
     
     <th>Amount</th>
     
+    <th>Balance</th>
+    
   </tr>
+ </thead>
  
- 
- 
+ <tbody>
   
   <tr ng-repeat="transaction in transactions" ng-class-odd="'odd'" >
-  	
-    <td>{{transaction.date}}</td>  
+ 	 <td>{{transaction.category}}</td>
+  	<td>{{transaction.account}}</td>
+    <td>{{transaction.date | pivot}}</td>  
     <td>{{transaction.type}}</td> 
     <td>{{transaction.number}}</td>   
     <td>{{transaction.name}}</td>    
     <td>{{transaction.memo}}</td>
-    <td>{{transaction.account}}</td>    
-    <td>{{transaction.amount}}</td>
+     <td class="split">{{transaction.split}}</td>   
+    <td class="rtalign">{{transaction.amount/100 | currency : ""}}</td>
+    <td class="rtalign">{{transaction.balance/100 | currency : ""}}</td>
   </tr>
-  
+</tbody>  
 </table>
 
 

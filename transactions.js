@@ -16,11 +16,13 @@ function TransactionsDAO(db) {
 			return callback( null, doc )
 			} )
 		}
-	this.getList = function( callback ){
-		
-		transactions.find( {} ).limit(10000).toArray( function( err, items ){
-			
+	this.getList = function( params, callback ){
+		var from = params.from, to = params.to
+		console.log(from +'+'+ to)
+		transactions.find( { date : { $gte : from, $lte : to } } ).sort( { category : -1, account : 1, type : 1, date : 1 } ).toArray( function( err, items ){
 			if (err) return callback( err, null )
+					console.log(items.length)
+
 			return callback( null, items )
 			} )
 		}

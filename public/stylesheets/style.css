@@ -44,7 +44,7 @@ button.reset { right : 4px; }
 
 form#entryForm { height:84px;width:100%; background-color:#3868bc; border: none;}
 
-td.rtalign, th.rtalign {  text-align:right; }
+td.rtalign, th.rtalign {  text-align:right; padding : 4px }
 
 select#reference { width : 113px; height:26px; border: gray solid 1px; background-color : white }
 
@@ -190,3 +190,11 @@ span.clickable { color : #3868bc; cursor : pointer; text-decoration:underline; m
 input:disabled {background-color:black}
 
 .btn[disabled] {cursor:not-allowed !important; }
+
+#wideaccount { width : 200px }
+
+.form-control { display : inline; }
+
+#runbtn { margin-left:20px; }
+
+.totals {font-weight:900}

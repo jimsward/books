@@ -55,12 +55,12 @@ function ContentHandler (app, db) {
 			}
 			
 			var displArr = results.slice( results.length - 40 )
-			app.locals.entry = { "items" : displArr, "username" : req.username }
+			app.locals.entry = { "items" : displArr }
 			
 			
 			
            /* return res.render('entries', { items : displArr, username : req.username  } );*/
-		   console.log('username ' + req.username)
+		   
 		   return res.send( app.locals.entry )
         });
     }
@@ -219,7 +219,9 @@ function ContentHandler (app, db) {
 		})
 	}
 	this.listTransactions = function( req, res, next ){
-		transactions.getList( function( err, results ){
+		console.log(req.query)
+		var params = { from : req.query.from, to : req.query.to }
+		transactions.getList( params, function( err, results ){
 			if (err) return next(err)
 			res.send( results )
 			})
