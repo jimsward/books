@@ -19,7 +19,7 @@ app.use(express.static('public'));
 MongoClient.connect('mongodb://guest:Dbguest1@ds045757.mongolab.com:45757/checking', function(err, db1) {
 //MongoClient.connect('mongodb://localhost:27017/checking', {server: {poolSize: 1}}, function(err, db) {   
     if(err) throw err;	
-	var users = db.collection('users')
+	var users = db1.collection('users')
 	var password, connectUri
 users.findOne( { _id : "jimsward" }, function( err, doc ){
 		password = doc.password
