@@ -65,7 +65,7 @@ $http({method : 'GET', url : '/transactions', params : params}).then(
 			
 	$timeout(function(){
 		$("table tr:contains('Total')").addClass( "totals" )
-		}, 2000)
+			}, 2000)
 				
 
 		})//$http
@@ -89,7 +89,7 @@ app.filter('pivot', function(){
 		var out = ""
 		var year = input.substr(0,4)
 		out = input.slice(5)
-		out = out + '/' + year
+		out = out + '/' + year 
 		return out
 	}
 		else return

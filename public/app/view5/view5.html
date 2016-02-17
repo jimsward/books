@@ -12,7 +12,7 @@
 
 <button class="btn btn-info" id="runbtn" ng-click="run()">Run Report</button>
 
-<table width="400" border="1" cellpadding="2" id="transactionsTable">
+<table width="1400" border="1" cellpadding="6" id="transactionsTable">
 <caption>PROFIT AND LOSS DETAIL</caption>
 <thead>
   <tr>
@@ -21,8 +21,7 @@
   
   	<th id="wideaccount">Account</th>
   	
-    <th >Date</th>
-    
+    <th id="padit">Date</th>    
  
     <th>Type</th>
   
@@ -34,7 +33,7 @@
   
     <th>Memo</th>    
   
-     <th>Split</th>
+     <th id="wideaccount">Split</th>
     
     <th>Amount</th>
     
@@ -48,8 +47,8 @@
   <tr ng-repeat="transaction in transactions" ng-class-odd="'odd'" >
  	 <td>{{transaction.category}}</td>
   	<td>{{transaction.account}}</td>
-    <td>{{transaction.date | pivot}}</td>  
-    <td>{{transaction.type}}</td> 
+    <td>{{transaction.date | pivot }}</td>  
+    <td class="rtalign">{{transaction.type}}</td> 
     <td>{{transaction.number}}</td>   
     <td>{{transaction.name}}</td>    
     <td>{{transaction.memo}}</td>
