@@ -197,3 +197,7 @@ input:disabled {background-color:black}
 
 #runbtn { margin-left:20px; }
 
+.totals {font-weight:900}
+
+table#transactionsTable tr th#padit {padding : 0 4px}
+
