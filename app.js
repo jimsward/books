@@ -18,7 +18,7 @@ app.use(express.static('public'));
 
 
 //MongoClient.connect('mongodb://localhost:27017/checking', {server: {poolSize: 1}}, function(err, db) {   
-    if(err) throw err;	
+    
 	var users = db1.collection('users')
 	var user, password, connectUri
 	user = process.env.DB_USER
