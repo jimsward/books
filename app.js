@@ -16,17 +16,15 @@ var users = require('./routes/users');
 var cons = require('consolidate') // Templating library adapter for Express
 app.use(express.static('public'));
 
-MongoClient.connect('mongodb://guest:Dbguest1@ds045757.mongolab.com:45757/checking', function(err, db1) {
+
 //MongoClient.connect('mongodb://localhost:27017/checking', {server: {poolSize: 1}}, function(err, db) {   
     if(err) throw err;	
 	var users = db1.collection('users')
-	var password, connectUri
-users.findOne( { _id : "jimsward" }, function( err, doc ){
-		password = doc.password
-		console.log(password)
-		var connectUri = 'mongodb://jimsward:' + password + '@ds045757.mongolab.com:45757/checking'
-		console.log(connectUri)
-MongoClient.connect(connectUri, function(err, db) {
+	var user, password, connectUri
+	user = process.env.DB_USER
+	password = process.env.DB_PW			
+		var connectUri = 'mongodb://user' + password + '@ds045757.mongolab.com:45757/checking'
+		MongoClient.connect(connectUri, function(err, db) {
     "use strict";
     if(err) throw err;
 var entries = db.collection("entries");
@@ -37,8 +35,6 @@ app.engine('html', cons.swig);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.locals.cache = "memory"
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -81,6 +77,6 @@ app.use(function(err, req, res, next) {
 app.listen(port);
     console.log('Express server listening on port ' + port);
 })//inner connect	
-})
-} )	
+
+	
 module.exports = app;
