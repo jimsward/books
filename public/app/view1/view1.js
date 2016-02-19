@@ -12,7 +12,8 @@ app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 	//getEntries.success(function(response) {	
 	$http.get('/entries').success(function(response){	
 	$rootScope.username = 	response.username
-	$rootScope.user = $scope.username ? true : false	
+	$rootScope.user = $rootScope.username ? true : false
+	console.dir(response)	
 	$scope.items = response.items
 	})
 	$scope.login = function(){

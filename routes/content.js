@@ -61,7 +61,7 @@ function ContentHandler (app, db) {
 			
            /* return res.render('entries', { items : displArr, username : req.username  } );*/
 		   
-		   return res.send( app.locals.entry )
+		   return res.send( {items : displArr, username : req.username} )
         });
     }
 
