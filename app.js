@@ -6,6 +6,7 @@ var app = express();
 var path = require('path');
 //var favicon = require('serve-favicon');
 var logger = require('morgan');
+
 var MongoClient = require('mongodb').MongoClient // Driver for connecting to MongoDB
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');

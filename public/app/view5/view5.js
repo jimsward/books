@@ -30,11 +30,23 @@ $scope.run = function(){
 	$http({method : 'GET', url : '/transactions', params : params}).then(	
 	function(response){		
 	var totIncome = 0, totExpense = 0
-	var totals = [], balance = 0
-	var catTotal = 0
+	var totals = [], balance = 0, acctBalance = 0
+	var catTotal = 0, acctTotal = 0
+	var acct  = response.data[0].account
 	, category = response.data[0].category
 	//response is sorted so when a category changes, we store a subtotal and start another category
 	response.data.forEach(function(value, index, array){
+		//now, by account
+		if (value.account == acct)
+		{
+			acctBalance += response.data[index].amount
+		}
+		else
+		{
+			totals.push( {account : acct, amount : acctBalance, split : "Total"} )
+			acctBalance = value.amount
+			acct = value.account
+		}
 		if (value.category == category)
 		{balance += response.data[index].amount
 		value.balance = balance
@@ -47,7 +59,9 @@ $scope.run = function(){
 		balance = value.amount
 		category = value.category
 		}
+
 		})//forEach
+		totals.push( {account : acct, amount : acctBalance, split : "Total"} )
 		totExpense = balance
 		totals.push( { category : category, balance : balance, split : "Total" } )	
 		totals.push( { category : "Net Income", balance : totIncome - totExpense, split : "Total" } )	
@@ -63,8 +77,8 @@ app.factory( 'getTransactions', [ '$http', function( $http ){
 	return function( params ){$http.get('/transactions', params)	
 	}	
 	} ] )
-//dates are stored as yyyy/mm/dd for sorting and somparison but are displayed as mm/dd/yyyy
-//this filter pivots the yyyy from the start to thend of the string
+//dates are stored as yyyy/mm/dd for sorting and comparison but are displayed as mm/dd/yyyy
+//this filter pivots the yyyy from the start to the end of the string
 app.filter('pivot', function(){	
 	return function(input){
 		if (input)
