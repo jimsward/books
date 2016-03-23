@@ -13,9 +13,9 @@ app.controller('View2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', 
 	$scope.customers = response.data
 	
 	//user clicked on a customer x in the list; redirect to customer details page with customer x's document
-	$scope.customerDetails = function(customer){
-		
-					$location.path('/customer').search(customer);
+	$scope.customerDetails = function(event, customer){
+		event.stopPropagation()
+		$location.path('/customer').search(customer);
 		}
 		})//then
 		
@@ -31,8 +31,12 @@ app.controller('View2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', 
 		alert('name : ' + $scope.customer.name)
 		$location.path('/customer').search($scope.customer);
 		}
-	}//callback
-]);//controller
+	$scope.makeInvoice = function(event, customer){
+		event.stopPropagation()
+		console.log(customer.name)
+		$location.path('/invoice').search(customer);
+	}
+	}]);//controller
 app.factory( 'getCustomers', [ '$http', function($http) {	 
     return $http.get('/customers')	
 	}])
@@ -52,93 +56,36 @@ app.factory( 'customerInit', [ '$http', function($http) {
 app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function( $location, $http, getCustomers ){		
 	return {
 		require : 'ngModel',
-	link : function(scope,element,attrs, ngModel){
+	link : function(scope, element, attrs, ngModel){
 		getCustomers.then(function(response) {
-		if (response)
-		{	
-		var cusArr = []
-		var addressArr = []//kluge
-	angular.forEach( response.data, function(value, key){		
-		cusArr.push( value.name )
-		addressArr.push( value.address )
-		
-		}		
-			)				
-		element.autocomplete({
-  				    source : cusArr,
-					select : function( event, ui ){
-					element.keypress(  function(event){										
-          if ( event.which == 13 ) 
-          {	
-		  console.log('here')				
-				var val = element.val()
-				var i = cusArr.indexOf(val)				 
-				if ( i > -1 )
-				{
-				scope.$apply(function(){
-				ngModel.$setViewValue(val)})					
-				var param = response.data[i]
-				if ( attrs.id == "customername" )//retrieving customer document
-				{
-				$location.path('/customer').search(param);
-				}
-				else
-				{
-				//we are creating an invoice
-				scope.invoice.name = response.data[i].name
-				scope.invoice.address = response.data[i].address
-				}
-		
-			}
-				else
-				{
+			if (response) {
+				var cusArr = []
+				var addressArr = []//kluge
+				angular.forEach(response.data, function (value, key) {
+						cusArr.push(value.name)
+					}
+				)
+				element.autocomplete({
+					source: cusArr
+				})
+				element.on( "autocompletechange", function(event, ui){
+					var val = event.target.value
+					if (cusArr.indexOf(val) == -1 && val.length > 0 )
+					{
+						alert(val + ' not in list of Customers')
+						angular.element(event.target).val("")
+						return
+					}//if
 					scope.$apply(function(){
-					ngModel.$setViewValue('')})
-					alert( 'Name is not in Customer List' )
-				}				
-		 }				
-		})//keypress handler
-						
-						
-						}								
+						ngModel.$setViewValue(val)
 					})
-					/*.keypress(  function(event){
-						console.log('keycode : ' + event.which)
-						
-          if ( event.which == 13 ) 
-          {					
-				var val = element.val()
-				var i = cusArr.indexOf(val)				 
-				if ( i > -1 )
-				{
-				scope.$apply(function(){
-				ngModel.$setViewValue(val)})					
-				var param = response.data[i]
-				if ( attrs.id == "customername" )//retrieving customer document
-				{
-				$location.path('/customer').search(param);
-				}
-				else
-				{
-				//we are creating an invoice
-				scope.invoice.name = response.data[i].name
-				scope.invoice.address = response.data[i].address
-				}
-		
+				})//autocompletechange callback
+
 			}
-				else
-				{
-					scope.$apply(function(){
-					ngModel.$setViewValue('')})
-					alert( 'Name is not in Customer List' )
-				}				
-		 }				
-		})//keypress handler*/
-		}
-		})//then
-		
-		}//callback
-	}//return
+		})
+	}
+	}
+
 }]);
  app.directive( 'custdialog', [ '$http', '$location', 'customerInit', function($http, $location, customerInit){	      
 	return {

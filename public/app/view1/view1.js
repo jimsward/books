@@ -13,7 +13,6 @@ app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 	$http.get('/entries').success(function(response){	
 	$rootScope.username = 	response.username
 	$rootScope.user = $rootScope.username ? true : false
-	console.dir(response)	
 	$scope.items = response.items
 	})
 	$scope.login = function(){
@@ -62,7 +61,6 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', func
 	
 	$scope.filterDate = function(){
 	$scope.date = $filter('date')($scope.dt, 'MM/dd/yyyy')
-	console.log( $scope.dt )
 	}
 	//angular.element( '#datepicker' ).focus()
 	$scope.entry.payment = ''

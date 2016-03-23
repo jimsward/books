@@ -205,8 +205,15 @@ function ContentHandler (app, db) {
 	this.getInvoice = function( req, res, next ){
 		var number = req.query
 		number.number = parseInt(number.number)
+		console.dir(req.query)
 		invoices.getInvoice( number, function( err, result ){
-			if (err) return next(err)
+			if (err) {
+				if (err.no_such_number) {
+					var response = {"error": "No such Number"}
+					return res.status(409).send(response)
+				}
+				else return next(err)
+			}
 			result.date = pivot(result.date)
 			return res.send( result )
 			} )

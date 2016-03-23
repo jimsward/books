@@ -17,8 +17,16 @@ function InvoicesDAO(db) {
 			} )
 		}
 	this.getInvoice = function( number, callback ){
-		console.log('number : ' + number)
+		console.dir( number)
 		invoices.findOne(  number , function( err, item ){
+
+			if (!item)
+			{
+				var no_such_number_error = new Error("Invoice: " + number + " does not exist")
+				no_such_number_error.no_such_number = true
+				callback(no_such_number_error, null)
+			}
+
 			
 			if (err) return callback( err, null )
 			return callback( null, item )

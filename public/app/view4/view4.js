@@ -10,7 +10,7 @@ app.config(['$routeProvider', function($routeProvider) {
 }])
 //Invoice entry. Adds invoice info and total to invoices collection. Adds line items -invArr- to transactions collection.
 //or show an existing invoice
-app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$location', '$filter', 'addInvoice', function($scope, $window, $http, $routeParams, $location, $filter, addInvoice){
+app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$location', '$filter', 'addInvoice', 'getInvoice', function($scope, $window, $http, $routeParams, $location, $filter, addInvoice, getInvoice){
 	//if the page request has parameters, user wants to see an existing invoice
 	if ( $routeParams.number )
 	{
@@ -30,7 +30,12 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	}
 	//add a new invoice
 	else {
-	$scope.invoice = {}	
+	$scope.invoice = {}
+		if ($routeParams.name)
+		{
+			$scope.invoice.name = $routeParams.name
+			$scope.invoice.address = $routeParams.address
+		}
 	$scope.invoice.lines = [ { activity : "", memo : "", amount : "" } ]
 	$scope.invoice.total = 0
 	var today = new Date()
@@ -42,8 +47,22 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		}
 	$scope.printInvoice = function(){
 		$(".menu").add('p').add('button').hide()
-		$window.print();
-		$(".menu").add('p').add('button').show()
+		var number = {number : $scope.invoice.number}
+		//getInvoice(number).then(function (response) {
+		//	$scope.invoice = response.data
+		//	$window.print();
+		//	$(".menu").add('p').add('button').show()
+		//})
+
+		$http({method : "GET", url : '/invoice', params : number})
+			.then(function successCallback(response){
+				$scope.invoice = response.data
+				$window.print();
+				$(".menu").add('p').add('button').show()
+			}, function errorCallback(response){
+		alert(response.error)
+		})
+
 	}
 	$scope.saveInvoice = function(){
 		if ( $scope.invoice.name == null )
@@ -55,22 +74,22 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		if ( $scope.invoice.total == 0 )
 		alert( 'Please enter an amount' )
 		else
-		{	
-		$scope.invoice.total = 	$filter('currency')( $scope.invoice.total, "", 2 )	
+		{
+		$scope.invoice.total = 	$filter('currency')( $scope.invoice.total, "", 2 )
 		var length =  $scope.invoice.lines.length
 		if ( $scope.invoice.lines[length - 1].amount == 0 )//if the last line item is empty get rid of it
 		$scope.invoice.lines.pop()
-			
+
 		addInvoice($scope.invoice)
-		$scope.invoice = {}
-		$scope.invoice.total = 0
-		$scope.invoice.lines = [ { activity : "", memo : "", amount : 0 } ]
-		alert('Invoice added')
+		//$scope.invoice = {}
+		//$scope.invoice.total = 0
+		//$scope.invoice.lines = [ { activity : "", memo : "", amount : 0 } ]
+		console.log('Invoice added')
 		}
-		}	
-	$scope.tabfwd = function( event ){		
+		}
+	$scope.tabfwd = function( event ){
 		var accept = [ 9, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 ]	//dot, tab, and 0-9
-		if ( accept.indexOf( event.which ) == -1 ) return		
+		if ( accept.indexOf( event.which ) == -1 ) return
 		if (event.which == 9)
 		{
 		var re = /(\d+)\.*(\d*)/
@@ -78,38 +97,50 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		if (isNaN(val))
 		{
 			 angular.element( event.target ).val("")
-			 return			 
+			 return
 		}
-		console.log(val)
+
 		if (re.test(val))
-		{	
+		{
 		var num = angular.element(event.target).val()
 		num = $filter('number')(num, 2)
-		console.log(num)
-		angular.element(event.target).val(num )	
-		var re = /\,/g	
-		var totnum = num	
+		angular.element(event.target).val(num )
+		var re = /\,/g
+		var totnum = num
 		totnum = totnum.replace(re, "")
-		
+
 		totnum = parseFloat(totnum)
 		$scope.invoice.total += totnum
 		$scope.invoice.lines.push( { activity : "", memo : "", amount : 0 } )
 		}
 		else
 		{
-		angular.element(event.target).val( "" ).focus()	
+		angular.element(event.target).val( "" ).focus()
 		}//else
 		}//if
-	}	
+	}
+	$scope.custdetails = function(){
+		$scope.invoice.name = $('#custinvoice').val()
+		//alert('name : ' + $scope.invoice.name)
+		var params = {name : $scope.invoice.name }
+		$http( { url :'/customer', params : params, method : 'GET' } ).then(function(response){
+			console.log(response.data)
+			$scope.invoice.address = response.data.address
+		})
+
+	}
 }])
-app.factory( 'addInvoice', [ '$http', function($http) {		 
+app.factory( 'addInvoice', [ '$http', function($http) {
     return function(invoice){
 	$http.post('/newInvoice', invoice).success( function(){
-		
-	console.log('success')
-			} )
-	}	
+				} )
+	}
 	}])
+app.factory( 'getInvoice', [ '$http', function($http) {
+	return function(number) {
+		$http.get({method : 'GET', url : '/invoice', params: number})
+	}
+}])
 app.directive('listservices', [ '$http', function($http){	
 	return {
 	require : 'ngModel',
@@ -128,8 +159,7 @@ app.directive('listservices', [ '$http', function($http){
 					})
 			element.on( "autocompletechange", function(event, ui){
 				var val = event.target.value
-				console.log(services.indexOf(val))				
-				if (services.indexOf(val) == -1 && val.length > 0 )			
+				if (services.indexOf(val) == -1 && val.length > 0 )
 				{
 				alert(val + ' not in list of Services')	
 				angular.element(event.target).val("")

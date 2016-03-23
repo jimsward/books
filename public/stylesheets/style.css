@@ -116,7 +116,7 @@ table#dtlTable { width : 900px; }
 
 table#custDtlTable { width : 400px }
 
-#invoicediv { width : 612px; height: 792px; border : 1px #888888 solid; padding : 20px}
+#invoicediv { width : 100%; height: 100%; border : none; padding : 20; font-size: 20px}
 
 button#to-invoice { float : right }
 
@@ -124,40 +124,41 @@ textarea#billto { width : 160px; height: 100px; border : 1px #000 solid; float :
 
 h1 { text-align : center }
 
-div#invdate { width : 80px; height : 30px; border : 1px #000 solid; padding : 0 5px   }
+div#invdate { width : 180px; height : 30px; border : 1px #000 solid; padding : 0 5px   }
 
-div#invnum { width : 80px; height : 30px; border : 1px #000 solid; padding : 0 5px     }
+div#invnum { width : 180px; height : 30px; border : 1px #000 solid; padding : 0 5px     }
 
-table#invtbl { clear:both; width : 600px; margin-top : 300px; }
-
-div#footer { width : 654px; }
+div#footer { width : 654px; padding : 4px; }
 
 button#cancel-invoice { float : left }
 
-.outer1 { width : 160px; float : left }
+.outer1 { width : 300px; float : left }
 
-.outer2 { width : 80px; float : right; padding:   10px }
+.outer2 { width : 200px; float : right; padding:   10px }
 
 
 
 @media print { 
 #invoicediv {width :960px; height : 1100px }
-table#invtbl { width : 960px; }
+table#invtbl { width : 100%;
+    font-size: 20px; }
  }
 
-input#activity, input#invmemo, input#invamt { width : 199px; text-align:right; border:hidden; }
+
+input#activity, input#invmemo, input#invamt { width : 270px; text-align:left; border:hidden; }
 
 #custnum { width : 80px; text-align:right; border:hidden }
 
-input#invnum  { width : 72px; text-align:right; border:hidden; }
+input#invnum, input#invdate  { width : 150px; text-align:right; border: 1px solid slategray; }
 
 #invtotal { text-align : right }
 
 input#invamt { float:right }
 
-input#activity, input#invmemo, input#invamt { width : 140px }
+/*input#activity, input#invmemo, input#invamt { width : 140px }*/
 
-table#invtbl { width : 570px; }
+
+input#invamt {text-align: right}
 
 /*input[type="text"], select { background-color : transparent; border : transparent }*/
 
@@ -201,3 +202,14 @@ input:disabled {background-color:black}
 
 table#transactionsTable tr th#padit {padding : 0 4px}
 
+input#custinvoice {width : 180px; height: 36px; margin-bottom: 20px}
+
+
+table#invtbl { width : 100%;
+    font-size: 20px; }
+
+
+table#invtbl tr th, table#invtbl tr td {
+    font-size: 20px;padding: 4px }
+
+textarea#billto { width: 320px }

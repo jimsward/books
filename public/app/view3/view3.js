@@ -63,7 +63,8 @@ app.directive( 'tabs', function(){
 	} )	
 app.directive( 'custedit', [ '$http', '$location', function($http, $location){	      
 	return {		
-	link : function(scope,element,attrs, ngModel){		
+	link : function(scope,element,attrs, ngModel){
+
 	scope.dialog = $( "#edit-customer-form" ).dialog({
       autoOpen: false,
       height: 600,

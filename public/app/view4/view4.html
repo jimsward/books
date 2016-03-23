@@ -3,16 +3,18 @@
 <div ng-controller="View4Ctrl">
 
 
-</form> 
+
 <div id="invoicediv">
 <h1>Invoice</h1>
-<form name="nameform" id="nameform">
-<input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Find a customer" name="name" listcustomers required>
+<form name="nameform" id="nameform" ng-submit="saveInvoice()">
+<input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Find a customer" name="name" listcustomers tabindex="1" required>
+  <button ng-click="custdetails()" tabindex="2">FIND</button>
 <!--<div role="alert">
       <span class="error" ng-show="nameform.name.$error.required">
        Required!</span>
     </div>-->
-<form name="invhdr" id="invhdr">
+<!--</form>-->
+<!--<form name="invhdr" id="invhdr">-->
 <div>
 <div class="outer1">
 <div class="property">Billing Address</div>
@@ -20,29 +22,29 @@
 </div>
 <div class="outer2">
 <div class="property">Date</div>
-<div id="invdate"><input type="text" ng-model="invoice.date" id="invnum" datepicker></div>
+<div id="invdate"><input type="text" ng-model="invoice.date" datepicker tabindex="4"></div>
 </div>
 <div class="outer2">
 <div class="property">Invoice #</div>
-<div id="invnum"><input type="text" ng-model="invoice.number" id="invnum" name="number" required></div>
+<div><input id="invnum" type="number" ng-model="invoice.number" name="number" tabindex="3"></div>
 <!-- <div role="alert">
       <span class="error" ng-show="invhdr.number.$error.required">
        Required!</span>-->
     </div> 
 </div>
-</form>
-<table width="550" border="1" cellpadding="2" id="invtbl">
+
+<table border="1" cellpadding="2" id="invtbl">
   <tr>
   <th scope="col">Number</th>
     <th scope="col">Product/Service</th>
     <th scope="col">Description</th>
-    <th scope="col">Amount</th>
+    <th scope="col" class="rtalign">Amount</th>
   </tr>
   <tr ng-repeat="line in invoice.lines"><!--this array will be saved to the transactions collection-->
   <td>{{$index + 1}}</td>
-    <td><input type="text" ng-model="line.activity" id="activity" listservices></td>
-    <td><input type="text"  ng-model="line.memo" id="invmemo"></td>
-    <td><input type="string" ng-model="line.amount" step="0.01" id="invamt"  required  string-to-number ng-keydown="tabfwd($event)" class="formcontrol"></td>
+    <td><input type="text" ng-model="line.activity" id="activity"  tabindex="5"></td>
+    <td><input type="text"  ng-model="line.memo" id="invmemo" tabindex="6"></td>
+    <td><input type="string" ng-model="line.amount" step="0.01" id="invamt"  required  string-to-number ng-keydown="tabfwd($event)" class="formcontrol" tabindex="7"></td>
   </tr>
   <tr>
   <td>Total</td>
@@ -54,12 +56,15 @@
   </tr>
 </table>
 
-</div>
-</div>
+
 
 <div id="footer">
 <button id="cancel-invoice" ng-disabled="!user" class="btn btn-info" ng-click="cancelInvoice()">Cancel</button>
-<button id="save-invoice" ng-disabled="!user" class="btn btn-info" ng-click="saveInvoice()">Save</button>
 <button id="print-invoice" ng-disabled="!user" class="btn btn-info" ng-click="printInvoice()">Print</button>
+<button ng-disabled="!user" class="btn btn-info" type="submit" >Save</button>
+
+</div>
+</form>
+</div>
 </div>
 </div>
