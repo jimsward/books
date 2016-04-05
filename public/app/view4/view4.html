@@ -8,7 +8,7 @@
 <h1>Invoice</h1>
 <form name="nameform" id="nameform" ng-submit="saveInvoice()">
 <input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Find a customer" name="name" listcustomers tabindex="1" required>
-  <button ng-click="custdetails()" tabindex="2">FIND</button>
+  <button ng-click="custdetails()" tabindex="2" ng-hide="saved">FIND</button>
 <!--<div role="alert">
       <span class="error" ng-show="nameform.name.$error.required">
        Required!</span>
@@ -26,7 +26,7 @@
 </div>
 <div class="outer2">
 <div class="property">Invoice #</div>
-<div><input id="invnum" type="number" ng-model="invoice.number" name="number" tabindex="3"></div>
+<div><input id="invnum" type="text" ng-model="invoice.number" name="number" tabindex="3"></div>
 <!-- <div role="alert">
       <span class="error" ng-show="invhdr.number.$error.required">
        Required!</span>-->
@@ -60,7 +60,7 @@
 
 <div id="footer">
 <button id="cancel-invoice" ng-disabled="!user" class="btn btn-info" ng-click="cancelInvoice()">Cancel</button>
-<button id="print-invoice" ng-disabled="!user" class="btn btn-info" ng-click="printInvoice()">Print</button>
+<button id="print-invoice" ng-disabled="!user || !saved" class="btn btn-info" ng-click="printInvoice($event)">Print</button>
 <button ng-disabled="!user" class="btn btn-info" type="submit" >Save</button>
 
 </div>

@@ -14,15 +14,16 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	//if the page request has parameters, user wants to see an existing invoice
 	if ( $routeParams.number )
 	{
+	$scope.saved = true //don't need to save before printing
 	$scope.invoice = {}
-	$scope.invoice.address = $routeParams.address	
-	$scope.invoice.name = $routeParams.name	
+
 	$scope.invoice.number = $routeParams.number
-	$scope.invoice.date = $routeParams.date
+
 	var invNum = parseInt( $scope.invoice.number )
 	var inv= { number : invNum }
 	$http({ url : '/invoice', method : 'GET', params : inv }).success( function(response){
 	$scope.invoice = response
+	$scope.invoice.address = $routeParams.address
 	//$scope.invoice.lines.amount = $filter('currency')( $scope.invoice.lines.amount )
 	//$scope.invoice.lines[0].amount = $filter('currency')( 77, "", 2 )
 	//$( 'table#invtbl tr td input#invamt' ).remove()
@@ -30,6 +31,7 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	}
 	//add a new invoice
 	else {
+	$scope.saved = false
 	$scope.invoice = {}
 		if ($routeParams.name)
 		{
@@ -45,24 +47,19 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	$scope.cancelInvoice = function(){
 		$location.path('/view2')
 		}
-	$scope.printInvoice = function(){
+	$scope.printInvoice = function(event){
 		$(".menu").add('p').add('button').hide()
 		var number = {number : $scope.invoice.number}
-		//getInvoice(number).then(function (response) {
-		//	$scope.invoice = response.data
-		//	$window.print();
-		//	$(".menu").add('p').add('button').show()
-		//})
-
-		$http({method : "GET", url : '/invoice', params : number})
-			.then(function successCallback(response){
+			var promise = getInvoice.getInv(number)
+			promise.then(
+			function successCallback(response){
 				$scope.invoice = response.data
 				$window.print();
 				$(".menu").add('p').add('button').show()
 			}, function errorCallback(response){
-		alert(response.error)
-		})
-
+				alert('error' +	response.error)
+			}
+		)
 	}
 	$scope.saveInvoice = function(){
 		if ( $scope.invoice.name == null )
@@ -81,9 +78,7 @@ app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		$scope.invoice.lines.pop()
 
 		addInvoice($scope.invoice)
-		//$scope.invoice = {}
-		//$scope.invoice.total = 0
-		//$scope.invoice.lines = [ { activity : "", memo : "", amount : 0 } ]
+		$scope.saved = true
 		console.log('Invoice added')
 		}
 		}
@@ -137,8 +132,10 @@ app.factory( 'addInvoice', [ '$http', function($http) {
 	}
 	}])
 app.factory( 'getInvoice', [ '$http', function($http) {
-	return function(number) {
-		$http.get({method : 'GET', url : '/invoice', params: number})
+	return {
+		getInv : function(number) {
+			return	$http({method: 'GET', url: '/invoice', params: number})
+		}
 	}
 }])
 app.directive('listservices', [ '$http', function($http){	

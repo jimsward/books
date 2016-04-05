@@ -10,7 +10,6 @@ app.config(['$routeProvider', function($routeProvider) {
 }])
 app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$location', function($scope, $routeParams, $http, $timeout, $location){	
 	$scope.customer = $routeParams
-	console.dir($scope.customer)	
 	var params = {}
 	$scope.details = {}
 	params.name = $scope.customer.name
@@ -46,7 +45,6 @@ app.controller('View3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$loc
 	$scope.getInvoice = function(obj){
 		obj.name = $scope.customer.name
 		obj.address= $scope.customer.address
-		console.dir('obj : ' + obj)		
 		$location.path('/invoice').search(obj);
 	}	
 }]);//controller
