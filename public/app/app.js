@@ -10,6 +10,7 @@ angular.module('myApp', [
   'myApp.view5',
   'myApp.view6',
   'myApp.view7',
+  'myApp.view8',
   'myApp.version',
   'ngMessages',
   'ngResource'
@@ -38,6 +39,10 @@ config(['$routeProvider', function($routeProvider) {
         templateUrl: 'view7/view7.html',
         controller: 'view7Ctrl'
       })
+      .when('/view7', {
+        templateUrl: 'view8/view8.html',
+        controller: 'view8Ctrl'
+        })
 	  
   .otherwise({redirectTo: '/view1'});
 }]);
