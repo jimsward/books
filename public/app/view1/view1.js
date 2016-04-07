@@ -157,8 +157,9 @@ app.directive('datepicker', function(){
 	require: 'ngModel',
 	link : function(scope,element,attrs, ngModel){
 		element.datepicker({
-				onSelect: function(dateText) {
+				onClose: function(dateText) {
 					var re = /(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d\d/
+					console.log(re.test(dateText))
 					if (re.test(dateText))
 				  scope.$apply(function() {
 					ngModel.$setViewValue(dateText);					
