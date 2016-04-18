@@ -5,10 +5,10 @@ var app = angular.module('myApp.view2', ['ngRoute'])
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view2', {
     templateUrl: 'view2/view2.html',
-    controller: 'View2Ctrl'
+    controller: 'view2Ctrl'
   });
 }])
-app.controller('View2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', '$location', function($scope, getCustomers, customerInit, $http, $location){		
+app.controller('view2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', '$location', function($scope, getCustomers, customerInit, $http, $location){
 	getCustomers.then(function(response) {		
 	$scope.customers = response.data
 	
@@ -28,7 +28,6 @@ app.controller('View2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', 
 		} 
 	$scope.custdetails = function(){
 		$scope.customer.name = $('#customername').val()
-		alert('name : ' + $scope.customer.name)
 		$location.path('/customer').search($scope.customer);
 		}
 	$scope.makeInvoice = function(event, customer){

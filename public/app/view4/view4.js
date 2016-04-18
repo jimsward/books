@@ -5,12 +5,12 @@ var app = angular.module('myApp.view4', ['ngRoute'])
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view4', {
     templateUrl: 'view4/view4.html',
-    controller: 'View4Ctrl'
+    controller: 'view4Ctrl'
   });
 }])
 //Invoice entry. Adds invoice info and total to invoices collection. Adds line items -invArr- to transactions collection.
 //or show an existing invoice
-app.controller('View4Ctrl', ['$scope', '$window','$http', '$routeParams', '$location', '$filter', 'addInvoice', 'getInvoice', function($scope, $window, $http, $routeParams, $location, $filter, addInvoice, getInvoice){
+app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$location', '$filter', 'addInvoice', 'getInvoice', function($scope, $window, $http, $routeParams, $location, $filter, addInvoice, getInvoice){
 	//if the page request has parameters, user wants to see an existing invoice
 	if ( $routeParams.number )
 	{

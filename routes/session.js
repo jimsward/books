@@ -142,7 +142,7 @@ function SessionHandler (db) {
                     // this was a duplicate
                     if (err.code == '11000') {
                         errors['username_error'] = "Username already in use. Please choose another";
-                        return res.render("signup", errors);
+                        return res.status(409).send(errors)
                     }
                     // this was a different error
                     else {

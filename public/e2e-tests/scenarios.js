@@ -15,8 +15,8 @@ describe('my app', function() {
       browser.get('index.html#/view1');
     });	
     it('should render view1 when user navigates to /view1', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 1/);
+		expect(element.all(by.css('[ng-view] p')).first().getText()).toMatch(/partial for view 1/);
+	})
     });	
 	describe( 'chkEntryDlg', function(){
 	beforeEach(function(){
@@ -31,21 +31,26 @@ describe('my app', function() {
 		
 	describe( 'schRegDialog', function(){
 	beforeEach(function(){
+		browser.get('index.html#/view1');
+
 		element( by.id('search-register')).click().then( function(){
 			console.log('iiiiiiiiiiiiiii')
 			} )
-		})	
+		})
+		browser.driver.sleep(1000);
 	it('should render schRegDialog', function(){
-		expect(element(by.id('datepicker2')).isDisplayed()).toBe(true); 
+		expect(element(by.id('search')).isDisplayed()).toBe(true);
 		})//it
 	})//describe schRegDialog
 	
 	describe('resultTable', function(){//this will only work with the dataset with entries for 2/21/2015
 	beforeEach(function(){
+		browser.get('index.html#/view1');
+
 		element( by.id('search-register')).click().then( function(){
 			
 			$( '#datepicker2' ).sendKeys( '02/21/2015' ).then( function(){
-				$( '#schFind' ).click().then( function(){
+				$( '#sFind' ).click().then( function(){
 					console.log('mmmmmmmmmmmm')
 					})
 				})
@@ -55,7 +60,7 @@ describe('my app', function() {
 		expect(element(by.id('resultTable')).isDisplayed()).toBe(true); 
 		})//it	
   })//describe resultTable		
-  });//describe view1
+  //});//describe view1
   
   describe('view2', function() {
     beforeEach(function() {
@@ -68,6 +73,7 @@ describe('my app', function() {
   })
   describe('customerRow', function() {
 	beforeEach(function(){
+		browser.get('index.html#/view2');
 		element( by.css( 'table .tbody tr.customerRow:nth-child(2)' )).click().then( function(){
 			console.log('cccccccccccc')
 			}) })
@@ -81,6 +87,7 @@ describe('my app', function() {
 		  browser.get('index.html#/view2');		 
 		  var inpt = element(by.id('customername'))
 		  inpt.sendKeys('test\n\n')
+		  element(by.css('button#findcust')).click()
 		  browser.driver.sleep(1000);
 		  })
 it('should render view3 when user navigates to /view3', function() {
@@ -117,17 +124,16 @@ describe( 'to-new-customer', function(){
 		
 		describe( 'custinvoice', function(){
 	beforeEach(function(){
-		browser.get('index.html#/view4');
-		 var inpt = element(by.id('customername'))
-		  inpt.sendKeys('test\n')
-		  browser.driver.sleep(1000);
-		  
-			}) })
+		browser.get('index.html#/view2');
+		element( by.css('button#to-invoice')).click()
+		  browser.driver.sleep(3000);
+		browser.waitForAngular();
+			})
 		it('should render the Invoice', function(){
-			expect(element(by.id('customerDetail')).isDisplayed()).toBe(true)
+			expect(element(by.id('invoicediv')).isDisplayed()).toBe(true)
 			})
 		})
-		
+
 		describe( 'transactionsTable', function(){
 	beforeEach(function(){
 		browser.get('index.html#/view5');
@@ -136,8 +142,44 @@ describe( 'to-new-customer', function(){
 			expect(element(by.id('transactionsTable')).isDisplayed()).toBe(true)
 			})
 		})
+
+
+	describe( 'signup', function(){
+		beforeEach(function(){
+			browser.get('index.html#/view6')
+			var inpt = element(by.id('username'))
+			inpt.sendKeys('test')
+			var inpt = element(by.id('password'))
+			inpt.sendKeys('test')
+			element(by.css('input#submitlogin')).click()
+			browser.driver.sleep(1000);
+		})
+		it('should render an Error Message', function(){
+
+			expect(element.all(by.css('[ng-view] p')).first().getText()).
+			toMatch(/No such user/);
+		})
+	})
+
+	describe( 'signup', function(){
+		beforeEach(function(){
+			browser.get('index.html#/view7')
+			var inpt = element(by.id('user'))
+			inpt.sendKeys('jim')
+			var inpt = element(by.id('password'))
+			inpt.sendKeys('bogus')
+			element(by.css('input#submitsignup')).click()
+			browser.driver.sleep(1000);
+		})
+		it('should render an Error Message', function(){
+
+			expect(element.all(by.css('[ng-view] p')).first().getText()).
+			toMatch(/Username already in use/);
+		})
+	})
+
 		
 		
 		
-//  })
+  })
   			

@@ -11,7 +11,7 @@ describe('myApp.view4 module', function() {
     it('should be defined', inject(function($controller, $rootScope) {
       //spec body
 	   var scope = $rootScope.$new()
-      var view4Ctrl = $controller('View4Ctrl', { $scope: scope });
+      var view4Ctrl = $controller('view4Ctrl', { $scope: scope });
       expect(view4Ctrl).toBeDefined();
     }));
 

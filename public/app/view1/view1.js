@@ -3,11 +3,11 @@ var app = angular.module('myApp.view1', ['ngRoute'])
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view1', {
     templateUrl: 'view1/view1.html',
-    controller: 'View1Ctrl'
+    controller: 'view1Ctrl'
   });
 }])
 //Populate the table with checkbook entries
-app.controller('View1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$rootScope', function($scope, getEntries, $http, $location, $routeParams, $rootScope){	
+app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$rootScope', function($scope, getEntries, $http, $location, $routeParams, $rootScope){
 	
 	//getEntries.success(function(response) {	
 	$http.get('/entries').success(function(response){	
@@ -259,7 +259,7 @@ app.directive('wdialog', [ '$http', function($http){
 		}},
       {
 	 text : 'Find',
-	 id : 'schFind',	  
+	 id : 'sFind',
 	 click: function(){		
 		
 		scope.$apply( function() {			

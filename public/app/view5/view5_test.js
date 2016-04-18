@@ -11,7 +11,7 @@ describe('myApp.view5 module', function() {
     it('should be defined', inject(function($controller, $rootScope) {
       //spec body
 	   var scope = $rootScope.$new()
-      var view5Ctrl = $controller('View5Ctrl', { $scope: scope });
+      var view5Ctrl = $controller('view5Ctrl', { $scope: scope });
       expect(view5Ctrl).toBeDefined();
     }));
 

@@ -11,7 +11,7 @@ describe('myApp.view3 module', function() {
     it('should ....', inject(function($controller, $rootScope) {
       //spec body
 	   var scope = $rootScope.$new()
-      var view3Ctrl = $controller('View3Ctrl', { $scope: scope });
+      var view3Ctrl = $controller('view3Ctrl', { $scope: scope });
       expect(view3Ctrl).toBeDefined();
     }));
 
