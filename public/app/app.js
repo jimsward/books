@@ -14,6 +14,7 @@ angular.module('myApp', [
   'myApp.version',
   'ngMessages',
   'ngResource'
+
  /* ,
   'ui.bootstrap'*/
  
@@ -21,25 +22,25 @@ angular.module('myApp', [
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/customer', {
         templateUrl: 'view3/view3.html',
-        controller: 'View3Ctrl'
+        controller: 'view3Ctrl'
       })
 	  .when('/invoice', {
         templateUrl: 'view4/view4.html',
-        controller: 'View4Ctrl'
+        controller: 'view4Ctrl'
       })
 	  .when('/transactions', {
         templateUrl: 'view5/view5.html',
-        controller: 'View5Ctrl'
+        controller: 'view5Ctrl'
       })
 	  .when('/view6', {
         templateUrl: 'view6/view6.html',
-        controller: 'View6Ctrl'
+        controller: 'view6Ctrl'
       })
 	  .when('/view7', {
         templateUrl: 'view7/view7.html',
         controller: 'view7Ctrl'
       })
-      .when('/view7', {
+      .when('/view8', {
         templateUrl: 'view8/view8.html',
         controller: 'view8Ctrl'
         })

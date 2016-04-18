@@ -1,18 +1,19 @@
-<div ng-controller="View6Ctrl">
+<div ng-controller="view6Ctrl">
 <div id="login">
     <h2>Login</h2>
     <form   name="login" ng-submit="submitLogin()">
       
             Username
           
-            <input type="text" name="username" ng-model="username">
+            <input type="text" name="username" id="username" ng-model="username">
           
           <p class="error">
+              {{login_error}}
           </p>
      
             Password
         
-            <input type="password" name="password" ng-model="password">
+            <input type="password" id="password" name="password" ng-model="password">
           
           <p class="error">
 	    {{login_error}}

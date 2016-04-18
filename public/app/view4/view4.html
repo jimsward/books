@@ -1,6 +1,6 @@
 <p>This is the partial for view 4.</p>
 <div class="container" id="customerDetail">
-<div ng-controller="View4Ctrl">
+<div ng-controller="view4Ctrl">
 
 
 
@@ -8,7 +8,7 @@
 <h1>Invoice</h1>
 <form name="nameform" id="nameform" ng-submit="saveInvoice()">
 <input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Find a customer" name="name" listcustomers tabindex="1" required>
-  <button ng-click="custdetails()" tabindex="2" ng-hide="saved">FIND</button>
+<button ng-click="custdetails()" tabindex="2" ng-hide="saved" id="findcust">FIND</button>
 <!--<div role="alert">
       <span class="error" ng-show="nameform.name.$error.required">
        Required!</span>
