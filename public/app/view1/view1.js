@@ -8,12 +8,11 @@ app.config(['$routeProvider', function($routeProvider) {
 }])
 //Populate the table with checkbook entries
 app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$rootScope', function($scope, getEntries, $http, $location, $routeParams, $rootScope){
-	
-	//getEntries.success(function(response) {	
-	$http.get('/entries').success(function(response){	
-	$rootScope.username = 	response.username
+	var promise = getEntries
+	promise.then(function(response){
+	$rootScope.username = 	response.data.username
 	$rootScope.user = $rootScope.username ? true : false
-	$scope.items = response.items
+	$scope.items = response.data.items
 	})
 	$scope.login = function(){
 		$location.path('/view6')
@@ -46,10 +45,10 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 		
 	}])//controller
 app.factory( 'getEntries', [ '$http', function($http) {	 
-    return $http.get('/entries')	
+    return $http({url : '/entries', method : 'GET'})
 	}])
 	//form with controls for new entries to the check register
-app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', function($scope, $http, $filter, $rootScope){
+app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'addEntry', function($scope, $http, $filter, $rootScope, addEntry){
 	$scope.entry = {}	
 	var myDate = new Date();
 	var imonth = myDate.getMonth()+1
@@ -84,7 +83,6 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', func
 		}
 	$scope.add = function(){
 		//validate
-		alert($rootScope.user)
 		if ( angular.element( '#reference option:selected' ).val() == '' )
 		{
 			alert('You must choose Deposit or Payment')
@@ -101,14 +99,14 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', func
 			alert('Please enter an Amount')			
 			return
 		}				
-		else		
-		$http.post('/newentry', $scope.entry).then( function successCallback(){
+		//else
+		var data = $scope.entry
+		var promise = addEntry.newEnt(data)
+		promise.then( function successCallback(){
 		location.reload(true)},
 		function errorCallback(response){
-			alert(response.data.error.message)
+			console.log('error' + response.data.error.message)
 			}
-
-		
 		)
 		}	
 	$scope.cancel = function()
@@ -127,7 +125,16 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', func
         }
 	}
 
-	}])	
+	}])
+app.factory('addEntry', ['$http', function($http) {
+	return {
+		newEnt :
+		function(data){ return $http( {url : '/newentry', data : data, method : "POST"})
+				}
+}
+
+}])
+
 	//controller for wdialog directive; launches dialog with search on several fields;allows selction of a single record
 	//and allows update, delete
 app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $http, $filter){		
@@ -190,8 +197,8 @@ app.directive('listaccts', [ '$http', function($http){
     	url: '/accounts',
    	 	method: "GET"}		 
 		)
-		.success( function(msg){
-			angular.forEach(msg, function( value, key){
+		.then( function(msg){
+			angular.forEach(msg.data, function( value, key){
 			accounts[key] = value.account;
 			})	
 			element.autocomplete({
@@ -240,7 +247,7 @@ app.directive('wdialog', [ '$http', function($http){
     	url: '/chkUpdate',
    	 	method: "POST",
     	data : scope.entry } )
-		.success(  function(data){			
+		.then(  function(data){
 		//alert('Document Updated!')
 			})
 		})
@@ -259,16 +266,15 @@ app.directive('wdialog', [ '$http', function($http){
 		}},
       {
 	 text : 'Find',
-	 id : 'sFind',
-	 click: function(){		
+	 click: function(){
 		
 		scope.$apply( function() {			
 		$http( {
     	url: '../find',
    	 	method: "GET",
     	params: scope.obj } )
-		.success(  function(data){			
-		scope.results = data
+		.then(  function(response){
+		scope.results = response.data
 		scope.obj.val = ''
 			})
 		})
@@ -284,7 +290,7 @@ app.directive('wdialog', [ '$http', function($http){
     	url: '/delete',
    	 	method: "POST",
     	data : data } )
-		.success(  function(data){			
+		.then(  function(data){
 		element.dialog( "close" );			})
 		  })		  
 	  }},		
@@ -330,7 +336,7 @@ app.directive( 'editable', [ '$http', function($http){
     	url: '/chkUpdate',
    	 	method: "POST",
     	data : scope.item } )
-		.success(  function(data){			
+		.then(  function(data){
 		element.dialog( "close" );
 			})
 				})
@@ -347,7 +353,7 @@ app.directive( 'editable', [ '$http', function($http){
     	url: '/delete',
    	 	method: "POST",
     	data : data } )
-		.success(  function(data){			
+		.then(  function(data){
 		element.dialog( "close" );
 			})
 		  })				

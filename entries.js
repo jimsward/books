@@ -25,10 +25,10 @@ function EntriesDAO(db) {
 			var bal = 0;
 			for ( var i =0; i < items.length; i++ )
 			{
-				
-				bal = bal + items[i].deposit - items[i].payment;				
-				
-				items[i].balance = bal;					
+
+				bal = bal + items[i].deposit - items[i].payment;
+
+				items[i].balance = bal;
 			}
 
             console.log("Found " + items.length + " entries");
