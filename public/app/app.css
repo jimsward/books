@@ -34,3 +34,5 @@
 div#login {margin-left :100px !important;}
 
 div#signup  {cursor: pointer; }
+
+div#chkEntryDlg input {margin-top: 4px;}

@@ -18,12 +18,12 @@ var cons = require('consolidate') // Templating library adapter for Express
 app.use(express.static('public'));
 
 
-//MongoClient.connect('mongodb://localhost:27017/checking', {server: {poolSize: 1}}, function(err, db) {   
+//MongoClient.connect('mongodb://localhost:27017/checking', {server: {poolSize: 1}}, function(err, db) {
     
 	
 	var user, password, connectUri
 	user = process.env.DB_USER || process.argv[2]
-	password = process.env.DB_PW || process.argv[3]			
+	password = process.env.DB_PW || process.argv[3]
 		var connectUri = 'mongodb://' + user + ':' + password + '@ds045757.mongolab.com:45757/checking'
 		MongoClient.connect(connectUri, function(err, db) {
     "use strict";

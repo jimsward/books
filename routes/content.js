@@ -51,7 +51,7 @@ function ContentHandler (app, db) {
 			
 			var parts = results[i].date.split('/');
 			results[i].date = parts[1] + '/' + parts[2] + '/' + parts[0]
-						
+
 			}
 			
 			var displArr = results.slice( results.length - 40 )
@@ -70,6 +70,7 @@ function ContentHandler (app, db) {
 	this.handleNewEntry = function(req, res, next) {
 		
 		var newE = req.body;  //need to store dollar amounts as integers
+		console.dir(req.body)
 		newE.deposit = toInt( newE.deposit )
 		newE.payment = toInt( newE.payment )
 				
