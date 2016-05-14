@@ -29,6 +29,8 @@
   padding: 0;
 }
 */
+
+body {margin-top: 24px}
 .ng-invalid { border : 1px solid red }
 
 div#login {margin-left :100px !important;}
@@ -36,3 +38,19 @@ div#login {margin-left :100px !important;}
 div#signup  {cursor: pointer; }
 
 div#chkEntryDlg input {margin-top: 4px;}
+
+#loading-bar .bar {
+    background: firebrick;
+    height : 10px;
+    z-index: -100;
+    border-radius: 6px;
+    /*margin-top : -20px;*/
+}
+
+#loading-bar-spinner .spinner-icon {
+    border-top-color:  #2c3e50;
+    border-left-color: #2c3e50;
+    height : 60px;
+    width : 60px;
+
+}

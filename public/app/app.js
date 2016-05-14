@@ -13,6 +13,7 @@ angular.module('myApp', [
   'myApp.view8',
   'myApp.version',
   'ngMessages',
+  'angular-loading-bar',
   'ngResource'
 
  /* ,

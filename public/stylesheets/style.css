@@ -69,7 +69,7 @@ button#save { opacity :0.5; }
 
 .buttons { width:460px; }
 
-#search-register, #new-customer, #to-new-customer { width : 220px; height : 42px; position : fixed; top : 0; left : 465px; font-size:18px; margin: 0 0 40px 0 }
+#search-register, #new-customer, #to-new-customer { width : 220px; height : 42px; position : fixed; top : 24px; left : 465px; font-size:18px; margin: 0 0 40px 0 }
 
 fieldset { height : 140px; }
 
