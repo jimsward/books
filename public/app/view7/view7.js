@@ -22,9 +22,9 @@ angular.module('myApp.view7', ['ngRoute'])
 			/*var text = 'The password for ' + response.data.username + ' is ' + response.data.password
 			var data = { 'text' : text, 'email' : $scope.email }
 			$http.post('/sendemail', data).then( function(){
-				$location.path( '/view1' )
+
 				})
-*/
+*/			$location.path( '/view1' )
 			},
 			function errorCallback(response){
 				$scope.username_error = response.data.username_error

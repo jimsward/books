@@ -52,6 +52,8 @@ function ContentHandler (app, db) {
 			var parts = results[i].date.split('/');
 			results[i].date = parts[1] + '/' + parts[2] + '/' + parts[0]
 
+
+
 			}
 			
 			var displArr = results.slice( results.length - 40 )
@@ -196,10 +198,21 @@ function ContentHandler (app, db) {
 	}
 	this.newInvoice = function( req, res, next ){
 		var obj = req.body
-		
+		var errors = {'number' : req.body.number}
 		obj.date = pivot(obj.date)
 		invoices.addInvoice( obj, function( err, result ){
-			if (err) return next(err)
+			if (err)
+			{
+				// this was a duplicate
+				if (err.code == '11000') {
+					errors['duplicate_error'] = "Invoice number already in use. Please choose another";
+					return res.status(409).send(errors)
+				}
+				// this was a different error
+				else {
+					return next(err);
+				}
+			}
 			return res.end()
 			} )
 		}

@@ -10,7 +10,7 @@ app.config(['$routeProvider', function($routeProvider) {
 }])
 //Invoice entry. Adds invoice info and total to invoices collection. Adds line items -invArr- to transactions collection.
 //or show an existing invoice
-app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$location', '$filter', 'addInvoice', 'getInvoice', function($scope, $window, $http, $routeParams, $location, $filter, addInvoice, getInvoice){
+app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$location', '$filter', 'addInvoice', 'getInvoice', 'getCustomer', function($scope, $window, $http, $routeParams, $location, $filter, addInvoice, getInvoice, getCustomer){
 	//if the page request has parameters, user wants to see an existing invoice
 	if ( $routeParams.number )
 	{
@@ -20,10 +20,17 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	$scope.invoice.number = $routeParams.number
 
 	var invNum = parseInt( $scope.invoice.number )
-	var inv= { number : invNum }
-	$http({ url : '/invoice', method : 'GET', params : inv }).success( function(response){
-	$scope.invoice = response
+		$scope.invoice.number = invNum
+	var inv = { number : invNum }
+	var promise = getInvoice.getInv(inv)
+	promise.then( function(response){
+	$scope.invoice = response.data
 	$scope.invoice.address = $routeParams.address
+		//angular.forEach($scope.invoice.lines, function(value, key){
+		//	console.log(value.amount			)
+		//	$scope.invoice.lines[key].amount = $filter('currency', "")(value.amount)
+		//})
+	//$scope.invoice.lines[angular.element(this).$scope().$index].amount = $filter('currency', "")($scope.invoice.lines[angular.element(this).$scope().$index].amount)
 	//$scope.invoice.lines.amount = $filter('currency')( $scope.invoice.lines.amount )
 	//$scope.invoice.lines[0].amount = $filter('currency')( 77, "", 2 )
 	//$( 'table#invtbl tr td input#invamt' ).remove()
@@ -35,6 +42,7 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	$scope.invoice = {}
 		if ($routeParams.name)
 		{
+			$scope.customer = $routeParams
 			$scope.invoice.name = $routeParams.name
 			$scope.invoice.address = $routeParams.address
 		}
@@ -62,73 +70,66 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		)
 	}
 	$scope.saveInvoice = function(){
-		if ( $scope.invoice.name == null )
-		alert( 'Enter a customer name' )
-		else
-		if ( $scope.invoice.number == null )
-		alert( 'Enter a number to continue' )
-		else
-		if ( $scope.invoice.total == 0 )
-		alert( 'Please enter an amount' )
-		else
-		{
-		$scope.invoice.total = 	$filter('currency')( $scope.invoice.total, "", 2 )
 		var length =  $scope.invoice.lines.length
+		var re = /\,/g
+		var amount = $scope.invoice.lines[length - 1].amount
+		amount = parseFloat(amount)
+		$scope.invoice.total += amount
+		if ( $scope.invoice.name == null )
+		{alert( 'Enter a customer name' )
+			return}
+		if ( $scope.invoice.number == undefined )
+		{alert( 'Enter an Invoice Number to continue' )
+			return}
+		if ( $scope.invoice.total == 0 )
+		{alert( 'Please enter an amount' )
+			return}
 		if ( $scope.invoice.lines[length - 1].amount == 0 )//if the last line item is empty get rid of it
 		$scope.invoice.lines.pop()
-
-		addInvoice($scope.invoice)
-		$scope.saved = true
-		console.log('Invoice added')
-		}
+		$scope.customer.invoices.push($scope.invoice)//customer collection has an array of invoices
+			var promise = addInvoice.saveInv($scope.invoice)
+			promise.then(function(){
+				$scope.saved = true
+				return $http( {url : "/customerUpdate",	method : 'POST', data : $scope.customer})
+				},
+				function errorCallback(response){
+					console.dir(response)
+				if (response.data.duplicate_error)
+				alert(response.data.duplicate_error)
+				}
+			)
 		}
 	$scope.tabfwd = function( event ){
+		if (event.which == 13) return
 		var accept = [ 9, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 ]	//dot, tab, and 0-9
 		if ( accept.indexOf( event.which ) == -1 ) return
 		if (event.which == 9)
 		{
-		var re = /(\d+)\.*(\d*)/
-		var val = angular.element( event.target ).val()
-		if (isNaN(val))
-		{
-			 angular.element( event.target ).val("")
-			 return
-		}
-
-		if (re.test(val))
-		{
 		var num = angular.element(event.target).val()
-		num = $filter('number')(num, 2)
-		angular.element(event.target).val(num )
 		var re = /\,/g
 		var totnum = num
 		totnum = totnum.replace(re, "")
-
 		totnum = parseFloat(totnum)
 		$scope.invoice.total += totnum
 		$scope.invoice.lines.push( { activity : "", memo : "", amount : 0 } )
-		}
-		else
-		{
-		angular.element(event.target).val( "" ).focus()
-		}//else
 		}//if
 	}
 	$scope.custdetails = function(){
 		$scope.invoice.name = $('#custinvoice').val()
-		//alert('name : ' + $scope.invoice.name)
 		var params = {name : $scope.invoice.name }
-		$http( { url :'/customer', params : params, method : 'GET' } ).then(function(response){
-			console.log(response.data)
+		var promise = getCustomer.cust(params)
+		promise.then(function(response){
+			$scope.customer = response.data
 			$scope.invoice.address = response.data.address
 		})
 
 	}
 }])
 app.factory( 'addInvoice', [ '$http', function($http) {
-    return function(invoice){
-	$http.post('/newInvoice', invoice).success( function(){
-				} )
+    return	{
+	saveInv :	function(invoice) {
+			return $http({url : '/newInvoice', data : invoice, method : "POST"})
+		}
 	}
 	}])
 app.factory( 'getInvoice', [ '$http', function($http) {
@@ -147,8 +148,9 @@ app.directive('listservices', [ '$http', function($http){
     	url: '/services',
    	 	method: "GET"}		 
 		)
-		.success( function(msg){
-			angular.forEach(msg, function( value, key){
+		.then( function(msg){
+
+			angular.forEach(msg.data, function( value, key){
 			services[key] = value.service;
 			})	
 			element.autocomplete({

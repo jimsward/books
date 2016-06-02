@@ -6,7 +6,7 @@
 
 <div id="invoicediv">
 <h1>Invoice</h1>
-<form name="nameform" id="nameform" ng-submit="saveInvoice()">
+<form name="nameform" id="nameform" ">
 <input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Find a customer" name="name" listcustomers tabindex="1" required>
 <button ng-click="custdetails()" tabindex="2" ng-hide="saved" id="findcust">FIND</button>
 <!--<div role="alert">
@@ -26,7 +26,7 @@
 </div>
 <div class="outer2">
 <div class="property">Invoice #</div>
-<div><input id="invnum" type="text" ng-model="invoice.number" name="number" tabindex="3"></div>
+<div><input id="invnum" type="number" ng-model="invoice.number" name="number" tabindex="3"></div>
 <!-- <div role="alert">
       <span class="error" ng-show="invhdr.number.$error.required">
        Required!</span>-->
@@ -42,9 +42,9 @@
   </tr>
   <tr ng-repeat="line in invoice.lines"><!--this array will be saved to the transactions collection-->
   <td>{{$index + 1}}</td>
-    <td><input type="text" ng-model="line.activity" id="activity"  tabindex="5"></td>
-    <td><input type="text"  ng-model="line.memo" id="invmemo" tabindex="6"></td>
-    <td><input type="string" ng-model="line.amount" step="0.01" id="invamt"  required  string-to-number ng-keydown="tabfwd($event)" class="formcontrol" tabindex="7"></td>
+    <td><input type="text" ng-model="line.activity" id="activity" listservices  ></td>
+    <td><input type="text"  ng-model="line.memo" id="invmemo" ></td>
+    <td><input type="string" ng-model="line.amount" step="0.01" id="invamt" maskmoney  required  string-to-number ng-keydown="tabfwd($event)" class="formcontrol" ></td>
   </tr>
   <tr>
   <td>Total</td>
@@ -61,7 +61,7 @@
 <div id="footer">
 <button id="cancel-invoice" ng-disabled="!user" class="btn btn-info" ng-click="cancelInvoice()">Cancel</button>
 <button id="print-invoice" ng-disabled="!user || !saved" class="btn btn-info" ng-click="printInvoice($event)">Print</button>
-<button ng-disabled="!user" class="btn btn-info" type="submit" >Save</button>
+<button ng-disabled="!user || saved" class="btn btn-info" type="button" ng-click="saveInvoice()" >Save</button>
 
 </div>
 </form>

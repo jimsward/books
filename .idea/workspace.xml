@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24f87e19-1ba9-49f0-965c-461f0693f63b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/invoices.js" afterPath="$PROJECT_DIR$/invoices.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/app.css" afterPath="$PROJECT_DIR$/public/app/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view1/view1.js" afterPath="$PROJECT_DIR$/public/app/view1/view1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view3/view3.js" afterPath="$PROJECT_DIR$/public/app/view3/view3.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view4/view4.html" afterPath="$PROJECT_DIR$/public/app/view4/view4.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view4/view4.js" afterPath="$PROJECT_DIR$/public/app/view4/view4.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view5/view5.js" afterPath="$PROJECT_DIR$/public/app/view5/view5.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view6/view6.js" afterPath="$PROJECT_DIR$/public/app/view6/view6.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view7/view7.js" afterPath="$PROJECT_DIR$/public/app/view7/view7.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view8/view8.html" afterPath="$PROJECT_DIR$/public/app/view8/view8.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/content.js" afterPath="$PROJECT_DIR$/routes/content.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/session.js" afterPath="$PROJECT_DIR$/routes/session.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/users.js" afterPath="$PROJECT_DIR$/routes/users.js" />
     </list>
     <ignored path="books.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -115,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/public/app/view7/view7.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.41755635">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="2" />
+              <caret line="26" column="38" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -1019,7 +1008,7 @@
     <entry file="file://$PROJECT_DIR$/public/app/view7/view7.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41755635">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="2" />
+          <caret line="26" column="38" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
           <folding />
         </state>
       </provider>
