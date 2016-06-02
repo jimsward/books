@@ -9,21 +9,22 @@ angular.module('myApp.view7', ['ngRoute'])
   });
 }])
 
-.controller('view7Ctrl', [ '$routeParams', '$scope', '$http', '$route', '$location', function( $routeParams, $scope, $http, $route, $location ) {
+.controller('view7Ctrl', [ '$routeParams', '$scope', '$http', '$route', '$location', 'signUp', function( $routeParams, $scope, $http, $route, $location, signUp ) {
 	$scope.password = ""
 	
 	$scope.username = ""
 	$scope.email = ""
 	$scope.submitSignup = function(){			
 			var data = { username : $scope.username, email : $scope.email, password : $scope.password }
-			$http.post( '/signup', data ).then( function(response){
+			var promise = signUp.signup(data)
+			promise.then( function(response){
 			//compose email msg
-			/*var text = 'The password for ' + response.data.username + ' is ' + response.data.password 
+			/*var text = 'The password for ' + response.data.username + ' is ' + response.data.password
 			var data = { 'text' : text, 'email' : $scope.email }
 			$http.post('/sendemail', data).then( function(){
 				$location.path( '/view1' )
 				})
-*/			
+*/
 			},
 			function errorCallback(response){
 				$scope.username_error = response.data.username_error
@@ -33,4 +34,12 @@ angular.module('myApp.view7', ['ngRoute'])
 	$scope.redirect = function(){
 		$location.path('/view6')
 		}
-}]);
+}])
+.factory('signUp', ['$http', function($http){
+	return {
+		signup :
+			   function(data){
+				   return $http({url : '/signup',method : "POST", data : data})
+			   }
+	}
+}])

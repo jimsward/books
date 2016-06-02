@@ -8,17 +8,14 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'view3Ctrl'
   });
 }])
-app.controller('view3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$location', function($scope, $routeParams, $http, $timeout, $location){
+app.controller('view3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$location', 'getCustomer', function($scope, $routeParams, $http, $timeout, $location, getCustomer){
 	$scope.customer = $routeParams
 	var params = {}
 	$scope.details = {}
 	params.name = $scope.customer.name
-	$http( {
-		url : '/customer',
-		method : 'GET',
-		params : params
-		} )
-		.then( function(response){
+
+	var promise = getCustomer.cust(params)
+	promise.then( function(response){
 			$scope.customer = response.data
 			var detailsArr = response.data.invoices.concat(response.data.entries)			
 			detailsArr.sort( function(a,b){
@@ -49,7 +46,13 @@ app.controller('view3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$loc
 	}	
 }]);//controller
 
-	
+app.factory('getCustomer', ['$http', function($http){
+	return {
+	 cust :
+		function(params){
+			return $http({url : '/customer', params : params, method : "GET"})
+		}}
+}])
 	
 	
 app.directive( 'tabs', function(){

@@ -30,10 +30,10 @@ console.log('username' + username)
 
         users.insert(user, function (err, result) {
             "use strict";
-
+console.dir(err)
             if (!err) {
-                console.log("Inserted new user");
-                return callback(null, result[0]);
+                console.log("Inserted new user" + result);
+                return callback(null, result);
             }
 
             return callback(err, null);

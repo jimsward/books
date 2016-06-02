@@ -26,8 +26,9 @@ $scope.run = function(){
 	var from =  fromparts[2] + '/' + fromparts[0] + '/' + fromparts[1]	
 	var toparts = $scope.transaction.to.split('/')
 	var to =  toparts[2] + '/' + toparts[0] + '/' + toparts[1]		
-	var params = {"from" : from, "to" : to }	
-	$http({method : 'GET', url : '/transactions', params : params}).then(	
+	var params = {"from" : from, "to" : to }
+	var promise = getTransactions.get(params)
+	promise.then(
 	function(response){		
 	var totIncome = 0, totExpense = 0
 	var totals = [], balance = 0, acctBalance = 0
@@ -74,8 +75,12 @@ $scope.run = function(){
 }//run	
 }]);//controller
 app.factory( 'getTransactions', [ '$http', function( $http ){
-	return function( params ){$http.get('/transactions', params)	
-	}	
+	return {
+		get :
+		function(params){
+			return $http({method : 'GET', url : '/transactions', params : params})
+		}
+	}
 	} ] )
 //dates are stored as yyyy/mm/dd for sorting and comparison but are displayed as mm/dd/yyyy
 //this filter pivots the yyyy from the start to the end of the string

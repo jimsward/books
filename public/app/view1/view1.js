@@ -7,7 +7,7 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }])
 //Populate the table with checkbook entries
-app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$rootScope', function($scope, getEntries, $http, $location, $routeParams, $rootScope){
+app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$rootScope', '$route', function($scope, getEntries, $http, $location, $routeParams, $rootScope, $route){
 	var promise = getEntries
 	promise.then(function(response){
 	$rootScope.username = 	response.data.username
@@ -22,7 +22,7 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 		}
 	$scope.logout = function(){		
 		$http.get( '/logout' ).then( function(response){
-			$location.path('/')
+			$rootScope.user = false
 			} )
 		}
 	$scope.openDlg =  function(item){
@@ -400,18 +400,8 @@ app.directive('numberfilt', [ '$filter', '$timeout', function( $filter, $timeout
         var html = element.val() ;
 		html = $filter('number')(html, 2)
 		console.log(html )
-        // When we clear the content editable the browser leaves a <br> behind
-        // If strip-br attribute is provided then we strip this out
-       /* if ( attrs.stripBr && html == '<br>' ) {
-          html = '';
-        }*/
         ngModel.$setViewValue(html);
-		/*scope.$applyAsync(function(){
-			
-					ngModel.$setViewValue('357')
-				})				*/
-		
-      }
+	  }
 			
 			
 			}//link

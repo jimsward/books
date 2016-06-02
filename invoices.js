@@ -1,3 +1,4 @@
+
 /* The EntriesDAO must be constructed with a connected database object */
 function InvoicesDAO(db) {
     "use strict";
@@ -13,6 +14,7 @@ function InvoicesDAO(db) {
 	this.addInvoice = function( obj, callback ){
 		invoices.insert( obj, function( err, doc ){
 			if (err) return callback( err, null )
+
 			return callback( null, doc )
 			} )
 		}

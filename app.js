@@ -29,9 +29,11 @@ app.use(express.static('public'));
     "use strict";
     if(err) throw err;
 var users = db.collection('users')
+var invoices = db.collection('invoices')
 var entries = db.collection("entries");
 var port = process.env.PORT || 3000;
 entries.ensureIndex({date:1}, { w:0 })
+invoices.createIndex("number", {unique : true})
 // view engine setup
 app.engine('html', cons.swig);
 app.set('view engine', 'html');

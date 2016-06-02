@@ -135,10 +135,11 @@ function SessionHandler (db) {
         // set these up in case we have an error case
         var errors = {'username': username, 'email': email}
 		console.log(username)
-            users.addUser(username, password, email, function(err, user) {
+            users.addUser(username, password, email, function(err, result) {
                 "use strict";
 
                 if (err) {
+                    console.log('error')
                     // this was a duplicate
                     if (err.code == '11000') {
                         errors['username_error'] = "Username already in use. Please choose another";
@@ -149,8 +150,7 @@ function SessionHandler (db) {
                         return next(err);
                     }
                 }
-
-                sessions.startSession(user['_id'], function(err, session_id) {
+                sessions.startSession(username, function(err, session_id) {
                     "use strict";
 
                     if (err) return next(err);
