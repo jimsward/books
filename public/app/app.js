@@ -21,10 +21,15 @@ angular.module('myApp', [
  
 ]).
 config(['$routeProvider', function($routeProvider) {
+
 	$routeProvider.when('/customer', {
         templateUrl: 'view3/view3.html',
         controller: 'view3Ctrl'
       })
+       .when('/view1', {
+         templateUrl: 'view1/view1.html',
+         controller: 'view1Ctrl'
+        })
 	  .when('/invoice', {
         templateUrl: 'view4/view4.html',
         controller: 'view4Ctrl'
