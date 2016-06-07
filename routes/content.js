@@ -26,6 +26,7 @@ function ContentHandler (app, db) {
 
     this.displayMainPage = function(req, res, next) {
         "use strict";
+		console.log('username ' + req.username)
 
         entries.getEntries( function(err, results) {	
 			
@@ -61,8 +62,7 @@ function ContentHandler (app, db) {
 			
 			
 			
-           /* return res.render('entries', { items : displArr, username : req.username  } );*/
-		   
+
 		   return res.send( {items : displArr, username : req.username} )
         });
     }

@@ -15,16 +15,15 @@ angular.module('myApp.view7', ['ngRoute'])
 	$scope.username = ""
 	$scope.email = ""
 	$scope.submitSignup = function(){			
-			var data = { username : $scope.username, email : $scope.email, password : $scope.password }
+			var data = { username : $scope.username, email : $scope.email }
 			var promise = signUp.signup(data)
 			promise.then( function(response){
 			//compose email msg
-			/*var text = 'The password for ' + response.data.username + ' is ' + response.data.password
+			var text = 'The password for ' + response.data.username + ' is ' + response.data.password
 			var data = { 'text' : text, 'email' : $scope.email }
 			$http.post('/sendemail', data).then( function(){
-
+				$location.path('/').search({'username' : response.data.username})
 				})
-*/			$location.path( '/view1' )
 			},
 			function errorCallback(response){
 				$scope.username_error = response.data.username_error

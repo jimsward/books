@@ -7,12 +7,15 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }])
 //Populate the table with checkbook entries
-app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$rootScope', '$route', function($scope, getEntries, $http, $location, $routeParams, $rootScope, $route){
+app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$route', function($scope, getEntries, $http, $location, $routeParams, $route){
 	var promise = getEntries
 	promise.then(function(response){
-	$rootScope.username = 	response.data.username
-	$rootScope.user = $rootScope.username ? true : false
 	$scope.items = response.data.items
+		return response
+	}).then(function(response){
+		$scope.username = response.data.username
+		console.log($scope.username)
+		$scope.user = $scope.username ? true : false
 	})
 	$scope.login = function(){
 		$location.path('/view6')
@@ -22,7 +25,7 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 		}
 	$scope.logout = function(){		
 		$http.get( '/logout' ).then( function(response){
-			$rootScope.user = false
+			$scope.user = false
 			} )
 		}
 	$scope.openDlg =  function(item){

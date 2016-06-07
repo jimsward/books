@@ -1,49 +1,32 @@
 var UsersDAO = require('../users').UsersDAO
-  , SessionsDAO = require('../sessions').SessionsDAO;
-
+  , SessionsDAO = require('../sessions').SessionsDAO
+  , randomCharString = require('./randomCharString')
 /* The SessionHandler must be constructed with a connected db */
 function SessionHandler (db) {
     "use strict";
-
     var users = new UsersDAO(db);
     var sessions = new SessionsDAO(db);
-
     this.isLoggedInMiddleware = function(req, res, next) {
-		
-		console.log('isLoggedIn')
-		
         var session_id = req.cookies.session;
         sessions.getUsername(session_id, function(err, username) {
             "use strict";
-
             if (!err && username) {
                 req.username = username;
             }
-			console.log( 'uSERNAME ' + username	 )
-
             return next();
         });
     }
-
     this.displayLoginPage = function(req, res, next) {
         "use strict";
-		
-		console.log( 'LOGIN HERE'	 )
-		
         return res.render("login", {username:"", password:"", login_error:""})
     }
-
     this.handleLoginRequest = function(req, res, next) {
         "use strict";
-
         var username = req.body.username;
         var password = req.body.password;
-
         console.log("user submitted username: " + username + " pass: " + password);
-
         users.validateLogin(username, password, function(err, user) {
             "use strict";
-
              if (err) {
                 if (err.no_such_user) {
 					console.log('error handler')
@@ -59,31 +42,26 @@ function SessionHandler (db) {
                     return next(err);
                 }
             }
-
             sessions.startSession(user['_id'], function(err, session_id) {
                 "use strict";
-
                 if (err) return next(err);
-
                 res.cookie('session', session_id);
-                return res.send({"user":username});
+                var user = {'username' : username}
+                return res.send(user);
             });
         });
     }
-
     this.displayLogoutPage = function(req, res, next) {
         "use strict";
-
         var session_id = req.cookies.session;
         sessions.endSession(session_id, function (err) {
             "use strict";
-
             // Even if the user wasn't logged in, redirect to home
             res.cookie('session', '');
+            req.username = ""
             return res.send({username : ""})
         });
     }
-
     this.displaySignupPage =  function(req, res, next) {
         "use strict";
         res.render("signup", {username:"", password:"",
@@ -91,18 +69,15 @@ function SessionHandler (db) {
                                     email:"", username_error:"", email_error:"",
                                     verify_error :""});
     }
-
     function validateSignup(username, password, verify, email, errors) {
         "use strict";
         var USER_RE = /^[a-zA-Z0-9_-]{3,20}$/;
         var PASS_RE = /^.{3,20}$/;
         var EMAIL_RE = /^[\S]+@[\S]+\.[\S]+$/;
-
         errors['username_error'] = "";
         errors['password_error'] = "";
         errors['verify_error'] = "";
         errors['email_error'] = "";
-
         if (!USER_RE.test(username)) {
             errors['username_error'] = "invalid username. try just letters and numbers";
             return false;
@@ -123,23 +98,16 @@ function SessionHandler (db) {
         }
         return true;
     }
-
     this.handleSignup = function(req, res, next) {
         "use strict";
-
         var email = req.body.email
         var username = req.body.username
-        var password = req.body.password
-        
-
         // set these up in case we have an error case
         var errors = {'username': username, 'email': email}
-		console.log(username)
+        var password = randomCharString()
             users.addUser(username, password, email, function(err, result) {
                 "use strict";
-
                 if (err) {
-                    console.log('error')
                     // this was a duplicate
                     if (err.code == '11000') {
                         errors['username_error'] = "Username already in use. Please choose another";
@@ -152,17 +120,13 @@ function SessionHandler (db) {
                 }
                 sessions.startSession(username, function(err, session_id) {
                     "use strict";
-
                     if (err) return next(err);
-
                     res.cookie('session', session_id);
-                    return res.redirect('/welcome');
+                    var user = { 'username' : username, 'password' : password, 'email' : email }
+                    return res.send(user);
                 });
             });
-        
-       
     }
-
     this.displayWelcomePage = function(req, res, next) {
         "use strict";
 
@@ -170,10 +134,8 @@ function SessionHandler (db) {
             console.log("welcome: can't identify user...redirecting to signup");
             return res.redirect("/signup");
         }
-
         return res.render("welcome", {'username':req.username})
     }
-	
 	this.displayCustomersPage = function(req, res, next){
 		return res.render( "customers", {} )
 		}

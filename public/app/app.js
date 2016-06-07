@@ -45,6 +45,6 @@ config(['$routeProvider', function($routeProvider) {
         templateUrl: 'view8/view8.html',
         controller: 'view8Ctrl'
         })
-	  
+
   .otherwise({redirectTo: '/view1'});
 }]);

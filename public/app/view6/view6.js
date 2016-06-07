@@ -9,15 +9,15 @@ angular.module('myApp.view6', ['ngRoute'])
   });
 }])
 
-.controller('view6Ctrl', [ '$routeParams', '$scope', '$http', '$route', '$location', 'login', function( $routeParams, $scope, $http, $route, $location, login ) {
+.controller('view6Ctrl', [ '$routeParams', '$scope', '$http', '$route', '$location', 'login', '$rootScope', function( $routeParams, $scope, $http, $route, $location, login, $rootScope ) {
 	$scope.username = ""
 	$scope.password = ""
 	$scope.submitLogin = function(){
 		var data = { username : $scope.username, password : $scope.password }
 		var promise = login.postLogin(data)
 		promise.then( function( response ){
-			console.log(response.config.data.username)
-			$location.path('/view1').search({'username' : response.config.data.username})},
+			$location.path('/view1')},
+
 			function errorCallback(response){
 				$scope.login_error = response.data.error			
 					})//then		

@@ -1,16 +1,11 @@
 var SessionHandler = require('./session')
   , ContentHandler = require('./content')
-  , ErrorHandler = require('./error').errorHandler;
-
-module.exports = exports = function(app, db) {
-
+  , ErrorHandler = require('./error').errorHandler
+  , SendEmail = require('./send');
+module.exports =  function(app, db) {
     var sessionHandler = new SessionHandler(db);
     var contentHandler = new ContentHandler(app, db);
-
-    // Middleware to see if a user is logged in
-   // app.use(sessionHandler.isLoggedInMiddleware);
-   
-   
+    var sendEmail = new SendEmail();
 
 // Middleware to see if a user is logged in
 app.use(sessionHandler.isLoggedInMiddleware);
@@ -50,8 +45,9 @@ app.get('/logout', sessionHandler.displayLogoutPage);
  app.get("/welcome", sessionHandler.displayWelcomePage);
 
     // Signup form
- app.get('/signup', sessionHandler.displaySignupPage);
- app.post('/signup', sessionHandler.handleSignup);
+app.get('/signup', sessionHandler.displaySignupPage);
+app.post('/signup', sessionHandler.handleSignup);
+app.post('/sendemail', sendEmail.send)
 
 app.use(ErrorHandler)
 }

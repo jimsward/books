@@ -20,21 +20,13 @@ function EntriesDAO(db) {
         entries.find().sort({date : 1 }).toArray(function(err, items) {
             "use strict";
             if (err) return callback(err, null);
-			
 			//compute balances
 			var bal = 0;
 			for ( var i =0; i < items.length; i++ )
 			{
-
 				bal = bal + items[i].deposit - items[i].payment;
-
 				items[i].balance = bal;
 			}
-
-            console.log("Found " + items.length + " entries");
-			
-			console.log(items[0])
-
             callback(err, items);
         });
     }
