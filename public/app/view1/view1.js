@@ -47,9 +47,7 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 		}			
 		
 	}])//controller
-app.factory( 'getEntries', [ '$http', function($http) {	 
-    return $http({url : '/entries', method : 'GET'})
-	}])
+
 	//form with controls for new entries to the check register
 app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'addEntry', function($scope, $http, $filter, $rootScope, addEntry){
 	$scope.entry = {}	
@@ -129,14 +127,7 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'add
 	}
 
 	}])
-app.factory('addEntry', ['$http', function($http) {
-	return {
-		newEnt :
-		function(data){ return $http( {url : '/newentry', data : data, method : "POST"})
-				}
-}
 
-}])
 
 	//controller for wdialog directive; launches dialog with search on several fields;allows selction of a single record
 	//and allows update, delete

@@ -74,14 +74,7 @@ $scope.run = function(){
 		})//$http								
 }//run	
 }]);//controller
-app.factory( 'getTransactions', [ '$http', function( $http ){
-	return {
-		get :
-		function(params){
-			return $http({method : 'GET', url : '/transactions', params : params})
-		}
-	}
-	} ] )
+
 //dates are stored as yyyy/mm/dd for sorting and comparison but are displayed as mm/dd/yyyy
 //this filter pivots the yyyy from the start to the end of the string
 app.filter('pivot', function(){	
