@@ -20,7 +20,7 @@ describe('my app', function() {
     });	
 	describe( 'chkEntryDlg', function(){
 	beforeEach(function(){
-		element( by.id('12219')).click().then( function(){
+		element( by.id('12261')).click().then( function(){
 			console.log('XXXXXXXXOOOOOOOOXXXXX')
 			} )
 		})	
@@ -50,7 +50,7 @@ describe('my app', function() {
 		element( by.id('search-register')).click().then( function(){
 			
 			$( '#datepicker2' ).sendKeys( '02/21/2015' ).then( function(){
-				$( '#sFind' ).click().then( function(){
+				$( '#schFind' ).click().then( function(){
 					console.log('mmmmmmmmmmmm')
 					})
 				})
@@ -88,7 +88,7 @@ describe('my app', function() {
 		  var inpt = element(by.id('customername'))
 		  inpt.sendKeys('test\n\n')
 		  element(by.css('button#findcust')).click()
-		  browser.driver.sleep(1000);
+		  browser.driver.sleep(5000);
 		  })
 it('should render view3 when user navigates to /view3', function() {
       expect(element.all(by.css('[ng-view] p')).first().getText()).
@@ -126,7 +126,7 @@ describe( 'to-new-customer', function(){
 	beforeEach(function(){
 		browser.get('index.html#/view2');
 		element( by.css('button#to-invoice')).click()
-		  browser.driver.sleep(3000);
+		  browser.driver.sleep(5000);
 		browser.waitForAngular();
 			})
 		it('should render the Invoice', function(){
@@ -148,11 +148,11 @@ describe( 'to-new-customer', function(){
 		beforeEach(function(){
 			browser.get('index.html#/view6')
 			var inpt = element(by.id('username'))
-			inpt.sendKeys('test')
+			inpt.sendKeys('jemima')
 			var inpt = element(by.id('password'))
-			inpt.sendKeys('test')
+			inpt.sendKeys('@'%'eYPI')
 			element(by.css('input#submitlogin')).click()
-			browser.driver.sleep(1000);
+			browser.driver.sleep(5000);
 		})
 		it('should render an Error Message', function(){
 
@@ -166,10 +166,10 @@ describe( 'to-new-customer', function(){
 			browser.get('index.html#/view7')
 			var inpt = element(by.id('user'))
 			inpt.sendKeys('jim')
-			var inpt = element(by.id('password'))
+			var inpt = element(by.id('email'))
 			inpt.sendKeys('bogus')
 			element(by.css('input#submitsignup')).click()
-			browser.driver.sleep(1000);
+			browser.driver.sleep(5000);
 		})
 		it('should render an Error Message', function(){
 

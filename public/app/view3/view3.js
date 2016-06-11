@@ -13,7 +13,6 @@ app.controller('view3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$loc
 	var params = {}
 	$scope.details = {}
 	params.name = $scope.customer.name
-
 	var promise = getCustomer.cust(params)
 	promise.then( function(response){
 			$scope.customer = response.data

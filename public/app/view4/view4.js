@@ -139,6 +139,13 @@ app.factory( 'getInvoice', [ '$http', function($http) {
 		}
 	}
 }])
+app.factory('getCustomer', ['$http', function($http){
+	return {
+		cust :
+			function(params){
+				return $http({url : '/customer', params : params, method : "GET"})
+			}}
+}])
 app.directive('listservices', [ '$http', function($http){	
 	return {
 	require : 'ngModel',

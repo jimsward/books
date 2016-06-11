@@ -269,8 +269,9 @@ app.directive('wdialog', [ '$http', function($http){
 		}},
       {
 	 text : 'Find',
+	 id : 'schFind',
 	 click: function(){
-		
+
 		scope.$apply( function() {			
 		$http( {
     	url: '../find',
