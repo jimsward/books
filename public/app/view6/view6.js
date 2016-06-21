@@ -23,3 +23,10 @@ angular.module('myApp.view6', ['ngRoute'])
 					})//then		
 		}//submitLogin
 }])
+.factory('login', [ '$http', function($http){
+	return {
+		postLogin : function(data){
+			return $http({method : "POST", url : '/login', data : data})
+		}
+	}
+}])

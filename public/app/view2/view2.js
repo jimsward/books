@@ -36,7 +36,21 @@ app.controller('view2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', 
 		$location.path('/invoice').search(customer);
 	}
 	}]);//controller
-
+app.factory( 'getCustomers', [ '$http', function($http) {	 
+    return $http.get('/customers')	
+	}])
+app.factory( 'customerInit', [ '$http', function($http) {	 
+    var customer = {}
+	customer.entries = []
+	customer.invoices = []
+	customer.name = ''
+	customer.company = ''
+	customer.address = ''
+	customer.phone = ''
+	customer.email = ''
+	customer.balance = 0
+	return customer	
+	}])
 	
 app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function( $location, $http, getCustomers ){		
 	return {

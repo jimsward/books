@@ -1,0 +1,24 @@
+﻿Revert "Moved factories to their own separate file"
+
+This reverts commit 3fd61aa49b63cc1dce4c7c6bde1a12c03091581e.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 3 commits.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	modified:   .idea/workspace.xml
+#	deleted:    public/app/factories.js
+#	modified:   public/app/index.html
+#	modified:   public/app/view1/view1.js
+#	modified:   public/app/view2/view2.js
+#	modified:   public/app/view3/view3.js
+#	modified:   public/app/view4/view4.js
+#	modified:   public/app/view5/view5.js
+#	modified:   public/app/view6/view6.js
+#	modified:   public/app/view7/view7.js
+#	modified:   public/coverage/Chrome 50.0.2661 (Windows 7)/index.html
+#
+

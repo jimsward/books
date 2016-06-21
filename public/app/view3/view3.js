@@ -44,6 +44,16 @@ app.controller('view3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$loc
 		$location.path('/invoice').search(obj);
 	}	
 }]);//controller
+
+app.factory('getCustomer', ['$http', function($http){
+	return {
+	 cust :
+		function(params){
+			return $http({url : '/customer', params : params, method : "GET"})
+		}}
+}])
+	
+	
 app.directive( 'tabs', function(){
 	return {
 		link : function(scope, element, attrs){

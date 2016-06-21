@@ -34,3 +34,11 @@ angular.module('myApp.view7', ['ngRoute'])
 		$location.path('/view6')
 		}
 }])
+.factory('signUp', ['$http', function($http){
+	return {
+		signup :
+			   function(data){
+				   return $http({url : '/signup',method : "POST", data : data})
+			   }
+	}
+}])

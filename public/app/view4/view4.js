@@ -125,7 +125,27 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 
 	}
 }])
-
+app.factory( 'addInvoice', [ '$http', function($http) {
+    return	{
+	saveInv :	function(invoice) {
+			return $http({url : '/newInvoice', data : invoice, method : "POST"})
+		}
+	}
+	}])
+app.factory( 'getInvoice', [ '$http', function($http) {
+	return {
+		getInv : function(number) {
+			return	$http({method: 'GET', url: '/invoice', params: number})
+		}
+	}
+}])
+app.factory('getCustomer', ['$http', function($http){
+	return {
+		cust :
+			function(params){
+				return $http({url : '/customer', params : params, method : "GET"})
+			}}
+}])
 app.directive('listservices', [ '$http', function($http){	
 	return {
 	require : 'ngModel',
