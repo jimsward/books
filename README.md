@@ -22,8 +22,5 @@ This is where new checks are entered. Date, account, and an amount is required. 
 
 ### Reports
 
-<<<<<<< HEAD
 ### About
-=======
-### About
->>>>>>> 9f93571f0e626c29d86be1251f14ad279e1f1003
+
