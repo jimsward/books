@@ -7,6 +7,15 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }])
 //Populate the table with checkbook entries
+/**
+ * description Controller for the table of check entries and dialog, chkEntryDlg, that pops up on clicks on a table row.
+ * Although it is called 'view1Ctrl', it ends there. There are 2 more controllers on this partial
+ *
+ * @param {string} a
+ */
+function add(a, b) {
+	return a + b;
+}
 app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$route', '$rootScope', function($scope, getEntries, $http, $location, $routeParams, $route, $rootScope){
 	var promise = getEntries
 	promise.then(function(response){
@@ -47,7 +56,9 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 		}			
 		
 	}])//controller
-
+app.factory( 'getEntries', [ '$http', function($http) {	 
+    return $http({url : '/entries', method : 'GET'})
+	}])
 	//form with controls for new entries to the check register
 app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'addEntry', function($scope, $http, $filter, $rootScope, addEntry){
 	$scope.entry = {}	
@@ -127,7 +138,14 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'add
 	}
 
 	}])
+app.factory('addEntry', ['$http', function($http) {
+	return {
+		newEnt :
+		function(data){ return $http( {url : '/newentry', data : data, method : "POST"})
+				}
+}
 
+}])
 
 	//controller for wdialog directive; launches dialog with search on several fields;allows selction of a single record
 	//and allows update, delete

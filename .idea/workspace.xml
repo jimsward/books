@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24f87e19-1ba9-49f0-965c-461f0693f63b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/app/factories.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/index.html" afterPath="$PROJECT_DIR$/public/app/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view1/view1.js" afterPath="$PROJECT_DIR$/public/app/view1/view1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view2/view2.js" afterPath="$PROJECT_DIR$/public/app/view2/view2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view3/view3.js" afterPath="$PROJECT_DIR$/public/app/view3/view3.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view4/view4.js" afterPath="$PROJECT_DIR$/public/app/view4/view4.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view5/view5.js" afterPath="$PROJECT_DIR$/public/app/view5/view5.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view6/view6.js" afterPath="$PROJECT_DIR$/public/app/view6/view6.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view7/view7.js" afterPath="$PROJECT_DIR$/public/app/view7/view7.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/coverage/Chrome 50.0.2661 (Windows 7)/index.html" afterPath="$PROJECT_DIR$/public/coverage/Chrome 50.0.2661 (Windows 7)/index.html" />
     </list>
     <ignored path="books.iws" />
     <ignored path=".idea/workspace.xml" />
