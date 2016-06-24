@@ -1,6 +1,6 @@
 ## MEANbooks
 
-#### Booksjs a MEAN Alternative to Quickbooks Online All the features of quickbooks online; but stable.
+#### Booksjs: a MEAN Alternative to Quickbooks Online All the features of quickbooks online; but stable.
 
 ### Checking
 
