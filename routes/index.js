@@ -2,7 +2,9 @@ var SessionHandler = require('./session')
   , ContentHandler = require('./content')
   , ErrorHandler = require('./error').errorHandler
   , SendEmail = require('./send');
-module.exports = function(app, db) {
+module.exports =
+
+    function(app, db) {
     var sessionHandler = new SessionHandler(db);
     var contentHandler = new ContentHandler(app, db);
     var sendEmail = new SendEmail();
@@ -47,7 +49,8 @@ app.get('/logout', sessionHandler.displayLogoutPage);
     // Signup form
 app.get('/signup', sessionHandler.displaySignupPage);
 app.post('/signup', sessionHandler.handleSignup);
-app.post('/sendemail', sendEmail.send)
-
+app.post('/sendemail', sendEmail.send);
+app.post('/test', contentHandler.test);
+        app.options('/test', contentHandler.test);
 app.use(ErrorHandler)
 }

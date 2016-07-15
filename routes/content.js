@@ -247,6 +247,13 @@ function ContentHandler (app, db) {
 			res.send( results )
 			})
 		}
+	this.test= function(req, res, next){
+		console.log('OPTIONS' + req.method)
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "X-Requested-With");
+		next();		res.send(req.body)
+
+	}
 	}
 
 module.exports = ContentHandler;
