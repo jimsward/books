@@ -50,8 +50,8 @@ function ContentHandler (app, db) {
 			results[i].balance = toDecimal(results[i].balance)
 			results[i].id = i.toString()
 			
-			var parts = results[i].date.split('/');
-			results[i].date = parts[1] + '/' + parts[2] + '/' + parts[0]
+			/*var parts = results[i].date.split('/');
+			results[i].date = parts[1] + '/' + parts[2] + '/' + parts[0]*/
 
 
 

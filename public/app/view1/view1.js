@@ -62,13 +62,13 @@ app.factory( 'getEntries', [ '$http', function($http) {
 	//form with controls for new entries to the check register
 app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'addEntry', function($scope, $http, $filter, $rootScope, addEntry){
 	$scope.entry = {}	
-	var myDate = new Date();
+	/*var myDate = new Date();
 	var imonth = myDate.getMonth()+1
 	var idate = myDate.getDate()
 	if ( imonth < 10 ) imonth = '0' + imonth
 	if ( idate < 10 ) idate = '0' + idate		
 	var today =(   imonth  + '/' + idate + '/' + myDate.getFullYear())
-	$scope.entry.date = today
+	$scope.entry.date = today*/
 	
 	$scope.filterDate = function(){
 	$scope.date = $filter('date')($scope.dt, 'MM/dd/yyyy')
@@ -147,7 +147,7 @@ app.factory('addEntry', ['$http', function($http) {
 
 }])
 
-	//controller for wdialog directive; launches dialog with search on several fields;allows selction of a single record
+	//controller for wdialog directive; launches dialog with search on several fields;allows selection of a single record
 	//and allows update, delete
 app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $http, $filter){		
 	$scope.openSearch = function(){
