@@ -39,6 +39,7 @@ function SessionHandler (db) {
                 }
                 else {
                     // Some other kind of error
+
                     return next(err);
                 }
             }

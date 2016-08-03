@@ -13,19 +13,25 @@ app.controller('view5Ctrl', ['$scope', '$http', '$timeout', '$location', 'getTra
 			
 $scope.transaction = {}
 	var today = new Date()
-	, dispTo, dispFrom
-	dispTo =  today.getMonth() + 1
-	if (dispTo < 10 )dispTo = '0' + dispTo  
-	+ '/' + today.getDate() + '/' + today.getFullYear()
-	dispFrom = '01/' + '01/' + today.getFullYear()
+	, dispFrom
+
+	dispFrom = new Date('01-' + '01-' + today.getFullYear())
 	$scope.transaction.from = dispFrom
-	$scope.transaction.to = dispTo
+	$scope.transaction.to = new Date()
 	
 $scope.run = function(){	
-	var fromparts = $scope.transaction.from.split('/')
-	var from =  fromparts[2] + '/' + fromparts[0] + '/' + fromparts[1]	
-	var toparts = $scope.transaction.to.split('/')
-	var to =  toparts[2] + '/' + toparts[0] + '/' + toparts[1]		
+	
+/*
+	Probably will change this
+*/
+console.log($scope.transaction.from.toISOString())
+	var re = /\-/g
+	var obj = $scope.transaction.from.toISOString()
+	var fromObj =  obj.substr(0, 10)
+	var from = fromObj.replace(re, '/')
+	obj = $scope.transaction.to.toISOString()
+	var toObj = obj.substr(0, 10)
+	var to = toObj.replace(re, '/')
 	var params = {"from" : from, "to" : to }
 	var promise = getTransactions.get(params)
 	promise.then(

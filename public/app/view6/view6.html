@@ -2,26 +2,28 @@
 <div id="login">
     <h2>Login</h2>
     <form   name="login" ng-submit="submitLogin()">
-      
-            Username
+      <md-content>
+          <md-input-container>
+            <label>Username</label>
           
             <input type="text" name="username" id="username" ng-model="username">
-          
+          </md-input-container>
           <p class="error">
               {{login_error}}
           </p>
-     
-            Password
+     <md-input-container>
+        <label>Password</label>
         
             <input type="password" id="password" name="password" ng-model="password">
-          
-          <p class="error">
-	    {{login_error}}
+         </md-input-container>
+
+          {{login_error}}
             
           </p>
         
 
       <input type="submit" id="submitlogin" value="Submit Login" class="btn btn-info" >
+      </md-content>
     </form>
  </div>
  </div>

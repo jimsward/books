@@ -1,26 +1,23 @@
 <div ng-controller="view7Ctrl">
 <div id="signup">
-    <span>Already a user?</span> <span ng-click="redirect()">Login</span>
+    <md-content>
+    <span>Already a user?</span> <md-button ng-click="redirect()">Login</md-button>
     <h2>Signup</h2>
     
     <form name="signup" ng-submit="submitSignup()">
-      
-            Username
-       
-            <input type="text" name="username" id="user" ng-model="username" required>
-        
-	  <p class="error">{{username_error}}</p>
-            
-          
-            Email
-        
-            <input type="text" name="password" ng-model="password" id="email" required>
-         
-	  <p class="error">{{email_error}}</p>
-            
-     
 
-      <input type="submit" id="submitsignup">
+          <md-input-container>
+          <label>Username</label>
+            <input type="text" name="username" id="user" ng-model="username" required>
+          </md-input-container>
+	  <p class="error">{{username_error}}</p>
+      <md-input-container>
+          <label>Email</label>
+            <input type="text" name="email" ng-model="email" id="email" required>
+      </md-input-container>
+          <p class="error">{{email_error}}</p>
+          <input type="submit" class="md-raised" id="submitsignup">
+      </md-content>
     </form>
 </div>
 </div> 

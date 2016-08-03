@@ -19,7 +19,10 @@ angular.module('myApp.view6', ['ngRoute'])
 			$location.path('/view1')},
 
 			function errorCallback(response){
-				$scope.login_error = response.data.error
+				if (response)
+				$scope.login_error = response.data.error()
+				else
+				$scope.login_error = 'The user name or password is not in our database'
 					})//then		
 		}//submitLogin
 }])

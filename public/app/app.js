@@ -11,14 +11,13 @@ angular.module('myApp', [
   'myApp.view6',
   'myApp.view7',
   'myApp.view8',
+  'myApp.view9',
   'myApp.version',
   'ngMessages',
-  'angular-loading-bar',
-  'ngResource'
-
- /* ,
-  'ui.bootstrap'*/
- 
+  //'angular-loading-bar',
+  'ngResource',
+  'ngMaterial',
+  'material.svgAssetsCache'
 ]).
 config(['$routeProvider', function($routeProvider) {
 
@@ -50,6 +49,26 @@ config(['$routeProvider', function($routeProvider) {
         templateUrl: 'view8/view8.html',
         controller: 'view8Ctrl'
         })
+      .when('/view9', {
+        templateUrl: 'view9/view9.html',
+        controller: 'view9Ctrl'
+        })
 
   .otherwise({redirectTo: '/view1'});
-}]);
+}])
+    .config(function($mdThemingProvider, $mdIconProvider){
+
+       /* $mdIconProvider
+            .defaultIconSet("./assets/svg/avatars.svg", 128)
+            .icon("menu"       , "./assets/svg/menu.svg"        , 24)
+            .icon("share"      , "./assets/svg/share.svg"       , 24)
+            .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
+            .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
+            .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
+            .icon("phone"      , "./assets/svg/phone.svg"       , 512);*/
+
+        $mdThemingProvider.theme('default')
+            .primaryPalette('cyan')
+            .accentPalette('indigo');
+
+    });

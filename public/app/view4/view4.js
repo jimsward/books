@@ -48,9 +48,8 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		}
 	$scope.invoice.lines = [ { activity : "", memo : "", amount : "" } ]
 	$scope.invoice.total = 0
-	var today = new Date()
-	$scope.invoice.date = $filter('date')(today, "MM/dd/yyyy")	
-	$scope.invoice.type = "Invoice"	
+	$scope.invoice.date = new Date()
+	$scope.invoice.type = "Invoice"
 	}	
 	$scope.cancelInvoice = function(){
 		$location.path('/view2')

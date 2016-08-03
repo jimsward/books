@@ -28,7 +28,7 @@ New Customer Button opens a dialog with a form with Name, Company, Address, Phon
 
 #### Find a customer.
 
-Find a customer by entering a name or click on a customer name in the customer table. Once a customer is selected, a page with customer details in one tab and transactions in the other. You can edit the details in the former and view transactions by date and access a copy of any transaction in the latter.
+Find a customer by entering a name or click on a customer name in the customer table. Once a customer is selected, a page appears with customer details in one tab and transactions in the other. You can edit the details in the former and view transactions by date and access a copy of any transaction in the latter.
 
 #### Create Invoice
 

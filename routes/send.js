@@ -10,7 +10,7 @@ function SendEmail() {
         return new SendEmail();
     }
 	this.send = function(req, res) {
-		console.log('request : ' + req.body)
+		console.dir(req.body)
     var transporter = nodemailer.createTransport("SMTP",{
         service: 'Yahoo',
         auth: {

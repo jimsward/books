@@ -6,10 +6,15 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "1.4.x",
+    "angular": "^1.4.7",
     "angular-route": "1.4.x",
     "angular-loader": "1.4.x",
     "angular-mocks": "~1.4.x",
-    "html5-boilerplate": "~5.2.0"
+    "html5-boilerplate": "~5.2.0",
+    "angular-aria": "^1.4.7",
+    "angular-animate": "^1.4.7"
+  },
+  "resolutions": {
+    "angular": "1.4.7"
   }
 }

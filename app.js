@@ -25,7 +25,7 @@ app.use(express.static('public'));
 	password = process.env.DB_PW || process.argv[3]
 		var connectUri = 'mongodb://' + user + ':' + password + '@ds045757.mongolab.com:45757/checking'
 		MongoClient.connect(connectUri, function(err, db) {
-            
+
 
      "use strict";
     if(err) throw err;

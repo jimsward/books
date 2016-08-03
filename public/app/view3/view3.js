@@ -67,9 +67,12 @@ app.directive( 'custedit', [ '$http', '$location', function($http, $location){
 
 	scope.dialog = $( "#edit-customer-form" ).dialog({
       autoOpen: false,
-      height: 600,
+      height: 800,
       width: 1040,
       modal: true,
+		focus : function(event, ui){
+			$( "[id^=custDialog]").attr( "class", "btn btn-info").attr( "disabled", !scope.user )
+		},
 	  open: function( event, ui ) {console.log('OPEN')},
 	  close : function(){
 		  $location.path('/customers')
@@ -94,16 +97,9 @@ app.directive( 'custedit', [ '$http', '$location', function($http, $location){
 	  {text : 'Cancel',
 	  id : 'custDialogCancel',
 	  click: function() {
-		  $( "#editCustomer" )[0].reset()
 		  $(this).dialog( "close" );
 		  }
-	  },
-	  {text : 'Reset',
-	  id : 'custDialogReset',
-	  click: function() {
-		  $( "#editCustomer" )[0].reset()
-		  }	  
-	  }	 
+	  }
 		]
 		})
 		}//link

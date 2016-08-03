@@ -16,6 +16,7 @@ angular.module('myApp.view7', ['ngRoute'])
 	$scope.email = ""
 	$scope.submitSignup = function(){			
 			var data = { username : $scope.username, email : $scope.email }
+		console.dir(data)
 			var promise = signUp.signup(data)
 			promise.then( function(response){
 			//compose email msg

@@ -50,8 +50,8 @@ function ContentHandler (app, db) {
 			results[i].balance = toDecimal(results[i].balance)
 			results[i].id = i.toString()
 			
-			/*var parts = results[i].date.split('/');
-			results[i].date = parts[1] + '/' + parts[2] + '/' + parts[0]*/
+			var parts = results[i].date.split('/');
+			results[i].date = parts[1] + '/' + parts[2] + '/' + parts[0]
 
 
 
@@ -75,53 +75,57 @@ function ContentHandler (app, db) {
 		console.dir(req.body)
 		newE.deposit = toInt( newE.deposit )
 		newE.payment = toInt( newE.payment )
-				
+
 		var parts = newE.date.split('/');
-		
-		newE.date =  parts[2] + '/' + parts[0] + '/' + parts[1] 		
-		
+
+		newE.date =  parts[2] + '/' + parts[0] + '/' + parts[1]
+
 			entries.insertEntry( newE, function(err) {
             "use strict";
             if (err) //return next(err);
 
 			  return next(err);
-			
-            entries.getEntries(function(err, results) {	
+
+            entries.getEntries(function(err, results) {
 			 "use strict";
-			 
+
 			 if (err) return next(err);
-			
+
 			//to reduce clutter, no display of zero amounts
 			for ( var i = 0; i < results.length; i++ )
-			{ 
+			{
 			if ( results[i].deposit== 0 ) results[i].deposit = "";
 			if ( results[i].payment == 0 ) results[i].payment = "";
 			}
-			
-			var entry = { "items" : results }			
+
+			var entry = { "items" : results }
            // return res.render('entries', entry );
 		   return res.send( entry )
-        });			
+        });
 		})
 	}
-	
 
-				
-	this.deleteRow = function(req, res, next) 
+
+
+	this.deleteRow = function(req, res, next)
 	{
-		var obj = req.body			
+		var obj = req.body
 		entries.deleteEntry(obj, function(err, results){
 			if (err) return next(err);
-		
-			return res.end()			
-			})		
+
+			return res.end()
+			})
 	}
-	
-	
+
+
 	this.findRow = function( req, res, next )
 	{
-			
+
 	var obj = req.query
+
+		 console.dir(obj)
+
+
 		entries.findEntries(obj, function(err, results)
 		{
 			for ( var i=0; i<results.length; i++ )

@@ -17,6 +17,7 @@ function add(a, b) {
 	return a + b;
 }
 app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$route', '$rootScope', function($scope, getEntries, $http, $location, $routeParams, $route, $rootScope){
+	$rootScope.currentNavItem="checking"
 	var promise = getEntries
 	promise.then(function(response){
 	$scope.items = response.data.items
@@ -26,6 +27,11 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 		console.log($scope.username)
 		$rootScope.user = $scope.username ? true : false
 	})
+	/*$scope.watch('username', function(newValue, oldValue){
+	if (newValue != oldValue)
+
+		$rootScope.user = true
+	})*/
 	$scope.login = function(){
 		$location.path('/view6')
 		}
@@ -61,32 +67,28 @@ app.factory( 'getEntries', [ '$http', function($http) {
 	}])
 	//form with controls for new entries to the check register
 app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'addEntry', function($scope, $http, $filter, $rootScope, addEntry){
-	$scope.entry = {}	
-	/*var myDate = new Date();
-	var imonth = myDate.getMonth()+1
-	var idate = myDate.getDate()
-	if ( imonth < 10 ) imonth = '0' + imonth
-	if ( idate < 10 ) idate = '0' + idate		
-	var today =(   imonth  + '/' + idate + '/' + myDate.getFullYear())
-	$scope.entry.date = today*/
-	
+	$scope.entry = {}
+	$scope.refs = {payment :'Payment', deposit : 'Deposit'}
+	$scope.entry.date = new Date()
+
 	$scope.filterDate = function(){
 	$scope.date = $filter('date')($scope.dt, 'MM/dd/yyyy')
 	}
-	//angular.element( '#datepicker' ).focus()
 	$scope.entry.payment = ''
 	$scope.entry.deposit = ''
 	$scope.disablePayment = true
 	$scope.disableDeposit = true
 	$scope.change = function(){
-		var ref = angular.element( 'select#reference' ).val()
-		if ( ref == 'payment' )
+		//var ref = angular.element( 'select#reference' ).val()
+		var ref = $scope.entry.reference
+		if ( ref == 'Payment' )
 		{ $scope.disablePayment = false
 		angular.element( '#deposit' ).css('opacity', 0.5)
 		angular.element( '#payment' ).css('opacity', 1)
 		$scope.disableDeposit = true
 			}
 		else
+
 		{$scope.disableDeposit = false
 		angular.element( '#payment' ).css('opacity', 0.5)
 		angular.element( '#deposit' ).css('opacity', 1)
@@ -112,6 +114,14 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'add
 			return
 		}				
 		//else
+		var dtObj = $scope.entry.date
+		var month = (dtObj.getMonth() + 1).toString()
+		if (month.length == 1) month = "0" + month
+		var day = dtObj.getDate().toString()
+		if (day.length == 1) day = "0" + day
+		$scope.entry.date =   month + '/' + day + '/' + dtObj.getFullYear()
+console.log('date' + $scope.entry.date)
+
 		var data = $scope.entry
 		var promise = addEntry.newEnt(data)
 		promise.then( function successCallback(){
@@ -149,17 +159,71 @@ app.factory('addEntry', ['$http', function($http) {
 
 	//controller for wdialog directive; launches dialog with search on several fields;allows selection of a single record
 	//and allows update, delete
-app.controller('schRegDialog', ['$scope', '$http', '$filter', function($scope, $http, $filter){		
-	$scope.openSearch = function(){
+app.controller('schRegDialog', ['$scope', '$http', '$filter', '$rootScope', function($scope, $http, $filter, $rootScope){
+	$scope.found = false
+	$rootScope.openSearch = function(){
 		$scope.dialog.dialog( "open" )
 		}		
 	$scope.obj = {}
-	$scope.items = [ 'date', 'amount', 'payee', 'account' ]
-	$scope.obj.key = $scope.items[0];	
+	$scope.obj.key = 'date'
+	$scope.date = new Date()
+
+	$scope.isDate = true
+	$scope.isAmount = false
+	$scope.isAccount = false
+	$scope.isPayee = false
+
+	$scope.$watch('obj.key', function(newvalue, oldvalue){
+		//console.log(newvalue, oldvalue)
+		$scope.obj.key = newvalue
+		//$scope.obj.val = $scope.date
+		if (newvalue != oldvalue) {
+
+			switch (oldvalue) {
+				case 'date' :
+					$scope.date = new Date()
+					$scope.isDate = false
+					break;
+				case 'amount' :
+					$scope.amount = ''
+					$scope.isAmount = false
+					break;
+				case 'account' :
+					$scope.account = ''
+					$scope.isAccount = false
+					break;
+				case 'payee' :
+					$scope.payee = ''
+					$scope.isPayee = false
+					break;
+
+			}
+			switch (newvalue) {
+				case 'date' :
+					$scope.isDate = true
+					break;
+				case 'amount' :
+					$scope.isAmount = true
+					break;
+				case 'account' :
+					$scope.isAccount = true
+					break;
+				case 'payee' :
+					$scope.isPayee = true
+					break;
+			}
+		}
+
+
+	})
+
+
+	/*$scope.obj.key = 'date'
+	$scope.obj.val = new Date()*/
 	//user clicked on a row in the results table
 	$scope.pickRow = function(item){
 		$scope.entry = item
-		$scope.entry.date = $filter('date')( item.date, 'M/d/yyyy' )
+		console.log('date' + $scope.entry.date)
 		$scope.disablePayment = true
 		$scope.disableDeposit = true
 		$scope.entry.deposit == 0 ? $scope.disablePayment = false : $scope.disableDeposit = false
@@ -178,7 +242,6 @@ app.directive('datepicker', function(){
 		element.datepicker({
 				onClose: function(dateText) {
 					var re = /(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d\d/
-					console.log(re.test(dateText))
 					if (re.test(dateText))
 				  scope.$apply(function() {
 					ngModel.$setViewValue(dateText);					
@@ -264,30 +327,34 @@ app.directive('wdialog', [ '$http', function($http){
 			})
 		})
 		}},
-	 { 
-	 text : 'Reset',
-	 id : 'schReset',
-	
-	 click : function()
-		{ $( '#dialogForm' )[0].reset()
-		$( '#resultsForm' )[0].reset()
-		$( 'input#dialogAmt' ).maskMoney( 'destroy' )
-		$( 'table#resultTable caption' ).html( '' )
-		 $( 'table#resultTable tbody tr' ).remove()
-		 scope.obj.key = ""
-		}},
+
       {
 	 text : 'Find',
 	 id : 'schFind',
 	 click: function(){
-
+		 switch (scope.obj.key) {
+			 case 'date' :
+				 scope.obj.val = scope.date
+				 break;
+			 case 'amount' :
+				 scope.obj.val = scope.amount
+				 break;
+			 case 'account' :
+				 scope.obj.val = scope.account
+				 break;
+			 case 'payee' :
+				 scope.obj.val = scope.payee
+				 break;
+		 }
 		scope.$apply( function() {			
 		$http( {
     	url: '../find',
    	 	method: "GET",
     	params: scope.obj } )
 		.then(  function(response){
+			scope.found = true
 		scope.results = response.data
+			console.dir(response.data)
 		scope.obj.val = ''
 			})
 		})
@@ -311,10 +378,7 @@ app.directive('wdialog', [ '$http', function($http){
 	  text : 'Cancel',
 	  id : 'schCancel',
 	  click: function() {
-		 $( '#dialogForm' )[0].reset()
-		$( '#resultsForm' )[0].reset()
-		$( 'input#datepicker2' ).maskMoney( 'destroy' )
-		$( 'table#resultTable caption' ).html( '' )
+
 		$( 'table#resultTable tbody tr' ).remove()
 		$(this).dialog( "close" );
 		}}        
@@ -403,7 +467,6 @@ app.directive('numberfilt', [ '$filter', '$timeout', function( $filter, $timeout
 		priority : 1000,
 		link : function( scope, element, attrs, ngModel ){
 			   element.on('blur keyup change', function() {
-				   console.log('eventHandler')
         scope.$evalAsync(read);
       });
       read(); // initialize
@@ -412,7 +475,6 @@ app.directive('numberfilt', [ '$filter', '$timeout', function( $filter, $timeout
       function read() {
         var html = element.val() ;
 		html = $filter('number')(html, 2)
-		console.log(html )
         ngModel.$setViewValue(html);
 	  }
 			

@@ -1,19 +1,20 @@
-<p>This is the partial for view 5.</p>
 <div class="container" id="transactionDetail">
 <div ng-controller="view5Ctrl">
 
 
 
 <div>
-<span>From:</span>
-<input name="from" type="text" datepicker ng-model="transaction.from" id="from" class="form-control" required>
-<span>To:</span>
-<input name="to" type="text" datepicker ng-model="transaction.to" id="to" class="form-control" required>
+    <h3>PROFIT AND LOSS DETAIL</h3>
 
-<button class="btn btn-info" id="runbtn" ng-click="run()">Run Report</button>
+<!--<input name="from" type="text" datepicker ng-model="transaction.from" id="from" class="form-control" required>-->
+    <md-content flex class="content" layout="row" layout-fill><span>From:</span><md-datepicker ng-model="transaction.from" id="from"  ></md-datepicker>
 
-<table width="1400" border="1" cellpadding="6" id="transactionsTable">
-<caption>PROFIT AND LOSS DETAIL</caption>
+        <span>To:</span>
+       <md-datepicker ng-model="transaction.to" id="to"  ></md-datepicker>
+
+<md-button class="btn btn-info" id="runbtn" ng-click="run()">Run Report</md-button></md-content>
+
+<table width="1000" border="1" cellpadding="6" id="transactionsTable">
 <thead>
   <tr>
   

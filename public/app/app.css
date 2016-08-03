@@ -30,37 +30,190 @@
 }
 */
 
-body {margin-top: 24px}
 /*
 .ng-invalid { border : 1px solid red }
 */
 
-.error {color: red}
 
 
-div#login {margin-left :100px !important;}
+/*div#chkEntryDlg input {margin-top: 4px;}*/
 
-div#signup  {cursor: pointer; }
+/*#loading-bar .bar {*/
+    /*background: firebrick;*/
+    /*height : 10px;*/
+    /*z-index: -100;*/
+    /*border-radius: 6px;*/
+    /*!*margin-top : -20px;*!*/
+/*}*/
 
-div#chkEntryDlg input {margin-top: 4px;}
+/*#loading-bar-spinner .spinner-icon {*/
+    /*border-top-color:  #2c3e50;*/
+    /*border-left-color: #2c3e50;*/
+    /*height : 60px;*/
+    /*width : 60px;*/
 
-#loading-bar .bar {
-    background: firebrick;
-    height : 10px;
-    z-index: -100;
-    border-radius: 6px;
-    /*margin-top : -20px;*/
+/*}*/
+
+
+.error {color:#FF0000}
+
+li.md-nav-item a:focus span {border-bottom: solid 2px #6f00ff; padding-bottom: 4px ;}
+
+.container {margin-left : 70px; }
+
+.odd { background-color : rgba(0, 144, 255, .1) }
+
+.container { width : 1015px; margin:auto;  margin-bottom:100px }
+
+table.tablesorter { width:1000px; border-collapse: collapse; }
+
+li {list-style-type:none !important;}
+
+select#reference {display: inline}
+
+md-datepicker {width:200px; margin-right: 50px}
+
+input {width:154px !important}
+
+td {padding:6px}
+
+td.rtalign, th.rtalign {  text-align:right; padding : 4px }
+
+#cancelbtn, #addbtn {float:right}
+
+#entrydt {margin-top:18px}
+
+/*#search-register {position:relative; top: -1604px; left:844px; }*/
+
+_md-nav-bar-list layout-row {margin:0 !important;}
+
+.clickable {cursor:pointer}
+
+#users {color : rgba(0,0,0,0.2)}
+
+/*#search-register, #new-customer, #to-new-customer { width : 220px; height : 42px; position : fixed; top : 24px; left : 465px; font-size:18px; margin: 0 0 40px 0 }*/
+
+
+body > div.layout-column.flex > div > md-content:nth-child(1) > md-nav-bar > div > nav > ul {padding : 0;}
+
+md-content {overflow: hidden}
+
+form#entryForm {border:#cccccc 1px solid ; padding-bottom: 30px; padding-left:10px}
+
+/*fieldset {height:280px; }*/
+
+.md-datepicker-calendar-pane {z-index: 1151}
+
+div#radios { display: inline-block;}
+
+div#choices {float:left; display: inline-block; }
+
+div#dialog-form md-input-container {display:block}
+
+md-radio-button {margin-top: 23px}
+
+table#transactionsTable {width : 1000px}
+
+.totals {font-weight: 700}
+
+#resultTable {clear:both; width:986px; margin:auto; cursor:pointer}
+
+#resultsForm input[type="text"], #resultsForm label {
+    width: 150px;
+    height: 20px;
+    display: block;
+    font-size: 12px;
 }
 
-#loading-bar-spinner .spinner-icon {
-    border-top-color:  #2c3e50;
-    border-left-color: #2c3e50;
-    height : 60px;
-    width : 60px;
-
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #eee;
 }
 
-ul.menu li a:hover {opacity : .5}
+table {border-collapse: collapse;}
 
-input#user, input#password {width:180px; margin : 10px}
+.crsrptr {cursor:pointer}
+
+table#custDtlTable {width:600px; border: 0}
+
+form#editCustomer md-input-container input {height: 60px; width:300px}
+
+form#editCustomer md-input-container {display:block; width:400px !important}
+
+div#edit-customer-form {
+    height:520p !important;}
+
+md-nav-bar md-nav-ink-bar {
+    left: 260px; width: 114px; height:2px;
+    color: rgb(255, 82, 82);
+    background: rgb(255, 82, 82);
+}
+
+div#edit-customer-form {height:584px !important;}
+
+form#newCustomer md-input-container {display:block; width:400px !important}
+
+form#newCustomer md-input-container input {height: 60px; width:300px}
+
+form#newCustomer {height:800px; overflow: visible}
+
+div.ui-dialog {height:860px}
+
+
+
+input#custinvoice {width : 180px; height: 36px; margin-bottom: 20px}
+
+
+table#invtbl { width : 100%;
+    font-size: 20px; }
+
+
+table#invtbl tr th, table#invtbl tr td {
+    font-size: 20px;padding: 4px }
+
+textarea#billto { width: 320px }
+
+.outer1 { width : 300px; float : left }
+
+.outer2 { width : 200px; float : right; padding:   10px }
+
+#invtbl > tbody > tr > td > md-content > md-input-container {margin:0}
+
+/*form#nameform md-input-container input#invnum {margin:-14px}*/
+
+md-datepicker#from {display:inline-block; width:200px}
+
+md-datepicker#to {display:inline-block; width:200px}
+
+md-content span {height:20px}
+
+h3 {margin:40px 0; text-align: center}
+
+td {font-size: 14px; cursor: pointer}
+
+#chkEntryDlg {height:560px !important;}
+
+.layout-row {padding:0}
+
+div#frontpage.container {margin-left: 15px}
+
+.md-nav-bar {
+    background-color: transparent;
+    border-color: '{{foreground-4}}';
+}
+
+.md-button._md-nav-button.md-unselected {
+    color: '{{foreground-2}}';
+}
+
+md-nav-ink-bar {
+    color: '{{accent-color}}';
+    background: '{{accent-color}}';
+}
+
+.md-button.md-raised[disabled] {cursor:not-allowed;}
+
+button[disabled] {cursor:not-allowed !important;}
 

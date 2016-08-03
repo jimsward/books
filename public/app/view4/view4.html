@@ -1,33 +1,30 @@
-<p>This is the partial for view 4.</p>
 <div class="container" id="customerDetail">
 <div ng-controller="view4Ctrl">
 <div id="invoicediv">
 <h1>Invoice</h1>
-<form name="nameform" id="nameform" ">
-<input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Find a customer" name="name" listcustomers tabindex="1" required>
-<button ng-click="custdetails()" tabindex="2" ng-hide="saved" id="findcust">FIND</button>
-<!--<div role="alert">
-      <span class="error" ng-show="nameform.name.$error.required">
-       Required!</span>
-    </div>-->
-<!--</form>-->
-<!--<form name="invhdr" id="invhdr">-->
+<form name="nameform" id="nameform">
+  <md-content>
+    <md-input-container>
+<input type="text" ng-model="invoice.name" id="custinvoice" placeholder="Name" name="name" listcustomers tabindex="1" required>
+    </md-input-container>
+<md-button ng-click="custdetails()" tabindex="2" ng-hide="saved" id="findcust">FIND</md-button>
+  </md-content>
 <div>
 <div class="outer1">
 <div class="property">Billing Address</div>
+  <md-input-container>
 <textarea id="billto">{{invoice.address}}</textarea>
+  </md-input-container>
 </div>
 <div class="outer2">
-<div class="property">Date</div>
-<div id="invdate"><input type="text" ng-model="invoice.date" datepicker tabindex="4"></div>
+<div class="property"></div>
+  <md-datepicker ng-model="invoice.date"></md-datepicker>
 </div>
 <div class="outer2">
-<div class="property">Invoice #</div>
+  <md-input-container>
+    <label for="invnum">Number</label>
 <div><input id="invnum" type="number" ng-model="invoice.number" name="number" tabindex="3"></div>
-<!-- <div role="alert">
-      <span class="error" ng-show="invhdr.number.$error.required">
-       Required!</span>-->
-    </div> 
+  </md-input-container>
 </div>
 
 <table border="1" cellpadding="2" id="invtbl">
@@ -39,27 +36,39 @@
   </tr>
   <tr ng-repeat="line in invoice.lines"><!--this array will be saved to the transactions collection-->
   <td>{{$index + 1}}</td>
-    <td><input type="text" ng-model="line.activity" id="activity" listservices  ></td>
-    <td><input type="text"  ng-model="line.memo" id="invmemo" ></td>
-    <td><input type="string" ng-model="line.amount" step="0.01" id="invamt" maskmoney  required  string-to-number ng-keydown="tabfwd($event)" class="formcontrol" ></td>
+    <td><md-content>
+      <md-input-container>
+      <input type="text" ng-model="line.activity" id="activity" listservices required >
+    </md-input-container>
+    </md-content>
+    </td>
+
+    <td><md-content>
+      <md-input-container>
+    <input type="text"  ng-model="line.memo" id="invmemo" >
+      </md-input-container>
+        </md-content>
+    </td>
+
+    <td><md-content>
+      <md-input-container>
+      <input type="string" ng-model="line.amount" step="0.01" id="invamt" maskmoney  required  string-to-number ng-keydown="tabfwd($event)" class="formcontrol" >
+      </md-input-container>
+    </md-content>
+    </td>
   </tr>
   <tr>
   <td>Total</td>
   <td></td>
   <td></td>
-  
-  
   <td id="invtotal">{{invoice.total | currency}}</td>
   </tr>
 </table>
-
-
-
 <div id="footer">
-<button id="cancel-invoice" ng-disabled="!user" class="btn btn-info" ng-click="cancelInvoice()">Cancel</button>
+<button id="cancel-invoice" class="btn btn-info" ng-click="cancelInvoice()">Cancel</button>
 <button id="print-invoice" ng-disabled="!user || !saved" class="btn btn-info" ng-click="printInvoice($event)">Print</button>
-<button ng-disabled="!user || saved" class="btn btn-info" type="button" ng-click="saveInvoice()" >Save</button>
-
+<button ng-disabled="!user || saved" class="btn btn-info" type="button" ng-click="saveInvoice()">Save</button>
+</div>
 </div>
 </form>
 </div>

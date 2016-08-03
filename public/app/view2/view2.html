@@ -1,12 +1,14 @@
-<p>This is the partial for view 2.</p>
 <div class="container">
 <div ng-controller="view2Ctrl">
-<button id="to-new-customer" ng-click="openNewCustomer()" title="Opens a dialog where you can add all the details for a new customer" class="btn btn-info">New Customer</button>
 
+<md-content layout="row">
+<md-input-container><input type="text" ng-model="customer.name" id="customername" placeholder="Customer Name" listcustomers></md-input-container>
+<md-button id="findcust" ng-click="custdetails()">FIND</md-button>
+<md-button id="to-invoice" ng-click="createInvoice()" title="Opens a page where you can add an invoice for a customer">Create Invoice</md-button>
+<md-button id="to-new-customer" ng-click="openNewCustomer()" title="Opens a dialog to add all the details for a new customer">New Customer</md-button>
 
-<input type="text" ng-model="customer.name" id="customername" placeholder="Find a customer" listcustomers>
-<button id="findcust" ng-click="custdetails()">FIND</button>
-<button id="to-invoice" ng-click="createInvoice()" title="Opens a page where you can add an invoice for a customer">Create Invoice</button>
+</md-content>
+
 <table width="1000" border="1" cellpadding="2">
   <tr>
     <th scope="col">Name</th>
@@ -15,9 +17,9 @@
   </tr>
   <tbody class="tbody">
   <tr ng-repeat="customer in customers" ng-class-odd="'odd'" class="customerRow"}>
-  	<td ng-click="customerDetails($event, customer)">{{customer.name}}</td>
+  	<td class="crsrptr" ng-click="customerDetails($event, customer)">{{customer.name}}</td>
     <td class="rtalign">{{customer.balance | number : 2}}</td>
-    <td class="rtalign" ng-click="makeInvoice($event, customer)">Make Invoice</td>
+    <td class="rtalign crsrptr" ng-click="makeInvoice($event, customer)">Make Invoice</td>
   </tr>
   </tbody>
 </table>
@@ -25,24 +27,32 @@
 <div id="new-customer-form" title="Customer Information" custdialog>
 <p class="title">Customer Information</p>
 <form id="newCustomer" name="newCustomer">
-    <fieldset>
+    <md-content>
+    <md-input-container>
      <label for="name">Name</label>
      <input type="text" ng-model="customer.name" id="name" name="name" required/>
-    
-     
+    </md-input-container>
+     <md-input-container>
      <label for="company">Company</label>
-     <input type="text" ng-model="customer.company" id="company"/> 
+     <input type="text" ng-model="customer.company" id="company"/>
+     </md-input-container>
+        <md-input-container>
      <label for="address">Address</label>
      <input type="text" ng-model="customer.address" id="address" name="address" required/>
-     
-
+        </md-input-container>
+        <md-input-container>
      <label for="phone">Phone</label>
-     <input type="text" ng-model="customer.phone" id="phone"/> 
+     <input type="text" ng-model="customer.phone" id="phone"/>
+        </md-input-container>
+        <md-input-container>
      <label for="email">email</label>
-     <input type="text" ng-model="customer.email" id="email"/
+     <input type="text" ng-model="customer.email" id="email"/>
+        </md-input-container>
+        <md-input-container>
      <label for="balance">Balance</label>
      <input type="text" ng-model="customer.balance" id="balance"/>
-     </fieldset>       
+        </md-input-container>
+    </md-content>
  </form>
 </div>
 </div><!--customerCtrl-->

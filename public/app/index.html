@@ -11,47 +11,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
 
 <link rel="stylesheet" href="../stylesheets/jquery-ui.css">
 <link rel="stylesheet" href="../stylesheets/jquery.ui.theme.css">
-  <link rel="stylesheet" href="app.css">
-  <link rel="stylesheet" href="../stylesheets/style.css">
+  <!--<link rel="stylesheet" href="app.css">-->
+  <!--<link rel="stylesheet" href="../stylesheets/style.css">-->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
  <script src="../javascripts/jquery.maskMoney.js"></script>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">Checking</a></li>
-    <li><a href="#/view2">Customers</a></li>
-    <li><a href="#/view5">Reports</a></li>
-    <li><a href="#/view8">About</a></li>
 
-  </ul>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
-
+  <div flex layout="column">
+    <div class="container">
+    <md-content class="menu">
+      <div layout="row" layout-align="left" >
+      <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-href="#/view1" name="checking">Checking</md-nav-item>
+        <md-nav-item md-nav-click="openSearch()" name="search">Search Register</md-nav-item>
+        <md-nav-item md-nav-href="#/view2" name="customers">Customers</md-nav-item>
+        <md-nav-item md-nav-href="#/view5" name="reports">Reports</md-nav-item>
+        <md-nav-item md-nav-href="#/view8" name="about">About</md-nav-item>
+      </md-nav-bar>
+      </div>
+    </md-content>
+      </md-content>
+    <md-content>
+    <div ng-view flex></div>
+    </md-content>
+  </div>
+  </div>
   
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
-  <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
-  <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
+  <!--<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />-->
+  <!--<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/1.1.0-rc.5/loading-bar.min.js'></script>-->
 
   <link rel="stylesheet" href="app.css">
 
-
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-messages.js"></script>
+  <script src="http://ngmaterial.assets.s3.amazonaws.com/svg-assets-cache.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc.5/angular-material.min.js"></script>"
+
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
@@ -61,6 +77,7 @@
   <script src="view6/view6.js"></script>
   <script src="view7/view7.js"></script>
   <script src="view8/view8.js"></script>
+  <script src="view9/view9.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

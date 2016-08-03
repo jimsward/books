@@ -20,13 +20,21 @@ function EntriesDAO(db) {
         entries.find().sort({date : 1 }).toArray(function(err, items) {
             "use strict";
             if (err) return callback(err, null);
+			
 			//compute balances
 			var bal = 0;
 			for ( var i =0; i < items.length; i++ )
 			{
+
 				bal = bal + items[i].deposit - items[i].payment;
+
 				items[i].balance = bal;
 			}
+
+            console.log("Found " + items.length + " entries");
+			
+			console.log(items[0])
+
             callback(err, items);
         });
     }
@@ -85,17 +93,16 @@ function EntriesDAO(db) {
 			val= obj.val
 			var query = {}, q1 = {}, q2 = {}
 			var deposit = 'deposit', payment ='payment'
-			//date needs to be a date object
-			
+
 			switch (key)
 			{
 			case 'date' :
-			var parts = val.split('/');
-			val = parts[2] + '/' + parts[0] + '/' + parts[1] 
-			console.log(val)
-			query[key] = val;
-			console.log(val)			
-			break;
+				val = val.substr(0, 10)
+				 var re = /\-/g
+				val = val.replace(re, '/')
+				query = {'date' : val}
+				console.dir(query)
+				break;
 			
 			case 'amount' :			
 			var re = /\,/g
