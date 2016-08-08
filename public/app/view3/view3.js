@@ -41,6 +41,10 @@ app.controller('view3Ctrl', ['$scope', '$routeParams','$http', '$timeout', '$loc
 	$scope.getInvoice = function(obj){
 		obj.name = $scope.customer.name
 		obj.address= $scope.customer.address
+		var dateParts = []
+		dateParts = obj.date.split('/')
+		var date = dateParts[2] + ',' + dateParts[0] + ',' + dateParts[1]
+		obj.date = new Date(date)
 		$location.path('/invoice').search(obj);
 	}	
 }]);//controller

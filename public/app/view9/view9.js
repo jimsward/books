@@ -9,114 +9,124 @@ var app = angular.module('myApp.view9', ['ngRoute'])
   });
 }])
 
-app.controller('view9Ctrl', ['$scope', '$http', '$filter', function($scope, $http, $filter){
-  //$scope.openSearch = function(){
-  $scope.dialog = $("#dialog-form").dialog()
-    $scope.dialog.dialog( "open" )
-  //}
+app.controller('view9Ctrl', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
+  $scope.found = false
   $scope.obj = {}
-  $scope.items = [ 'date', 'amount', 'payee', 'account' ]
-  $scope.obj.key = $scope.items[0];
+  $scope.obj.key = 'date'
+  $scope.date = new Date()
+  $scope.isDate = true
+  $scope.isAmount = false
+  $scope.isAccount = false
+  $scope.isPayee = false
+  $scope.update = function(){
+    $http( {
+      url: '/chkUpdate',
+      method: "POST",
+      data : $scope.entry } )
+        .then(  function(data){
+          //alert('Document Updated!')
+        })
+  }
+  $scope.find = function(){
+    switch ($scope.obj.key) {
+      case 'date' :
+        $scope.obj.val = $scope.date
+        break;
+      case 'amount' :
+        $scope.obj.val = $scope.amount
+        break;
+      case 'account' :
+        $scope.obj.val = $scope.account
+        break;
+      case 'payee' :
+        $scope.obj.val = $scope.payee
+        break;
+    }
+      $http( {
+        url: '../find',
+        method: "GET",
+        params: $scope.obj } )
+          .then(  function(response){
+            $scope.found = true
+            $scope.results = response.data
+            console.dir(response.data)
+            $scope.obj.val = ''
+          })
+
+  }
+  $scope.delete = function(){
+    var data = {}
+    data._id = $scope.entry._id
+    $scope.$apply( function() {
+      $http( {
+        url: '/delete',
+        method: "POST",
+        data : data } )
+          .then(  function(data){
+            element.dialog( "close" );			})
+    })
+  }
+  $scope.cancel = function(){
+    $( 'table#resultTable tbody tr' ).remove()
+    $(this).dialog( "close" );
+  }
+  $scope.reset = function(){
+$scope.obj.val = ""
+    $scope.entry = {}
+    $scope.results = {}
+    $scope.found = false
+  }
+  $scope.$watch('obj.key', function (newvalue, oldvalue) {
+    //console.log(newvalue, oldvalue)
+    $scope.obj.key = newvalue
+    //$scope.obj.val = $scope.date
+    if (newvalue != oldvalue) {
+      switch (oldvalue) {
+        case 'date' :
+          $scope.date = new Date()
+          $scope.isDate = false
+          break;
+        case 'amount' :
+          $scope.amount = ''
+          $scope.isAmount = false
+          break;
+        case 'account' :
+          $scope.account = ''
+          $scope.isAccount = false
+          break;
+        case 'payee' :
+          $scope.payee = ''
+          $scope.isPayee = false
+          break;
+      }
+      switch (newvalue) {
+        case 'date' :
+          $scope.isDate = true
+          break;
+        case 'amount' :
+          $scope.isAmount = true
+          break;
+        case 'account' :
+          $scope.isAccount = true
+          break;
+        case 'payee' :
+          $scope.isPayee = true
+          break;
+      }
+    }
+  })
   //user clicked on a row in the results table
-  $scope.pickRow = function(item){
+  $scope.pickRow = function (item) {
     $scope.entry = item
-    $scope.entry.date = $filter('date')( item.date, 'M/d/yyyy' )
+    console.log('date' + $scope.entry.date)
     $scope.disablePayment = true
     $scope.disableDeposit = true
     $scope.entry.deposit == 0 ? $scope.disablePayment = false : $scope.disableDeposit = false
   }
-  $scope.clearAmt = function(which){
+  $scope.clearAmt = function (which) {
     which == 'payment' ? $scope.entry.payment = 0 : $scope.entry.deposit = 0
   }
-  $scope.filterAmt = function(){
+  $scope.filterAmt = function () {
     $scope.obj.val = $filter('number')($scope.obj.val, 2)
   }
-}])	//schRegDialog controller
-app.directive('wdialog', [ '$http', function($http){
-  return {
-    link : function(scope,element,attrs, ngModel){
-
-      scope.dialog = $( "#dialog-form" ).dialog({
-        autoOpen: false,
-        height: 600,
-        width: 1040,
-        modal: true,
-        focus : function(event, ui){
-          $( "[id^=sch]").attr( "class", "btn btn-info").attr( "disabled", !scope.user )
-        },
-        buttons: [  //button label/text : callback
-          {
-            text : 'Update',
-            id : 'schUpdate',
-            click : function()
-            {
-              scope.$apply( function() {
-                $http( {
-                  url: '/chkUpdate',
-                  method: "POST",
-                  data : scope.entry } )
-                    .then(  function(data){
-                      //alert('Document Updated!')
-                    })
-              })
-            }},
-          {
-            text : 'Reset',
-            id : 'schReset',
-
-            click : function()
-            { $( '#dialogForm' )[0].reset()
-              $( '#resultsForm' )[0].reset()
-              $( 'input#dialogAmt' ).maskMoney( 'destroy' )
-              $( 'table#resultTable caption' ).html( '' )
-              $( 'table#resultTable tbody tr' ).remove()
-              scope.obj.key = ""
-            }},
-          {
-            text : 'Find',
-            id : 'schFind',
-            click: function(){
-
-              scope.$apply( function() {
-                $http( {
-                  url: '../find',
-                  method: "GET",
-                  params: scope.obj } )
-                    .then(  function(response){
-                      scope.results = response.data
-                      scope.obj.val = ''
-                    })
-              })
-            }},//find
-          {
-            text : 'Delete',
-            id : 'schDelete',
-            click: function(){
-              var data = {}
-              data._id = scope.entry._id
-              scope.$apply( function() {
-                $http( {
-                  url: '/delete',
-                  method: "POST",
-                  data : data } )
-                    .then(  function(data){
-                      element.dialog( "close" );			})
-              })
-            }},
-          {
-            text : 'Cancel',
-            id : 'schCancel',
-            click: function() {
-              $( '#dialogForm' )[0].reset()
-              $( '#resultsForm' )[0].reset()
-              $( 'input#datepicker2' ).maskMoney( 'destroy' )
-              $( 'table#resultTable caption' ).html( '' )
-              $( 'table#resultTable tbody tr' ).remove()
-              $(this).dialog( "close" );
-            }}
-        ]//buttons
-      });//scope.dialog
-    }//link
-  }//return
-}]);//wdialog
-
+}])

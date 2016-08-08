@@ -1,53 +1,84 @@
 <div ng-controller="view9Ctrl">
-    <div id="dialog-form" title="Find Checking Transactions" wdialog>
-<p>HERE</p>
-    <form id="dialogForm" name="dialogForm">
-                <fieldset>
-                    <label for="search">Search by</label>
-                    <select id="search" ng-model="obj.key" ng-options="item for item in items"></select>
-                    <label for="find">Find</label>
-                    <div id="find" class="wrapdiv" ng-switch on="obj.key">
-                        <div ng-switch-when="date"><input type="text" ng-model="obj.val" name="searchdate" datepicker id="datepicker2" required/></div>
-                        <div ng-switch-when="amount"><input type="text" ng-model="obj.val" id="dialogAmt" maskmoney required/></div>
-                        <div ng-switch-when="payee"><input type="text" ng-model="obj.val" required /></div>
-                        <div ng-switch-when="account"> <input type="text" ng-model="obj.val" listaccts required /></div>
-                    </div>
-                </fieldset>
-            </form>
-            <table id="resultTable">
-                <caption>Results</caption>
-                <thead>
-                <tr>
-                    <th>#</th><th>Date</th><th>Account</th><th>Payment</th><th>Deposit</th>
-                </tr>
-                </thead>
-                <tbody title="Click on a row to see complete contents of the transaction below.">
-                <tr ng-repeat="item in results" ng-click="pickRow(item)" ng-class-odd="'odd'">
-                    <td>{{$index + 1}}</td>
-                    <td>{{item.date }}</td>
-                    <td>{{item.account}}</td>
-                    <td>{{item.payment}}</td>
-                    <td>{{item.deposit}}</td>
-                </tr>
-                </tbody>
-            </table>
-            <form novalidate method="POST" id="resultsForm" name="resultsForm">
-                <label>Date</label>
-                <input type="text" name="date" ng-model="entry.date" readonly>
-                <label>Reference</label>
-                <input type="text" name="reference" ng-model="entry.reference" readonly>
-                <label>Number</label>
-                <input type="text" name="number" ng-model="entry.number">
-                <label>Payee</label>
-                <input type="text" name="payee" ng-model="entry.payee" >
-                <label>Memo</label>
-                <input type="text" name="memo" ng-model="entry.memo">
-                <label>Account</label>
-                <input type="text" name="account" ng-model="entry.account" listaccts>
-                <label>Payment</label>
-                <input type="text" name="payment" ng-model="entry.payment" ng-disabled="disablePayment" ng-mousedown="clearAmt('payment')" maskmoney>
-                <label>Deposit</label>
-                <input type="text" name="deposit" ng-model="entry.deposit" ng-disabled="disableDeposit" ng-mousedown="clearAmt('deposit')" maskmoney>
-            </form>
- </div>
+        <p class="title">Search the Check Register.</p>
+        <div id="search-form">
+            <div id="radios">
+                <md-content>
+                <md-radio-group ng-model="obj.key">
+                    <md-radio-button value="date" class="md-primary">Date</md-radio-button>
+                    <md-radio-button  value="amount" >Amount</md-radio-button>
+                    <md-radio-button  value="account" >Account</md-radio-button>
+                    <md-radio-button  value="payee" >Payee</md-radio-button>
+                </md-radio-group>
+            </div>
+            <div id="choices">
+               <md-datepicker ng-model="date" md-placeholder="Enter date" ng-disabled="!isDate" ng-focus="isDate"></md-datepicker></md-content>
+                <md-input-container><input type="text" ng-model="amount" id="dialogAmt" maskmoney ng-disabled="!isAmount" placeholder="Amount" ng-focus="isAmount"/></md-input-container>
+                <md-input-container><input type="text" ng-model="account" id="dialogAcct" listaccts ng-disabled="!isAccount" placeholder="Account"/></md-input-container>
+                <md-input-container><input type="text" ng-model="payee" id="dialogPayee" ng-disabled="!isPayee" placeholder="Payee"/></md-input-container>
+                </md-content>
+            </div>
+        </div>
+        <table id="resultTable" ng-show="found">
+            <caption>Results</caption>
+            <thead>
+            <tr>
+                <th class="lfalign">#</th><th class="lfalign">Date</th><th class="lfalign">Account</th><th class="rtalign">Payment</th><th class="rtalign">Deposit</th>
+            </tr>
+            </thead>
+            <tbody title="Click on a row to see complete contents of the transaction below.">
+            <tr ng-repeat="item in results" ng-click="pickRow(item)" ng-class-odd="'odd'">
+                <td>{{$index + 1}}</td>
+                <td>{{item.date }}</td>
+                <td>{{item.account}}</td>
+                <td class="rtalign">{{item.payment}}</td>
+                <td class="rtalign">{{item.deposit}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="resultsForm" name="resultsForm" >
+            <md-content layout="column" layout-align="left">
+                <md-input-container class ="fl">
+            <label>Date</label>
+            <input type="text" name="date" ng-model="entry.date" readonly>
+                </md-input-container>
+                <md-input-container class ="fl">
+            <label>Reference</label>
+            <input type="text" name="reference" ng-model="entry.reference" readonly>
+                </md-input-container>
+                <md-input-container class ="fl">
+            <label>Number</label>
+            <input type="text" name="number" ng-model="entry.number">
+                </md-input-container>
+                <md-input-container class ="fl">
+            <label>Payee</label>
+            <input type="text" name="payee" ng-model="entry.payee" >
+                </md-input-container>
+                <md-input-container class ="fl">
+            <label>Memo</label>
+            <input type="text" name="memo" ng-model="entry.memo">
+                </md-input-container>
+                <md-input-container class ="fl">
+            <label>Account</label>
+            <input type="text" name="account" ng-model="entry.account" listaccts>
+                </md-input-container>
+                <md-input-container class ="fl">
+            <label>Payment</label>
+            <input type="text" name="payment" ng-model="entry.payment" ng-disabled="disablePayment" ng-mousedown="clearAmt('payment')" maskmoney>
+                </md-input-container>
+                <md-input-container class ="fl">
+            <label>Deposit</label>
+            <input type="text" name="deposit" ng-model="entry.deposit" ng-disabled="disableDeposit" ng-mousedown="clearAmt('deposit')" maskmoney>
+                </md-input-container>
+            </md-content>
+        </div>
+    <div id="srchbtns">
+        <md-content id="formButtons">
+            <md-button ng-disabled="!user" class="md-raised .btn" ng-click="update()" id="updatebtn">Update</md-button>
+            <md-button class="md-raised .btn" ng-click="find()" id="findbtn">Find</md-button>
+            <md-button ng-disabled="!user" class="md-raised .btn" ng-click="delete()" id="deletebtn">Delete</md-button>
+            <md-button class="md-raised .btn" ng-click="cancel()" id="cancelbtn">Cancel</md-button>
+            <md-button class="md-raised .btn" ng-click="reset()" id="resetbtn">Reset</md-button>
+        </md-content>
+    </div>
+
     </div>

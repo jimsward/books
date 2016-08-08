@@ -19,7 +19,15 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 
 	$scope.invoice.number = $routeParams.number
 
+		$scope.invoice.date = new Date($routeParams.date)
+		console.dir($scope.invoice)
+		/*var re = /\//g
+		var date = $routeParams.date
+		var dateObj = date.replace(re, '-')
+		console.log(dateObj)*/
+//$scope.invoice.date = new Date(dateObj)
 	var invNum = parseInt( $scope.invoice.number )
+
 		$scope.invoice.number = invNum
 	var inv = { number : invNum }
 	var promise = getInvoice.getInv(inv)

@@ -79,13 +79,16 @@ td {padding:6px}
 
 td.rtalign, th.rtalign {  text-align:right; padding : 4px }
 
-#cancelbtn, #addbtn {float:right}
+td.lfalign, th.lfalign {  text-align:left; padding : 4px }
+
+
+#addbtn {margin-right:12px; float:right}
 
 #entrydt {margin-top:18px}
 
 /*#search-register {position:relative; top: -1604px; left:844px; }*/
 
-_md-nav-bar-list layout-row {margin:0 !important;}
+_md-nav-bar-list layout-row {margin-left:-8px !important;}
 
 .clickable {cursor:pointer}
 
@@ -98,7 +101,7 @@ body > div.layout-column.flex > div > md-content:nth-child(1) > md-nav-bar > div
 
 md-content {overflow: hidden}
 
-form#entryForm {border:#cccccc 1px solid ; padding-bottom: 30px; padding-left:10px}
+form#entryForm {border:#cccccc 1px solid ; padding-bottom: 30px; padding-left:10px; width:988px}
 
 /*fieldset {height:280px; }*/
 
@@ -108,9 +111,9 @@ div#radios { display: inline-block;}
 
 div#choices {float:left; display: inline-block; }
 
-div#dialog-form md-input-container {display:block}
+div#search-form md-input-container {display:block; width:130px}
 
-md-radio-button {margin-top: 23px}
+md-radio-button {margin-top: 23px; margin-bottom:30px}
 
 table#transactionsTable {width : 1000px}
 
@@ -181,7 +184,6 @@ textarea#billto { width: 320px }
 
 #invtbl > tbody > tr > td > md-content > md-input-container {margin:0}
 
-/*form#nameform md-input-container input#invnum {margin:-14px}*/
 
 md-datepicker#from {display:inline-block; width:200px}
 
@@ -217,3 +219,30 @@ md-nav-ink-bar {
 
 button[disabled] {cursor:not-allowed !important;}
 
+#searchbtn {display : inline-block; float: right }
+
+#users {float:left}
+
+#resultTable {margin:0}
+
+#formButtons {margin-left:-8px}
+
+#resultTable {margin-bottom: 20px}
+
+caption {
+    margin: 40px;
+font-size: 20px}
+
+table#resultTable > thead > tr > th {font-weight: 600 !important;}
+
+#resultsForm md-content md-input-container {margin:0}
+
+#resultsForm md-content md-input-container #resultsForm input[type="text"] div#inner-editor {background-color:red;width:100px}
+
+#resultsForm {margin-top:40px; clear:both}
+
+.fl {float:left; margin-top: 18px !important; clear:both}
+
+div#srchbtns {margin-top : 40px}
+
+#nameform > md-content > div > div:nth-child(2) > md-datepicker > div {padding-bottom:20px}

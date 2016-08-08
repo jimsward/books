@@ -232,7 +232,6 @@ function ContentHandler (app, db) {
 				}
 				else return next(err)
 			}
-			result.date = pivot(result.date)
 			return res.send( result )
 			} )
 		}

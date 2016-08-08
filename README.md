@@ -18,7 +18,7 @@ This is where new checks are entered. Date, account, and an amount is required. 
 
 #### Search Registry Dialog
 
-Launched by the Search Register button. Choose to search by date, amount, account, or payee. Enter value to search for. Returns a table with all the entries matching value. Click on one of the entries; a form appears with the fields in the chosen entries document and inputs for most of the fields allow you to change the data or delete the entire document.
+Launched by the Search Register button. Choose to search by date, amount, account, or payee. Enter a value to search for. Returns a table with all the entries matching that value. Click on one of the entries (rows); a form appears with the fields in the chosen entries document and inputs for most of the fields allow you to change the data or delete the entire document.
 
 ### Customers
 

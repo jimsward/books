@@ -24,7 +24,6 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 		return response
 	}).then(function(response){
 		$scope.username = response.data.username
-		console.log($scope.username)
 		$rootScope.user = $scope.username ? true : false
 	})
 	/*$scope.watch('username', function(newValue, oldValue){
@@ -114,7 +113,9 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'add
 			return
 		}				
 		//else
+
 		var dtObj = $scope.entry.date
+		console.dir(dtObj)
 		var month = (dtObj.getMonth() + 1).toString()
 		if (month.length == 1) month = "0" + month
 		var day = dtObj.getDate().toString()
@@ -150,91 +151,12 @@ console.log('date' + $scope.entry.date)
 	}])
 app.factory('addEntry', ['$http', function($http) {
 	return {
-		newEnt :
-		function(data){ return $http( {url : '/newentry', data : data, method : "POST"})
-				}
-}
-
+		newEnt: function (data) {
+			return $http({url: '/newentry', data: data, method: "POST"})
+		}
+	}
 }])
 
-	//controller for wdialog directive; launches dialog with search on several fields;allows selection of a single record
-	//and allows update, delete
-app.controller('schRegDialog', ['$scope', '$http', '$filter', '$rootScope', function($scope, $http, $filter, $rootScope){
-	$scope.found = false
-	$rootScope.openSearch = function(){
-		$scope.dialog.dialog( "open" )
-		}		
-	$scope.obj = {}
-	$scope.obj.key = 'date'
-	$scope.date = new Date()
-
-	$scope.isDate = true
-	$scope.isAmount = false
-	$scope.isAccount = false
-	$scope.isPayee = false
-
-	$scope.$watch('obj.key', function(newvalue, oldvalue){
-		//console.log(newvalue, oldvalue)
-		$scope.obj.key = newvalue
-		//$scope.obj.val = $scope.date
-		if (newvalue != oldvalue) {
-
-			switch (oldvalue) {
-				case 'date' :
-					$scope.date = new Date()
-					$scope.isDate = false
-					break;
-				case 'amount' :
-					$scope.amount = ''
-					$scope.isAmount = false
-					break;
-				case 'account' :
-					$scope.account = ''
-					$scope.isAccount = false
-					break;
-				case 'payee' :
-					$scope.payee = ''
-					$scope.isPayee = false
-					break;
-
-			}
-			switch (newvalue) {
-				case 'date' :
-					$scope.isDate = true
-					break;
-				case 'amount' :
-					$scope.isAmount = true
-					break;
-				case 'account' :
-					$scope.isAccount = true
-					break;
-				case 'payee' :
-					$scope.isPayee = true
-					break;
-			}
-		}
-
-
-	})
-
-
-	/*$scope.obj.key = 'date'
-	$scope.obj.val = new Date()*/
-	//user clicked on a row in the results table
-	$scope.pickRow = function(item){
-		$scope.entry = item
-		console.log('date' + $scope.entry.date)
-		$scope.disablePayment = true
-		$scope.disableDeposit = true
-		$scope.entry.deposit == 0 ? $scope.disablePayment = false : $scope.disableDeposit = false
-		}
-	$scope.clearAmt = function(which){
-			which == 'payment' ? $scope.entry.payment = 0 : $scope.entry.deposit = 0
-			}
-	$scope.filterAmt = function(){		
-		$scope.obj.val = $filter('number')($scope.obj.val, 2)
-		}		
-	}])	//schRegDialog controller
 app.directive('datepicker', function(){	      
 	return {
 	require: 'ngModel',
@@ -308,6 +230,9 @@ app.directive('wdialog', [ '$http', function($http){
       height: 600,
       width: 1040,
       modal: true,
+	  close: function( event, ui ) {
+			scope.obj = {}
+		  },
 	  focus : function(event, ui){
 		 $( "[id^=sch]").attr( "class", "btn btn-info").attr( "disabled", !scope.user )
 		 },
@@ -482,3 +407,29 @@ app.directive('numberfilt', [ '$filter', '$timeout', function( $filter, $timeout
 			}//link
 		}//return
 	}])
+app.directive('utcParser', function () {
+
+	function link(scope, element, attrs, ngModel) {
+		var parser = function (val) {
+			val = moment.utc(val).format();
+			return val;
+		};
+
+		var formatter = function (val) {
+			if (!val) {
+				return val;
+			}
+			val = moment(val).toDate();
+			return val;
+		};
+
+		ngModel.$parsers.unshift(parser);
+		ngModel.$formatters.unshift(formatter);
+	}
+
+	return {
+		require: 'ngModel',
+		link: link,
+		restrict: 'A'
+	}
+});
