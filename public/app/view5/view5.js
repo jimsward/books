@@ -15,7 +15,7 @@ $scope.transaction = {}
 	var today = new Date()
 	, dispFrom
 
-	dispFrom = new Date('01-' + '01-' + today.getFullYear())
+	dispFrom = new Date(today.getFullYear() +  '-01-' + '02')
 	$scope.transaction.from = dispFrom
 	$scope.transaction.to = new Date()
 	

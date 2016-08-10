@@ -21,6 +21,7 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
  <script src="../javascripts/jquery.maskMoney.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
   <link rel="stylesheet" href="app.css">
 
@@ -34,7 +35,9 @@
 
   <div flex layout="column">
     <div class="container">
-    <md-content class="menu">
+      <md-toolbar>    </md-toolbar>
+
+      <md-content class="menu">
       <div layout="row" layout-align="left" >
       <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
         <md-nav-item md-nav-href="#/view1" name="checking">Checking</md-nav-item>
@@ -45,7 +48,6 @@
       </md-nav-bar>
       </div>
     </md-content>
-      </md-content>
     <md-content>
     <div ng-view flex></div>
     </md-content>
