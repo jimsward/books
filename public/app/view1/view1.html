@@ -77,7 +77,7 @@
     <form  method="POST" name="entryForm" id="entryForm">
     <md-content flex class="content" layout="row" layout-fill>
         <md-datepicker ng-model="entry.date" id="entrydt" required></md-datepicker>
-        <md-input-container>
+        <md-input-container id="reference">
             <label>Choose Type of Entry</label>
             <md-select ng-model="entry.reference" ng-change="change()">
                 <md-option ng-repeat="ref in refs" value="{{ref}}" >
