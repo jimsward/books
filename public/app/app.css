@@ -38,13 +38,14 @@
 
 /*div#chkEntryDlg input {margin-top: 4px;}*/
 
-/*#loading-bar .bar {*/
-    /*background: firebrick;*/
-    /*height : 10px;*/
-    /*z-index: -100;*/
-    /*border-radius: 6px;*/
-    /*!*margin-top : -20px;*!*/
-/*}*/
+#loading-bar .bar {
+    background: firebrick !important;
+    height : 10px;
+    z-index: 100;
+    border-radius: 6px;
+    /*margin-top : -20px;*/
+}
+
 
 /*#loading-bar-spinner .spinner-icon {*/
     /*border-top-color:  #2c3e50;*/

@@ -14,7 +14,7 @@ angular.module('myApp', [
   'myApp.view9',
   'myApp.version',
   'ngMessages',
-  //'angular-loading-bar',
+  'angular-loading-bar',
   'ngResource',
   'ngMaterial',
   'material.svgAssetsCache'
@@ -71,4 +71,7 @@ config(['$routeProvider', function($routeProvider) {
             .primaryPalette('cyan')
             .accentPalette('indigo');
 
-    });
+    })
+    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = false;
+    }])
