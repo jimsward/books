@@ -103,7 +103,7 @@ body > div.layout-column.flex > div > md-content:nth-child(1) > md-nav-bar > div
 
 md-content {overflow: hidden}
 
-form#entryForm { padding-bottom: 30px; padding-left:10px; width:1015px}
+form#entryForm { padding-bottom: 30px;  width:1015px}
 
 /*fieldset {height:280px; }*/
 
