@@ -116,7 +116,7 @@ div#choices {float:left; display: inline-block; }
 
 div#search-form md-input-container {display:block; width:130px}
 
-md-radio-button {margin-top: 23px; margin-bottom:30px}
+md-radio-button {margin-top: 38px; margin-bottom:30px}
 
 table#transactionsTable {width : 1000px}
 
@@ -243,6 +243,8 @@ table#resultTable > thead > tr > th {font-weight: 600 !important;}
 #resultsForm {margin-top:40px; clear:both}
 
 .fl {float:left; margin-top: 18px !important; clear:both}
+
+.fr { margin-top: 18px !important; margin-left:572px; clear:both}
 
 div#srchbtns {margin-top : 80px}
 

@@ -9,6 +9,7 @@ app.config(['$routeProvider', function($routeProvider) {
   });
 }])
 app.controller('view2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', '$location', function($scope, getCustomers, customerInit, $http, $location){
+	$scope.gotCustomer = false
 	getCustomers.then(function(response) {		
 	$scope.customers = response.data
 	
@@ -59,7 +60,6 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 		getCustomers.then(function(response) {
 			if (response) {
 				var cusArr = []
-				var addressArr = []//kluge
 				angular.forEach(response.data, function (value, key) {
 						cusArr.push(value.name)
 					}
@@ -67,7 +67,7 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 				element.autocomplete({
 					source: cusArr
 				})
-				element.on( "autocompletechange", function(event, ui){
+				element.on( "autocompleteclose", function(event, ui){
 					var val = event.target.value
 					if (cusArr.indexOf(val) == -1 && val.length > 0 )
 					{
@@ -75,9 +75,14 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
 						angular.element(event.target).val("")
 						return
 					}//if
+					console.log('This is it')
+					//$('#findcust').focus()
 					scope.$apply(function(){
 						ngModel.$setViewValue(val)
+						scope.custdetails()
+
 					})
+
 				})//autocompletechange callback
 
 			}
@@ -95,9 +100,9 @@ app.directive('listcustomers', [ '$location', '$http', 'getCustomers', function(
       height: 600,
       width: 1040,
       modal: true,
-	  focus : function(event, ui){
+	  /*focus : function(event, ui){
 		  $( "[id^=custDialog]").attr( "class", "btn btn-info").attr( "disabled", !scope.user )
-		  },
+		  },*/
 	  close : function(){
 		  $location.path('/customers')
 		  },

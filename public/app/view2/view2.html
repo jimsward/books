@@ -3,10 +3,10 @@
 
 <md-content layout="row">
 <md-input-container><input type="text" ng-model="customer.name" id="customername" placeholder="Customer Name" listcustomers></md-input-container>
-<md-button id="findcust" ng-click="custdetails()">FIND</md-button>
+    <div class="fr">
 <md-button id="to-invoice" ng-click="createInvoice()" title="Opens a page where you can add an invoice for a customer">Create Invoice</md-button>
 <md-button id="to-new-customer" ng-click="openNewCustomer()" title="Opens a dialog to add all the details for a new customer">New Customer</md-button>
-
+    </div>
 </md-content>
 
 <table width="1000" border="1" cellpadding="2">
