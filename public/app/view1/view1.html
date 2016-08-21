@@ -9,7 +9,6 @@
 <thead>
   <tr>
     <th scope="col">Date</th>
-    <th scope="col">Reference</th>
     <th scope="col">Number</th>
     <th scope="col">Payee</th>
     <th scope="col">Memo</th>
@@ -22,8 +21,7 @@
 <tbody class="tbody">
 	<tr ng-repeat="item in items" ng-class-odd="'odd'" ng-click="openDlg(item)" id={{item.id}}>
     <td class="date">{{item.date | date:'MM/dd/yyyy'}}</td>
-    <td class="reference">{{item.reference}}</td>
-    <td class="number">{{item.number}}</td>    
+    <td class="number">{{item.number}}</td>
     <td class="payee">{{item.payee}}</td>
     <td class="memo">{{item.memo}}</td>
     <td class="account">{{item.account}}</td>    

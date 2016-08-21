@@ -251,3 +251,5 @@ div#srchbtns {margin-top : 80px}
 #nameform > md-content > div > div:nth-child(2) > md-datepicker > div {padding-bottom:20px}
 
 #entryForm > md-content.content.layout-fill._md.layout-row.flex > md-input-container {width:200px}
+
+md-radio-button {margin-left: 40px !important;}
