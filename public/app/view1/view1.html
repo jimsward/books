@@ -1,36 +1,39 @@
 <div id="frontpage" class="container" >
-<div ng-controller="view1Ctrl">
+
+    <div ng-controller="view1Ctrl">
     <div id="users">
 <div ng-hide="user"><p>You are not logged in!</p><span ng-click="login()" class="clickable">Login</span>|<span ng-click="signUp()" class="clickable">Sign  Up</span></div>
 <p></p>
 <div ng-show="user"><span>Welcome {{username}}</span><span ng-click="logout()" class="clickable"> | LOGOUT</span></div>
      </div>
-<table class="tbl tablesorter" width="1000" border="1" cellpadding="2">
-<thead>
-  <tr>
-    <th scope="col">Date</th>
-    <th scope="col">Number</th>
-    <th scope="col">Payee</th>
-    <th scope="col">Memo</th>
-    <th scope="col">Account</th>
-    <th scope="col" class="rtalign">Payment</th>
-    <th scope="col" class="rtalign">Deposit</th>
-    <th scope="col" class="rtalign">Balance</th>
+        <div>
+
+<md-table-container>
+<table id="entriesTable" md-table >
+<thead md-head>
+  <tr md-row>
+    <th md-column>Date</th>
+    <th md-column>Payee</th>
+    <th md-column>Memo</th>
+    <th md-column>Account</th>
+    <th md-column md-numeric>Payment</th>
+    <th md-column md-numeric>Deposit</th>
+    <th md-column class="rtalign">Balance</th>
   </tr>
 </thead>
-<tbody class="tbody">
-	<tr ng-repeat="item in items" ng-class-odd="'odd'" ng-click="openDlg(item)" id={{item.id}}>
-    <td class="date">{{item.date | date:'MM/dd/yyyy'}}</td>
-    <td class="number">{{item.number}}</td>
-    <td class="payee">{{item.payee}}</td>
-    <td class="memo">{{item.memo}}</td>
-    <td class="account">{{item.account}}</td>    
-    <td class="payment rtalign">{{item.payment}}</td>
-    <td class="deposit rtalign">{{item.deposit}}</td>    
-    <td class="balance rtalign">{{item.balance}}</td>
+<tbody md-body>
+	<tr md-row ng-repeat="item in items" ng-class-odd="'odd'" ng-click="openDlg(item)" id={{item.id}}>
+    <td md-cell class="date">{{item.date | date:'MM/dd/yyyy'}}</td>
+    <td md-cell class="payee">{{item.payee}}</td>
+    <td md-cell class="memo">{{item.memo}}</td>
+    <td md-cell class="account">{{item.account}}</td>
+    <td md-cell class="payment rtalign">{{item.payment}}</td>
+    <td md-cell class="deposit rtalign">{{item.deposit}}</td>
+    <td md-cell class="balance rtalign">{{item.balance}}</td>
   </tr>
  </tbody>
 </table>
+</md-table-container>
 <div id="chkEntryDlg" title="Check Register Entry" editable>
 <form novalidate method="POST" id="chkEntryForm" name="chkEntryForm">
 <md-content flex class="content" layout="column" layout-fill>
@@ -67,13 +70,16 @@
 <input type="text" name="deposit" ng-model="item.deposit" ng-disabled="disableDeposit" ng-mousedown="clearAmt('deposit')" maskmoney><br>
         </md-input-container>
 </md-content>
+
 </form>
 </div><!--chkEntryDlg-->
+   </div>
 </div><!--View1Ctrl-->
-    <div id="entryForm">
 <div ng-controller="entryFormCtl" >
+    <!--<div id="entryForm">-->
+
     <form  method="POST" name="entryForm" id="entryForm">
-    <md-content flex class="content" layout="row" layout-fill>
+    <md-content id="dtAndSelect" flex class="content" layout="row" layout-fill>
         <md-datepicker ng-model="entry.date" id="entrydt" required></md-datepicker>
         <md-input-container id="reference">
             <label>Choose Type of Entry</label>
@@ -120,8 +126,7 @@
     <md-button ng-disabled="!user" class="md-raised .btn" ng-click="add()" id="addbtn">Add</md-button>
 </md-content>
 </form>
-</div>
+<!--</div>-->
         </div>
 </div><!--container-->
 
-</div><!--.container-->

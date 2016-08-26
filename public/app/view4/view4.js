@@ -20,12 +20,6 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	$scope.invoice.number = $routeParams.number
 
 		$scope.invoice.date = new Date($routeParams.date)
-		console.dir($scope.invoice)
-		/*var re = /\//g
-		var date = $routeParams.date
-		var dateObj = date.replace(re, '-')
-		console.log(dateObj)*/
-//$scope.invoice.date = new Date(dateObj)
 	var invNum = parseInt( $scope.invoice.number )
 
 		$scope.invoice.number = invNum
@@ -33,6 +27,9 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 	var promise = getInvoice.getInv(inv)
 	promise.then( function(response){
 	$scope.invoice = response.data
+		var parts = $scope.invoice.date.split('/')
+		var dateObj = new Date(parts[0], parts[1], parts[2])
+		$scope.invoice.date = dateObj
 	$scope.invoice.address = $routeParams.address
 		//angular.forEach($scope.invoice.lines, function(value, key){
 		//	console.log(value.amount			)
@@ -63,6 +60,11 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		$location.path('/view2')
 		}
 	$scope.printInvoice = function(event){
+		$('.md-datepicker-input-container').css("border-bottom-width",  0)
+		$('input').css("border-bottom-width",  0)
+
+		$('textarea').css("border-bottom-width",  0)
+
 		$(".menu").add('p').add('button').hide()
 		var number = {number : $scope.invoice.number}
 			var promise = getInvoice.getInv(number)

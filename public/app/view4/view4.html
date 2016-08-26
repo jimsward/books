@@ -14,54 +14,62 @@
 <textarea id="billto">{{invoice.address}}</textarea>
   </md-input-container>
 </div>
-<div class="outer2">
-<div class="property"></div>
-  <md-datepicker ng-model="invoice.date"></md-datepicker>
-</div>
+
 <div class="outer2">
   <md-input-container>
     <label for="invnum">Number</label>
 <div><input id="invnum" type="number" ng-model="invoice.number" name="number" tabindex="3"></div>
   </md-input-container>
 </div>
+  <div class="outer2">
+    <div class="property"></div>
+    <md-datepicker ng-model="invoice.date"></md-datepicker>
+  </div>
 </md-content>
 
-<table border="1" cellpadding="2" id="invtbl">
-  <tr>
-  <th scope="col">Number</th>
-    <th scope="col">Product/Service</th>
-    <th scope="col">Description</th>
-    <th scope="col" class="rtalign">Amount</th>
+<table md-table id="lineItems">
+<thead md-head>
+  <tr md-row>
+  <th md-column>Number</th>
+    <th md-column>Product/Service</th>
+    <th md-column>Description</th>
+    <th md-column md-numeric >Amount</th>
   </tr>
-  <tr ng-repeat="line in invoice.lines"><!--this array will be saved to the transactions collection-->
-  <td>{{$index + 1}}</td>
-    <td><md-content>
+</thead>
+  <tbody md-body>
+  <tr md-row ng-repeat="line in invoice.lines"><!--this array will be saved to the transactions collection-->
+  <td md-cell>{{$index + 1}}</td>
+    <td md-cell>
+      <md-content>
       <md-input-container>
       <input type="text" ng-model="line.activity" id="activity" listservices required >
     </md-input-container>
     </md-content>
     </td>
 
-    <td><md-content>
+    <td md-cell>
+      <md-content>
       <md-input-container>
     <input type="text"  ng-model="line.memo" id="invmemo" >
       </md-input-container>
         </md-content>
     </td>
 
-    <td><md-content>
+    <td md-cell>
+      <md-content>
       <md-input-container>
       <input type="string" ng-model="line.amount" step="0.01" id="invamt" maskmoney  required  string-to-number ng-keydown="tabfwd($event)" class="formcontrol" >
       </md-input-container>
     </md-content>
     </td>
   </tr>
-  <tr>
-  <td>Total</td>
-  <td></td>
-  <td></td>
-  <td id="invtotal">{{invoice.total | currency}}</td>
+  <tr md-row id="bottomLine">
+  <td md-cell>Total</td>
+  <td md-cell></td>
+  <td md-cell></td>
+  <td md-cell id="invtotal">{{invoice.total | currency}}</td>
   </tr>
+  </tbody>
 </table>
 <div id="footer">
 <button id="cancel-invoice" class="btn btn-info" ng-click="cancelInvoice()">Cancel</button>

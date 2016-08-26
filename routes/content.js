@@ -32,10 +32,6 @@ function ContentHandler (app, db) {
 			
             "use strict";
 			 if (err) return next(err);
-			 
-			 
-
-			
 			for ( var i = 0; i < results.length; i++ )
 			{ 
 			if ( results[i].deposit== 0 ){

@@ -9,17 +9,19 @@
     </div>
 </md-content>
 
-<table width="1000" border="1" cellpadding="2">
-  <tr>
-    <th scope="col">Name</th>
-    <th scope="col" class="rtalign">Open Balance</th>
-    <th scope="col" class="rtalign">Action</th>
+<table md-table>
+    <thead md-head>
+  <tr md-row>
+    <th md-column >Name</th>
+    <th md-column class="rtalign">Open Balance</th>
+    <th md-column class="rtalign">Action</th>
   </tr>
-  <tbody class="tbody">
-  <tr ng-repeat="customer in customers" ng-class-odd="'odd'" class="customerRow"}>
-  	<td class="crsrptr" ng-click="customerDetails($event, customer)">{{customer.name}}</td>
-    <td class="rtalign">{{customer.balance | number : 2}}</td>
-    <td class="rtalign crsrptr" ng-click="makeInvoice($event, customer)">Make Invoice</td>
+    </thead>
+  <tbody md-body>
+  <tr md-row ng-repeat="customer in customers" >
+  	<td md-cell class="crsrptr" ng-click="customerDetails($event, customer)">{{customer.name}}</td>
+    <td md-cell class="rtalign">{{customer.balance | number : 2}}</td>
+    <td md-cell class="rtalign crsrptr" ng-click="makeInvoice($event, customer)">Make Invoice</td>
   </tr>
   </tbody>
 </table>

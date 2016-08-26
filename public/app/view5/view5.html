@@ -14,48 +14,46 @@
 
 <md-button class="btn btn-info" id="runbtn" ng-click="run()">Run Report</md-button></md-content>
 
-<table width="1000" border="1" cellpadding="6" id="transactionsTable">
-<thead>
-  <tr>
+<table md-table id="transactionsTable">
+<thead md-head>
+  <tr md-row>
   
-  	<th >Category</th>
+  	<th md-column>Category</th>
   
-  	<th id="wideaccount">Account</th>
+  	<th md-column id="wideaccount">Account</th>
   	
-    <th id="padit">Date</th>    
+    <th md-column id="padit">Date</th>
  
-    <th>Type</th>
+    <th md-column>Type</th>
   
-    <th>Number</th>
+    <th md-column>Number</th>
     
   
-    <th>Name</th>
+    <th md-column>Name</th>
     
   
-    <th>Memo</th>    
-  
-     <th id="wideaccount">Split</th>
+
+     <th md-column id="wideaccount">Split</th>
+
+    <th md-column>Amount</th>
     
-    <th>Amount</th>
-    
-    <th>Balance</th>
+    <th md-column>Balance</th>
     
   </tr>
  </thead>
  
- <tbody>
+ <tbody md-body>
   
-  <tr ng-repeat="transaction in transactions" ng-class-odd="'odd'" >
- 	 <td>{{transaction.category}}</td>
-  	<td>{{transaction.account}}</td>
-    <td>{{transaction.date | pivot }}</td>  
-    <td class="rtalign">{{transaction.type}}</td> 
-    <td>{{transaction.number}}</td>   
-    <td>{{transaction.name}}</td>    
-    <td>{{transaction.memo}}</td>
-     <td class="split">{{transaction.split}}</td>   
-    <td class="rtalign">{{transaction.amount/100 | currency : ""}}</td>
-    <td class="rtalign">{{transaction.balance/100 | currency : ""}}</td>
+  <tr md-row ng-repeat="transaction in transactions"  >
+ 	 <td md-cell>{{transaction.category}}</td>
+  	<td md-cell>{{transaction.account}}</td>
+    <td md-cell>{{transaction.date | pivot }}</td>
+    <td md-cell class="rtalign">{{transaction.type}}</td>
+    <td md-cell>{{transaction.number}}</td>
+    <td md-cell>{{transaction.name}}</td>
+     <td md-cell class="split">{{transaction.split}}</td>
+    <td md-cell class="rtalign">{{transaction.amount/100 | currency : ""}}</td>
+    <td md-cell class="rtalign">{{transaction.balance/100 | currency : ""}}</td>
   </tr>
 </tbody>  
 </table>

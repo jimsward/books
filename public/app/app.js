@@ -17,7 +17,9 @@ angular.module('myApp', [
   'angular-loading-bar',
   'ngResource',
   'ngMaterial',
-  'material.svgAssetsCache'
+  'material.svgAssetsCache',
+   'md.data.table'
+
 ]).
 config(['$routeProvider', function($routeProvider) {
 

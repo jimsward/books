@@ -4,10 +4,10 @@
             <div id="radios">
                 <md-content>
                 <md-radio-group ng-model="obj.key">
-                    <md-radio-button value="date" class="md-primary">Date</md-radio-button>
-                    <md-radio-button  value="amount" >Amount</md-radio-button>
-                    <md-radio-button  value="account" >Account</md-radio-button>
-                    <md-radio-button  value="payee" >Payee</md-radio-button>
+                    <md-radio-button id="rb1" value="date" class="md-primary">Date</md-radio-button>
+                    <md-radio-button  id="rb2" value="amount" >Amount</md-radio-button>
+                    <md-radio-button  id="rb3" value="account" >Account</md-radio-button>
+                    <md-radio-button  id="rb4" value="payee" >Payee</md-radio-button>
                 </md-radio-group>
             </div>
             <div id="choices">
@@ -18,24 +18,32 @@
                 </md-content>
             </div>
         </div>
-        <table id="resultTable" ng-show="found">
+    <div id="resultDiv">
+    <md-table-container>
+        <table md-table id="resultTable" ng-show="found">
             <caption>Results</caption>
-            <thead>
-            <tr>
-                <th class="lfalign">#</th><th class="lfalign">Date</th><th class="lfalign">Account</th><th class="rtalign">Payment</th><th class="rtalign">Deposit</th>
+            <thead md-head>
+            <tr md-row>
+                <th md-column >#</th>
+                <th md-column >Date</th>
+                <th md-column >Account</th>
+                <th md-column md-numeric class="rtalign">Payment</th>
+                <th md-column md-numeric class="rtalign">Deposit</th>
             </tr>
             </thead>
-            <tbody title="Click on a row to see complete contents of the transaction below.">
-            <tr ng-repeat="item in results" ng-click="pickRow(item)" ng-class-odd="'odd'">
-                <td>{{$index + 1}}</td>
-                <td>{{item.date }}</td>
-                <td>{{item.account}}</td>
-                <td class="rtalign">{{item.payment}}</td>
-                <td class="rtalign">{{item.deposit}}</td>
+            <tbody md-body title="Click on a row to see complete contents of the transaction below.">
+            <tr md-row ng-repeat="item in results" ng-click="pickRow(item)" ng-class-odd="'odd'">
+                <td md-cell>{{$index + 1}}</td>
+                <td md-cell>{{item.date }}</td>
+                <td md-cell>{{item.account}}</td>
+                <td md-cell class="rtalign">{{item.payment}}</td>
+                <td md-cell class="rtalign">{{item.deposit}}</td>
             </tr>
             </tbody>
         </table>
-        <div id="resultsForm" name="resultsForm" ng-show="found">
+    </md-table-container>
+    </div>
+        <div id="resultsForm"  ng-show="found">
             <md-content layout="column" layout-align="left">
                 <md-input-container class ="fl">
             <label>Date</label>
