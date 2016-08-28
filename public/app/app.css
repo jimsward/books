@@ -274,4 +274,10 @@ form#entryForm, #formButtons, #dtAndSelect {background-color:#eeeeee}
 
 #details {cursor: pointer}
 
+md-toolbar {color:#ffffff !important; font-size: 48px; width:inherit}
+
+/*table.md-table {padding-top: 40px !important;}*/
+
+/*md-content.menu {position : relative !important; top : 64px; width : inherit}*/
+
 

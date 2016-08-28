@@ -26,19 +26,12 @@
   <link rel="stylesheet" href="app.css">
 
 </head>
-<body>
+<body layout="column" style="width : 1015px; margin:auto">
+<md-toolbar style="position : fixed; width:inherit; text-align: center; font-family: 'Times New Roman'">BOOKS</md-toolbar>
 
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-
-  <div flex layout="column">
-    <div class="container">
-      <md-toolbar>    </md-toolbar>
-
-      <md-content class="menu">
-      <div layout="row" layout-align="left" >
+      <md-content layout="column" class="menu" style=" padding: 64px 0">
+      <div  layout-align="left" >
       <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
         <md-nav-item md-nav-href="#/view1" name="checking">Checking</md-nav-item>
         <md-nav-item md-nav-href="#/view9" name="search">Search Register</md-nav-item>
@@ -48,12 +41,12 @@
       </md-nav-bar>
       </div>
     </md-content>
+      <div class="container">
     <md-content>
     <div ng-view flex></div>
     </md-content>
   </div>
-  </div>
-  
+
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
