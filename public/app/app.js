@@ -77,3 +77,7 @@ config(['$routeProvider', function($routeProvider) {
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
     }])
+    .config(function($mdAriaProvider) {
+        // Globally disables all ARIA warnings.
+        $mdAriaProvider.disableWarnings();
+    });

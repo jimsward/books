@@ -4,7 +4,7 @@
     <span>Already a user?</span> <md-button ng-click="redirect()">Login</md-button>
     <h2>Signup</h2>
     
-    <form name="signup" ng-submit="submitSignup()">
+    <form name="signup"">
 
           <md-input-container>
           <label>Username</label>
@@ -16,7 +16,7 @@
             <input type="text" name="email" ng-model="email" id="email" required>
       </md-input-container>
           <p class="error">{{email_error}}</p>
-          <input type="submit" class="md-raised" id="submitsignup">
+            <md-button class="md-raised .btn" ng-click="submitSignup()" id="signupBtn">Submit</md-button>
       </md-content>
     </form>
 </div>

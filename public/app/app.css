@@ -58,11 +58,11 @@
 
 .error {color:#FF0000}
 
-li.md-nav-item a:focus span {border-bottom: solid 2px #6f00ff; padding-bottom: 4px ;}
+/*li.md-nav-item a:focus span {border-bottom: solid 2px #6f00ff; padding-bottom: 4px ;}*/
 
-.container {margin-left : 70px; }
+.container { width : 1015px; margin: 0 auto;  margin-bottom:100px; background-color: #ffffff }
 
-.container { width : 1015px; margin:auto;  margin-bottom:100px; background-color: #ffffff }
+/*.container { margin-top:0 }*/
 
 /*table.tablesorter { width:1015px; border-collapse: collapse; }*/
 
@@ -188,7 +188,7 @@ md-datepicker#from {display:inline-block; width:200px}
 
 md-datepicker#to {display:inline-block; width:200px}
 
-md-content span {height:20px}
+/*md-content span {height:20px}*/
 
 h3 {margin:40px 0; text-align: center}
 
@@ -197,6 +197,7 @@ h3 {margin:40px 0; text-align: center}
 .layout-row {padding:0}
 
 .md-nav-bar {
+    height: 64px;
     background-color: transparent;
     border-color: '{{foreground-4}}';
 }
@@ -270,7 +271,7 @@ table#lineItems input {font-size: 20px !important;}
 
 table#lineItems td.md-cell {font-size: 20px}
 
-form#entryForm, #formButtons, #dtAndSelect {background-color:#eeeeee}
+form#entryForm, #formButtons, #dtAndSelect {background-color:#f2f2f2}
 
 #details {cursor: pointer}
 
@@ -279,5 +280,8 @@ md-toolbar {color:#ffffff !important; font-size: 48px; width:inherit}
 /*table.md-table {padding-top: 40px !important;}*/
 
 /*md-content.menu {position : relative !important; top : 64px; width : inherit}*/
+
+.container {margin-top:100px}
+
 
 

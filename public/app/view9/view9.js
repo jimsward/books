@@ -9,7 +9,7 @@ var app = angular.module('myApp.view9', ['ngRoute'])
   });
 }])
 
-app.controller('view9Ctrl', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
+app.controller('view9Ctrl', ['$scope', '$http', '$filter', '$location', function($scope, $http, $filter, $location) {
   $scope.found = false
   $scope.obj = {}
   $scope.obj.key = 'date'
@@ -63,12 +63,12 @@ app.controller('view9Ctrl', ['$scope', '$http', '$filter', function($scope, $htt
         method: "POST",
         data : data } )
           .then(  function(data){
-            element.dialog( "close" );			})
+            $location.path('/view1')
     })
-  }
+  })}
   $scope.cancel = function(){
     $( 'table#resultTable tbody tr' ).remove()
-    $(this).dialog( "close" );
+    $location.path('/view1')
   }
   $scope.reset = function(){
 $scope.obj.val = ""

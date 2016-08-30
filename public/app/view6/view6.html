@@ -5,7 +5,6 @@
       <md-content>
           <md-input-container>
             <label>Username</label>
-          
             <input type="text" name="username" id="username" ng-model="username">
           </md-input-container>
           <p class="error">
@@ -13,16 +12,12 @@
           </p>
      <md-input-container>
         <label>Password</label>
-        
             <input type="password" id="password" name="password" ng-model="password">
          </md-input-container>
-
+          <p>
           {{login_error}}
-            
           </p>
-        
-
-      <input type="submit" id="submitlogin" value="Submit Login" class="btn btn-info" >
+          <md-button class="md-raised .btn" ng-click="submitLogin()" id="loginBtn">Submit</md-button>
       </md-content>
     </form>
  </div>

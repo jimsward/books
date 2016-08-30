@@ -60,6 +60,7 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		$location.path('/view2')
 		}
 	$scope.printInvoice = function(event){
+		$('md-toolbar').hide()
 		$('.md-datepicker-input-container').css("border-bottom-width",  0)
 		$('input').css("border-bottom-width",  0)
 

@@ -13,14 +13,17 @@
     <thead md-head>
   <tr md-row>
     <th md-column >Name</th>
-    <th md-column md-numeric class="rtalign">Open Balance</th>
+      <th md-column >Company</th>
+      <th md-column md-numeric >Open Balance</th>
     <th md-column class="rtalign">Action</th>
   </tr>
     </thead>
   <tbody md-body>
   <tr md-row ng-repeat="customer in customers" >
   	<td md-cell class="crsrptr" ng-click="customerDetails($event, customer)">{{customer.name}}</td>
-    <td md-cell class="rtalign">{{customer.balance | number : 2}}</td>
+      <td md-cell class="crsrptr" ng-click="customerDetails($event, customer)">{{customer.company}}</td>
+
+      <td md-cell  style="text-align:center">{{customer.balance | number : 2}}</td>
     <td md-cell class="rtalign crsrptr" ng-click="makeInvoice($event, customer)">Make Invoice</td>
   </tr>
   </tbody>
