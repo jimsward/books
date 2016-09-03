@@ -39,11 +39,9 @@
 /*div#chkEntryDlg input {margin-top: 4px;}*/
 
 #loading-bar .bar {
-    background: firebrick !important;
-    height : 10px;
+    background: pink !important;
+    /*height : 10px;*/
     z-index: 100;
-    border-radius: 6px;
-    /*margin-top : -20px;*/
 }
 
 
@@ -197,7 +195,7 @@ h3 {margin:40px 0; text-align: center}
 .layout-row {padding:0}
 
 .md-nav-bar {
-    height: 64px;
+    height: 54px;
     background-color: transparent;
     border-color: '{{foreground-4}}';
 }
@@ -251,16 +249,16 @@ form#nameform {font-size: 20px}
 
 md-radio-button {margin-left: 40px !important;}
 
-.md-cell {padding : 24px !important;}
+/*.md-cell {padding : 24px !important;}*/
 
 #resultTable > thead > tr > th {padding-left: 24px}
 
-table.md-table > thead > tr > th {padding-left: 24px !important;}
+/*table.md-table > thead > tr > th {padding-left: 24px !important;}*/
 
 
 /*td.rtalign, th.rtalign {text-align: right !important;}*/
 
-table#entriesTable.md-table td.md-cell.md-numeric {text-align: center !important;}
+/*table#entriesTable.md-table td.md-cell.md-numeric {text-align: center !important;}*/
 
 #invtotal {text-align: right; font-size : 20px !important;}
 
@@ -282,6 +280,17 @@ md-toolbar {color:#ffffff !important; font-size: 48px; width:inherit}
 /*md-content.menu {position : relative !important; top : 64px; width : inherit}*/
 
 .container {margin-top:100px}
+
+td.date.md-cell.ng-binding {width:64px !important}
+
+/*table.md-table th.md-column:first-child {*/
+    /*padding: 0 !important; width:64px !important;}*/
+
+table.md-table {
+    table-layout: fixed;
+}
+
+table.md-table td.md-cell:last-child, table.md-table th.md-column:last-child {text-align: right}
 
 
 

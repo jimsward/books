@@ -12,7 +12,8 @@ angular.module('myApp', [
   'myApp.view7',
   'myApp.view8',
   'myApp.view9',
-  'myApp.version',
+    'myApp.entryFormCtl',
+    'myApp.version',
   'ngMessages',
   'angular-loading-bar',
   'ngResource',
@@ -70,8 +71,8 @@ config(['$routeProvider', function($routeProvider) {
             .icon("phone"      , "./assets/svg/phone.svg"       , 512);*/
 
         $mdThemingProvider.theme('default')
-            .primaryPalette('cyan')
-            .accentPalette('indigo');
+            .primaryPalette('indigo')
+            .accentPalette('pink');
 
     })
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
