@@ -13,10 +13,9 @@ app.config(['$routeProvider', function($routeProvider) {
  *
  * @param {string} a
  */
-function add(a, b) {
-	return a + b;
-}
-app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$route', '$rootScope', function($scope, getEntries, $http, $location, $routeParams, $route, $rootScope){
+
+
+app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$routeParams', '$route', '$rootScope', '$compile', function($scope, getEntries, $http, $location, $routeParams, $route, $rootScope, $compile){
 	$rootScope.currentNavItem="checking"
 	var promise = getEntries
 	promise.then(function(response){
@@ -26,11 +25,7 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 		$scope.username = response.data.username
 		$rootScope.user = $scope.username ? true : false
 	})
-	/*$scope.watch('username', function(newValue, oldValue){
-	if (newValue != oldValue)
 
-		$rootScope.user = true
-	})*/
 	$scope.login = function(){
 		$location.path('/view6')
 		}
@@ -42,6 +37,10 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 			$scope.user = false
 			} )
 		}
+	$scope.openForm = function(item){
+		$rootScope.selected = item
+		$('tr#' + item.id).replaceWith($compile("<entry-form />")($scope));
+	}
 	$scope.openDlg =  function(item){
 		angular.element( '#' + item.id ).unbind().css( 'opacity', '0.5' )
 		$scope.item = item
@@ -65,90 +64,7 @@ app.factory( 'getEntries', [ '$http', function($http) {
     return $http({url : '/entries', method : 'GET'})
 	}])
 	//form with controls for new entries to the check register
-app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'addEntry', function($scope, $http, $filter, $rootScope, addEntry){
-	$scope.entry = {}
-	$scope.refs = {payment :'Payment', deposit : 'Deposit'}
-	$scope.entry.date = new Date()
 
-	$scope.filterDate = function(){
-	$scope.date = $filter('date')($scope.dt, 'MM/dd/yyyy')
-	}
-	$scope.entry.payment = ''
-	$scope.entry.deposit = ''
-	$scope.disablePayment = true
-	$scope.disableDeposit = true
-	$scope.change = function(){
-		//var ref = angular.element( 'select#reference' ).val()
-		var ref = $scope.entry.reference
-		if ( ref == 'Payment' )
-		{ $scope.disablePayment = false
-		angular.element( '#deposit' ).css('opacity', 0.5)
-		angular.element( '#payment' ).css('opacity', 1)
-		$scope.disableDeposit = true
-			}
-		else
-
-		{$scope.disableDeposit = false
-		angular.element( '#payment' ).css('opacity', 0.5)
-		angular.element( '#deposit' ).css('opacity', 1)
-		$scope.disablePayment = true
-		}
-		}
-	$scope.add = function(){
-		//validate
-		if ( angular.element( '#reference option:selected' ).val() == '' )
-		{
-			alert('You must choose Deposit or Payment')
-			return
-		}
-		if ( $scope.entry.account == undefined || $scope.entry.account == '' )		
-		{
-			angular.element( '#account' ).text('')
-			alert('Please choose an Account')			
-			return
-		}
-		if ( ($scope.entry.payment + $scope.entry.deposit) == 0 )		
-		{			
-			alert('Please enter an Amount')			
-			return
-		}				
-		//else
-
-		var dtObj = $scope.entry.date
-		console.dir(dtObj)
-		var month = (dtObj.getMonth() + 1).toString()
-		if (month.length == 1) month = "0" + month
-		var day = dtObj.getDate().toString()
-		if (day.length == 1) day = "0" + day
-		$scope.entry.date =   month + '/' + day + '/' + dtObj.getFullYear()
-console.log('date' + $scope.entry.date)
-
-		var data = $scope.entry
-		var promise = addEntry.newEnt(data)
-		promise.then( function successCallback(){
-		location.reload(true)},
-		function errorCallback(response){
-			console.log('error' + response.data.error.message)
-			}
-		)
-		}	
-	$scope.cancel = function()
-		{
-		location.reload(false)
-		}	
-	$scope.validDate = function(){
-        var val = $scope.entry.date		
-        var val1 = Date.parse(val);		
-        if (isNaN(val1)==true && val!==''){
-			$scope.entry.date = ""
-           alert("Please enter a valid date!")
-        }
-        else{
-           console.log(val1);
-        }
-	}
-
-	}])
 app.factory('addEntry', ['$http', function($http) {
 	return {
 		newEnt: function (data) {

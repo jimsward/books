@@ -22,7 +22,7 @@
   </tr>
 </thead>
 <tbody md-body>
-	<tr md-row ng-repeat="item in items" ng-class-odd="'odd'" ng-click="openDlg(item)" id={{item.id}}>
+  <tr md-row ng-repeat="item in items"  ng-click="openForm(item); $event.stopImmediatePropagation();" id={{item.id}}>
     <td md-cell class="date">{{item.date | date:'MM/dd/yyyy'}}</td>
     <td md-cell class="payee">{{item.payee}}</td>
     <td md-cell class="memo">{{item.memo}}</td>
@@ -75,58 +75,6 @@
 </div><!--chkEntryDlg-->
    </div>
 </div><!--View1Ctrl-->
-<div ng-controller="entryFormCtl" >
-    <!--<div id="entryForm">-->
-
-    <form  method="POST" name="entryForm" id="entryForm">
-    <md-content id="dtAndSelect" flex class="content" layout="row" layout-fill>
-        <md-datepicker ng-model="entry.date" id="entrydt" required></md-datepicker>
-        <md-input-container id="reference">
-            <label>Choose Type of Entry</label>
-            <md-select ng-model="entry.reference" ng-change="change()">
-                <md-option ng-repeat="ref in refs" value="{{ref}}" >
-                    {{ref}}
-                </md-option>
-            </md-select>
-            </md-input-container>
-    </md-content>
-    <md-input-container>
-        <label>Number</label>
-        <input type="number" name="number" ng-model="entry.number">
-        <div ng-messages="entryForm.number.$error">
-            <div ng-message="required">This is required!</div>
-        </div>
-    </md-input-container>
-    <md-input-container>
-        <label>Payee</label>
-        <input type="text" name="payee" ng-model="entry.payee">
-
-    </md-input-container>
-    <md-input-container>
-        <label>Memo</label>
-        <input type="text" name="memo" ng-model="entry.memo">
-    </md-input-container>
-    <md-input-container>
-        <label>Account</label>
-        <input type="text" name="account" ng-model="entry.account" required listaccts>
-        <div ng-messages="entryForm.account.$error">
-            <div ng-message="required">Account is required!</div>
-        </div>
-    </md-input-container>
-    <md-input-container>
-        <label>Payment</label>
-        <input type="text" name="payment" ng-model="entry.payment" ng-disabled="disablePayment" id="payment" title="Payment" maskmoney/>
-    </md-input-container>
-    <md-input-container>
-        <label>Deposit</label>
-        <input type="text" name="deposit" ng-model="entry.deposit" ng-disabled="disableDeposit" id="deposit" title="Deposit" maskmoney/>
-    </md-input-container>
-<md-content id="formButtons">
-    <md-button ng-disabled="!user" class="md-raised .btn" ng-click="cancel()" id=cancelbtn>Cancel</md-button>
-    <md-button ng-disabled="!user" class="md-raised .btn" ng-click="add()" id="addbtn">Add</md-button>
-</md-content>
-</form>
-<!--</div>-->
-        </div>
+<entry-form id="entry-form"></entry-form>
 </div><!--container-->
 
