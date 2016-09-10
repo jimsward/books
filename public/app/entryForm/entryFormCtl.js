@@ -13,7 +13,7 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'add
     else {
     $scope.entry = {}
     $rootScope.newEntry = true
-
+        document.getElementById("entrydt").focus()
 
     $scope.refs = {payment :'Payment', deposit : 'Deposit'}
     $scope.entry.date = new Date()

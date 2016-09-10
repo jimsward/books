@@ -39,7 +39,7 @@
 /*div#chkEntryDlg input {margin-top: 4px;}*/
 
 #loading-bar .bar {
-    background: pink !important;
+    background: #FF8C00 !important;
     /*height : 10px;*/
     z-index: 100;
 }
@@ -58,7 +58,7 @@
 
 /*li.md-nav-item a:focus span {border-bottom: solid 2px #6f00ff; padding-bottom: 4px ;}*/
 
-.container { width : 1015px; margin: 0 auto;  margin-bottom:100px; background-color: #ffffff }
+.container { width : 1015px; margin: 0 auto; background-color: #ffffff }
 
 /*.container { margin-top:0 }*/
 
@@ -273,13 +273,13 @@ form#entryForm, #formButtons, #dtAndSelect {background-color:#f2f2f2}
 
 #details {cursor: pointer}
 
-md-toolbar {color:#ffffff !important; font-size: 48px; width:inherit}
+md-toolbar {color:#ffffff !important; font-size: 48px; width:inherit; box-shadow: 0px 0px 4px 4px}
 
 /*table.md-table {padding-top: 40px !important;}*/
 
 /*md-content.menu {position : relative !important; top : 64px; width : inherit}*/
 
-.container {margin-top:100px}
+.container {margin-top:70px}
 
 td.date.md-cell.ng-binding {width:64px !important}
 
@@ -287,10 +287,26 @@ td.date.md-cell.ng-binding {width:64px !important}
     /*padding: 0 !important; width:64px !important;}*/
 
 table.md-table {
-    table-layout: fixed;
-}
+    table-layout: fixed;}
 
 table.md-table td.md-cell:last-child, table.md-table th.md-column:last-child {text-align: right}
+
+footer {
+    background-color: #ccc;
+}
+
+#contact {
+    background-color: #FFFFFF;
+    width: 75% !important;
+    border-radius: 8px 8px 8px 8px;
+    padding: 0 0 75px;
+    margin-top: 20px;
+}
+
+form#contact { padding-top : 20px; width : 600px !important; }
+
+
+
 
 
 

@@ -28,10 +28,12 @@ app.post( '/newInvoice', contentHandler.newInvoice )
 app.get( '/invoice', contentHandler.getInvoice )
 app.get( '/services', contentHandler.listServices )
 app.get( '/transactions', contentHandler.listTransactions )
-//app.post( '/newTransaction', contentHandler.newTransaction )
+app.post( '/newTransaction', contentHandler.newTransaction )
+        app.post( '/contact', contentHandler.contactForm )
 
 
-console.log("HERE")
+
+        console.log("HERE")
 
 app.get('/home', function(req, res, next) {
   res.render('index', { title: 'Express' });

@@ -12,8 +12,9 @@ angular.module('myApp', [
   'myApp.view7',
   'myApp.view8',
   'myApp.view9',
-    'myApp.entryFormCtl',
-    'myApp.version',
+   'myApp.view10',
+   'myApp.entryFormCtl',
+   'myApp.version',
   'ngMessages',
   'angular-loading-bar',
   'ngResource',
@@ -56,7 +57,10 @@ config(['$routeProvider', function($routeProvider) {
         templateUrl: 'view9/view9.html',
         controller: 'view9Ctrl'
         })
-
+        .when('/view10', {
+            templateUrl: 'view10/view10.html',
+            controller: 'view10Ctrl'
+        })
   .otherwise({redirectTo: '/view1'});
 }])
     .config(function($mdThemingProvider, $mdIconProvider){
@@ -72,7 +76,9 @@ config(['$routeProvider', function($routeProvider) {
 
         $mdThemingProvider.theme('default')
             .primaryPalette('indigo')
-            .accentPalette('pink');
+            .accentPalette('pink')
+            .warnPalette('deep-orange')
+            .backgroundPalette('grey');
 
     })
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {

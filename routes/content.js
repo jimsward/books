@@ -253,6 +253,16 @@ function ContentHandler (app, db) {
 		next();		res.send(req.body)
 
 	}
+	this.contactForm = function( req, res, next ){
+		var message = req.body
+		console.log('message  : ' + message)
+		messages.insertMessage( message, function( err, result ){
+			if (err) return next(err)
+			res.end()
+		} )
+	}
+
+
 	}
 
 module.exports = ContentHandler;

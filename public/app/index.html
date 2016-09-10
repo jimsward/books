@@ -27,27 +27,30 @@
 
 </head>
 <body layout="column" style="width : 1015px; margin:auto">
-<md-toolbar style="position : fixed; width:inherit; text-align: center; font-family: 'Adobe Garamond Pro'">BOOKS</md-toolbar>
-<md-toolbar style="position : fixed; width:inherit; text-align: center; font-family: 'Adobe Garamond Pro'; top:64px; background-color: white">
+<md-toolbar style="position : fixed; width:inherit; text-align: center; font-family: 'Roboto'">BOOKS</md-toolbar>
+<md-toolbar style="position : fixed; width:inherit; text-align: center; font-family: 'Roboto'; top:64px; background-color: white">
         <div  layout-align="left" >
             <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-                <md-nav-item md-nav-href="#/view1" name="checking">Checking</md-nav-item>
+                <md-nav-item md-nav-href="#/view1#entry-form" name="checking">Checking</md-nav-item>
                 <md-nav-item md-nav-href="#/view9" name="search">Search Register</md-nav-item>
                 <md-nav-item md-nav-href="#/view2" name="customers">Customers</md-nav-item>
                 <md-nav-item md-nav-href="#/view5" name="reports">Reports</md-nav-item>
                 <md-nav-item md-nav-href="#/view8" name="about">About</md-nav-item>
+                <md-nav-item md-nav-href="#/view10" name="contact">Contact</md-nav-item>
+
             </md-nav-bar>
         </div>
-
 </md-toolbar>
-
-
       <div class="container">
     <md-content>
     <div ng-view flex></div>
     </md-content>
   </div>
-
+<footer>
+    <div layout="row" layout-align="center center">
+        <p>Jim Sward &copy; 2016. All content is the property of Jim Sward and stump3.</p>
+    </div>
+</footer>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -81,7 +84,8 @@
   <script src="view7/view7.js"></script>
   <script src="view8/view8.js"></script>
   <script src="view9/view9.js"></script>
-<script src="entryForm/entryFormCtl.js"></script>
+  <script src="view10/view10.js"></script>
+  <script src="entryForm/entryFormCtl.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
