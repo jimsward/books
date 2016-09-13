@@ -7,7 +7,6 @@
 <div ng-show="user"><span>Welcome {{username}}</span><span ng-click="logout()" class="clickable"> | LOGOUT</span></div>
      </div>
         <div>
-
 <md-table-container>
 <table id="entriesTable" md-table >
 <thead md-head>
@@ -34,45 +33,6 @@
  </tbody>
 </table>
 </md-table-container>
-<div id="chkEntryDlg" title="Check Register Entry" editable>
-<form novalidate method="POST" id="chkEntryForm" name="chkEntryForm">
-<md-content flex class="content" layout="column" layout-fill>
-<md-input-container>
-<label>Date</label>
-<input type="text" name="date" ng-model="item.date" readonly><br>
-</md-input-container>
-<md-input-container>
-<label>Reference</label>
-<input type="text" name="reference" ng-model="item.reference" readonly><br>
-</md-input-container>
-    <md-input-container>
-<label>Number</label>
-<input type="text" name="number" ng-model="item.number"><br>
-        </md-input-container>
-    <md-input-container>
-<label>Payee</label>
-<input type="text" name="payee" ng-model="item.payee" ><br>
-        </md-input-container>
-    <md-input-container>
-<label>Memo</label>
-<input type="text" name="memo" ng-model="item.memo"><br>
-        </md-input-container>
-    <md-input-container>
-<label>Account</label>
-<input type="text" name="account" ng-model="item.account" listaccts><br>
-        </md-input-container>
-    <md-input-container>
-<label>Payment</label>
-<input type="text" name="payment" ng-model="item.payment" ng-disabled="disablePayment" ng-mousedown="clearAmt('payment')" maskmoney ><br>
-        </md-input-container>
-    <md-input-container>
-<label>Deposit</label>
-<input type="text" name="deposit" ng-model="item.deposit" ng-disabled="disableDeposit" ng-mousedown="clearAmt('deposit')" maskmoney><br>
-        </md-input-container>
-</md-content>
-
-</form>
-</div><!--chkEntryDlg-->
    </div>
 </div><!--View1Ctrl-->
 <entry-form id="entry-form"></entry-form>
