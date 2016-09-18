@@ -28,7 +28,6 @@ app.post( '/newInvoice', contentHandler.newInvoice )
 app.get( '/invoice', contentHandler.getInvoice )
 app.get( '/services', contentHandler.listServices )
 app.get( '/transactions', contentHandler.listTransactions )
-app.post( '/newTransaction', contentHandler.newTransaction )
         app.post( '/contact', contentHandler.contactForm )
 
 
