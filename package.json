@@ -32,10 +32,15 @@
     "mongDB",
     "angular"
   ],
+
   "author": "Jim Sward",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jimsward/books/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall" : "cd public/app && npm install"
   },
   "homepage": "https://github.com/jimsward/books"
 }
