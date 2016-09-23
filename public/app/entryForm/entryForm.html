@@ -45,9 +45,9 @@
             <input type="text" name="deposit" ng-model="entry.deposit" ng-disabled="disableDeposit" id="deposit" title="Deposit" maskmoney/>
         </md-input-container>
         <md-content id="formButtons">
-            <md-button ng-disabled="!user" class="md-raised .btn" ng-click="cancel()" id=cancelbtn>Cancel</md-button>
-            <md-button ng-disabled="!user" class="md-raised .btn" ng-click="save()" id="addbtn">Save</md-button>
-            <md-button ng-disabled="!user || newEntry" class="md-raised .btn" ng-click="delete()" id="deletebtn">Delete</md-button>
+            <md-button class="md-raised .btn" ng-click="cancel()" id=cancelbtn>Cancel</md-button>
+            <md-button class="md-raised .btn" ng-click="save()" id="addbtn">Save</md-button>
+            <md-button ng-hide="newEntry" class="md-raised .btn" ng-click="delete()" id="deletebtn">Delete</md-button>
 
         </md-content>
     </form>

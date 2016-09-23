@@ -1,0 +1,17 @@
+{
+  "name": "tbar",
+  "version": "1.0.0",
+  "description": "directive adding login auth0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "angular-jwt": "^0.0.9",
+    "angular-storage": "^0.0.13",
+    "angular-ui-router": "^0.2.17",
+    "auth0-angular": "^4.1.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

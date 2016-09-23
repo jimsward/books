@@ -20,7 +20,10 @@ angular.module('myApp', [
   'ngResource',
   'ngMaterial',
   'material.svgAssetsCache',
-   'md.data.table'
+   'md.data.table',
+    'auth0',
+    'angular-storage',
+    'angular-jwt'
 
 ]).
 config(['$routeProvider', function($routeProvider) {
@@ -87,4 +90,78 @@ config(['$routeProvider', function($routeProvider) {
     .config(function($mdAriaProvider) {
         // Globally disables all ARIA warnings.
         $mdAriaProvider.disableWarnings();
-    });
+    })
+    .config(function($provide, authProvider, $httpProvider, jwtInterceptorProvider) {
+
+        authProvider.init({
+            domain: 'jimbob1953.auth0.com',
+            clientID: 'ogYuz2sCD57CfasGQ3Ln5KOGNzkBFDBG'
+        });
+
+        /* $urlRouterProvider.otherwise("/home");
+
+         $stateProvider
+         .state('home', {
+         url: '/home',
+         templateUrl: 'components/home/home.tpl.html'
+         })
+         .state('profile', {
+         url: '/profile',
+         templateUrl: 'components/profile/profile.tpl.html',
+         controller: 'profileController as user'
+         });*/
+
+        jwtInterceptorProvider.tokenGetter = function(store) {
+            return store.get('token');
+        }
+
+        //function redirect($q, $injector, auth, store, $location) {
+
+
+        function redirect($q, $injector, $timeout, store, $location) {
+
+            var auth;
+            $timeout(function() {
+                auth = $injector.get('auth');
+            });
+
+
+
+            return {
+                responseError: function(rejection) {
+
+                    if (rejection.status === 401) {
+                        auth.signout();
+                        store.remove('profile');
+                        store.remove('token');
+                        $location.path('/home')
+                    }
+                    return $q.reject(rejection);
+                }
+            }
+        }
+        $provide.factory('redirect', redirect);
+        $httpProvider.interceptors.push('jwtInterceptor');
+        $httpProvider.interceptors.push('redirect');
+    })
+    .run(function($rootScope, auth, store, jwtHelper, $location) {
+
+        $rootScope.$on('$locationChangeStart', function() {
+            // Get the JWT that is saved in local storage
+            // and if it is there, check whether it is expired.
+            // If it isn't, set the user's auth state
+            var token = store.get('token');
+            if (token) {
+                if (!jwtHelper.isTokenExpired(token)) {
+                    if (!auth.isAuthenticated) {
+                        auth.authenticate(store.get('profile'), token);
+                    }
+                }
+            }
+            else {
+                // Otherwise, redirect to the home route
+                $location.path('/home');
+            }
+        });
+
+    })

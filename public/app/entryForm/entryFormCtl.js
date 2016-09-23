@@ -4,8 +4,6 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'add
 
     if ($rootScope.selected)
     {
-        console.log($scope.selected)
-
     $rootScope.selected.date = new Date($rootScope.selected.date)
     $scope.entry = $rootScope.selected
         $rootScope.newEntry = false

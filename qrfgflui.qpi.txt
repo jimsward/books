@@ -1,0 +1,14 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch auth0
+# Changes to be committed:
+#	modified:   .gitignore
+#	modified:   .idea/workspace.xml
+#	modified:   public/app/app.js
+#	modified:   public/app/app.run.js
+#	modified:   public/app/auth0-variables.js
+#	modified:   public/app/components/auth/auth.service.js
+#	modified:   public/app/index.html
+#
+

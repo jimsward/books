@@ -13,7 +13,7 @@
     "debug": "~2.1.1",
     "express": "~4.11.1",
     "jade": "~1.9.1",
-    "mongodb": "^2.0.44",
+    "mongodb": ">=2.1.0",
     "morgan": "~1.5.1",
     "nodemailer": "0.7",
     "serve-favicon": "~2.2.0",

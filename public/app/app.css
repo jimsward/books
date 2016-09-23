@@ -35,8 +35,7 @@
 */
 
 
-
-/*div#chkEntryDlg input {margin-top: 4px;}*/
+body {font-family: 'Roboto'}
 
 #loading-bar .bar {
     background: #FF8C00 !important;
@@ -72,9 +71,7 @@ md-datepicker {width:200px; margin-right: 50px}
 
 input {width:154px !important}
 
-#addbtn {margin-right:12px; float:right}
-
-#cancelbtn  {float:right}
+#addbtn {margin-right:12px;}
 
 #entrydt {margin-top:18px}
 
@@ -215,8 +212,6 @@ button[disabled] {cursor:not-allowed !important;}
 
 #searchbtn {display : inline-block; float: right }
 
-/*#users {float:left}*/
-
 #resultTable {margin:0}
 
 #formButtons {margin-left:-8px}
@@ -269,7 +264,7 @@ table#lineItems input {font-size: 20px !important;}
 
 table#lineItems td.md-cell {font-size: 20px}
 
-form#entryForm, #formButtons, #dtAndSelect {background-color:#f2f2f2}
+form#entryForm, #formButtons, #dtAndSelect {background-color:#e8e8e8; padding-left:6px}
 
 #details {cursor: pointer}
 
