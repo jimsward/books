@@ -14,7 +14,7 @@ function CustomersDAO(db) {
 
    this.getCustomers = function( callback )
    {
-	   customers.find( {} ).sort( { name : 1 } ).toArray( function( err, items)
+	   customers.find().project({name:1, company:1, balance:1}).sort( { name : 1 } ).toArray( function( err, items)
 	   {
 		   if (err) return callback(err, null);
 		   //console.log(items.length)

@@ -47,10 +47,13 @@ app.controller('view9Ctrl', ['$scope', '$http', '$filter', '$location', function
         method: "GET",
         params: $scope.obj } )
           .then(  function(response){
-            $scope.found = true
-            $scope.results = response.data
-            console.dir(response.data)
-            $scope.obj.val = ''
+            if (response.data.length) {
+              $scope.found = true
+              $scope.results = response.data
+              console.dir(response.data)
+              $scope.obj.val = ''
+            }
+            else alert('No results found based on your query.')
           })
 
   }

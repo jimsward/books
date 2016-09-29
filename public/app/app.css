@@ -79,7 +79,7 @@ input {width:154px !important}
 
 _md-nav-bar-list layout-row {margin-left:-8px !important;}
 
-.clickable {cursor:pointer}
+.clickable {cursor:pointer; color:pink}
 
 #users {color : rgba(0,0,0,0.2)}
 
@@ -198,7 +198,7 @@ h3 {margin:40px 0; text-align: center}
 }
 
 .md-button._md-nav-button.md-unselected {
-    color: '{{foreground-2}}';
+    color: pink
 }
 
 md-nav-ink-bar {

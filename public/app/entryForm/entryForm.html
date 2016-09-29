@@ -3,7 +3,7 @@
 <div>
     <form  method="POST" name="entryForm" id="entryForm">
         <md-content id="dtAndSelect" flex class="content" layout="row" layout-fill>
-            <md-datepicker ng-model="entry.date" id="entrydt" required autofocus></md-datepicker>
+            <md-datepicker ng-model="entry.date" id="entrydt" required ng-focus></md-datepicker>
             <md-input-container id="reference">
                 <label>Choose Type of Entry</label>
                 <md-select ng-model="entry.reference" ng-change="change()">

@@ -19,27 +19,34 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 
 	$scope.invoice.number = $routeParams.number
 
-		$scope.invoice.date = new Date($routeParams.date)
+	$scope.invoice.date = new Date($routeParams.date)
 	var invNum = parseInt( $scope.invoice.number )
 
 		$scope.invoice.number = invNum
 	var inv = { number : invNum }
 	var promise = getInvoice.getInv(inv)
 	promise.then( function(response){
+
+			if (response.data)
+		{
 	$scope.invoice = response.data
-		var parts = $scope.invoice.date.split('/')
+			$scope.invoice.lines.forEach(function(currentValue, index){
+				console.log(currentValue.amount)
+				var str2num = Number(currentValue.amount)
+				$scope.invoice.lines[index].amount = $filter('currency')(str2num, "", 2)
+				console.log($scope.invoice.lines[index].amount)
+
+			} )
+
+			var parts = $scope.invoice.date.split('/')
 		var dateObj = new Date(parts[0], parts[1], parts[2])
 		$scope.invoice.date = dateObj
 	$scope.invoice.address = $routeParams.address
-		//angular.forEach($scope.invoice.lines, function(value, key){
-		//	console.log(value.amount			)
-		//	$scope.invoice.lines[key].amount = $filter('currency', "")(value.amount)
-		//})
-	//$scope.invoice.lines[angular.element(this).$scope().$index].amount = $filter('currency', "")($scope.invoice.lines[angular.element(this).$scope().$index].amount)
-	//$scope.invoice.lines.amount = $filter('currency')( $scope.invoice.lines.amount )
-	//$scope.invoice.lines[0].amount = $filter('currency')( 77, "", 2 )
-	//$( 'table#invtbl tr td input#invamt' ).remove()
-			} )
+		}
+			},
+	function errorCallback(err){
+		console.log('error')
+	})
 	}
 	//add a new invoice
 	else {

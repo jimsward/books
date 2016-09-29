@@ -54,6 +54,7 @@ function ContentHandler (app, db) {
 			}
 			
 			var displArr = results.slice( results.length - 40 )
+			displArr = displArr.reverse()
 			app.locals.entry = { "items" : displArr }
 			
 			
@@ -228,7 +229,7 @@ function ContentHandler (app, db) {
 				}
 				else return next(err)
 			}
-			return res.send( result )
+			else return res.send( result )
 			} )
 		}
 	this.listServices = function( req, res, next )

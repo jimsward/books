@@ -10,17 +10,15 @@ app.config(['$routeProvider', function($routeProvider) {
 }])
 app.controller('view2Ctrl', ['$scope', 'getCustomers', 'customerInit', '$http', '$location', function($scope, getCustomers, customerInit, $http, $location){
 	$scope.gotCustomer = false
-	getCustomers.then(function(response) {		
-	$scope.customers = response.data
-	
+	getCustomers.then(function(response) {
+		$scope.customers = response.data
+	})
 	//user clicked on a customer x in the list; redirect to customer details page with customer x's document
 	$scope.customerDetails = function(event, customer){
 		event.stopPropagation()
 		$location.path('/customer').search(customer);
 		}
-		})//then
-		
-	$scope.openNewCustomer = function(){
+		$scope.openNewCustomer = function(){
 		$scope.customer = customerInit
 		$scope.dialog.dialog( "open" )
 		}

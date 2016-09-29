@@ -73,8 +73,8 @@
 </table>
 <div id="footer">
 <button id="cancel-invoice" class="btn btn-info" ng-click="cancelInvoice()">Cancel</button>
-<button id="print-invoice" ng-disabled="!user || !saved" class="btn btn-info" ng-click="printInvoice($event)">Print</button>
-<button ng-disabled="!user || saved" class="btn btn-info" type="button" ng-click="saveInvoice()">Save</button>
+<button id="print-invoice" ng-disabled="!saved" class="btn btn-info" ng-click="printInvoice($event)">Print</button>
+<button ng-disabled="saved" class="btn btn-info" type="button" ng-click="saveInvoice()">Save</button>
 </div>
 </div>
 </form>
