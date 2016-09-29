@@ -44,7 +44,7 @@
         </table>
     </md-table-container>
     </div>
-        <div id="resultsForm"  ng-show="found">
+        <div id="resultsForm"  ng-hide="!found">
             <md-content layout="column" layout-align="left">
                 <md-input-container class ="fl">
             <label>Date</label>
@@ -82,9 +82,9 @@
         </div>
     <div id="srchbtns">
         <md-content id="formButtons">
-            <md-button ng-disabled="!user" class="md-raised .btn" ng-click="update()" id="updatebtn">Update</md-button>
+            <md-button class="md-raised .btn" ng-click="update()" id="updatebtn">Update</md-button>
             <md-button class="md-raised .btn" ng-click="find()" id="findbtn">Find</md-button>
-            <md-button ng-disabled="!user" class="md-raised .btn" ng-click="delete()" id="deletebtn">Delete</md-button>
+            <md-button  class="md-raised .btn" ng-click="delete()" id="deletebtn">Delete</md-button>
             <md-button class="md-raised .btn" ng-click="cancel()" id="cancelbtn">Cancel</md-button>
             <md-button class="md-raised .btn" ng-click="reset()" id="resetbtn">Reset</md-button>
         </md-content>
