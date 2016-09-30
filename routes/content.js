@@ -5,7 +5,7 @@ var CustomersDAO = require('../customers').CustomersDAO
 var InvoicesDAO = require('../invoices').InvoicesDAO
 var ServicesDAO = require('../services').ServicesDAO
 var TransactionsDAO = require('../transactions').TransactionsDAO
-
+var MessagesDAO = require('../messages').MessagesDAO
 var toDecimal = require('../public/javascripts/toDecimal')
 var toInt = require('../public/javascripts/toInt')
 var pivot = require('../public/javascripts/pivot')
@@ -21,6 +21,8 @@ function ContentHandler (app, db) {
 	var invoices = new InvoicesDAO(db);
 	var services = new ServicesDAO(db);
 	var transactions = new TransactionsDAO(db)
+	var messages = new MessagesDAO(db)
+
 	this.displayLayout = function(req, res, next){
 	return res.redirect( 'app/index.html' )}
 

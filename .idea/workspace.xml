@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24f87e19-1ba9-49f0-965c-461f0693f63b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/customers.js" afterPath="$PROJECT_DIR$/customers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/app.css" afterPath="$PROJECT_DIR$/public/app/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/entryForm/entryForm.html" afterPath="$PROJECT_DIR$/public/app/entryForm/entryForm.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/home/home.tpl.html" afterPath="$PROJECT_DIR$/public/app/home/home.tpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view1/view1.html" afterPath="$PROJECT_DIR$/public/app/view1/view1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view10/view10.html" afterPath="$PROJECT_DIR$/public/app/view10/view10.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view2/view2.html" afterPath="$PROJECT_DIR$/public/app/view2/view2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view2/view2.js" afterPath="$PROJECT_DIR$/public/app/view2/view2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view4/view4.html" afterPath="$PROJECT_DIR$/public/app/view4/view4.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view4/view4.js" afterPath="$PROJECT_DIR$/public/app/view4/view4.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view5/view5.html" afterPath="$PROJECT_DIR$/public/app/view5/view5.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view8/view8.html" afterPath="$PROJECT_DIR$/public/app/view8/view8.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view9/view9.html" afterPath="$PROJECT_DIR$/public/app/view9/view9.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/app/view9/view9.js" afterPath="$PROJECT_DIR$/public/app/view9/view9.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/content.js" afterPath="$PROJECT_DIR$/routes/content.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/send.js" afterPath="$PROJECT_DIR$/routes/send.js" />
     </list>
     <ignored path="books.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -163,20 +147,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.2956327">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="send.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="send.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/send.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.418813">
+            <state vertical-scroll-proportion="0.0">
               <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
               <folding />
             </state>
@@ -186,8 +170,8 @@
       <file leaf-file-name="content.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/content.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.851851">
-              <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+            <state vertical-scroll-proportion="-9.428572">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -265,11 +249,11 @@
         <option value="$PROJECT_DIR$/public/app/view9/view9.html" />
         <option value="$PROJECT_DIR$/entries.js" />
         <option value="$PROJECT_DIR$/invoices.js" />
-        <option value="$PROJECT_DIR$/routes/content.js" />
         <option value="$PROJECT_DIR$/public/app/view4/view4.js" />
         <option value="$PROJECT_DIR$/public/app/view10/view10.html" />
         <option value="$PROJECT_DIR$/public/app/view9/view9.js" />
         <option value="$PROJECT_DIR$/routes/send.js" />
+        <option value="$PROJECT_DIR$/routes/content.js" />
       </list>
     </option>
   </component>
@@ -890,26 +874,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/invoices.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.037037">
           <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/content.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.851851">
-          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -946,14 +914,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/view10/view10.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-27.387096">
@@ -978,6 +938,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/send.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/view10/view10.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/content.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.428572">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -988,16 +980,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="-0.2956327">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/send.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.418813">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding />
         </state>
       </provider>
