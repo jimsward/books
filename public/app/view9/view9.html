@@ -1,5 +1,4 @@
 <div class="container">
-<div ng-controller="view9Ctrl">
         <p class="title">Search the Check Register.</p>
         <div id="search-form">
             <div id="radios">
@@ -12,7 +11,7 @@
                 </md-radio-group>
             </div>
             <div id="choices">
-               <md-datepicker ng-model="date" md-placeholder="Enter date" ng-disabled="!isDate" ng-focus="isDate"></md-datepicker></md-content>
+               <md-datepicker ng-model="date" id="srdate#" md-placeholder="Enter date" ng-disabled="!isDate" ng-focus="isDate"></md-datepicker></md-content>
                 <md-input-container><input type="text" ng-model="amount" id="dialogAmt" maskmoney ng-disabled="!isAmount" placeholder="Amount" ng-focus="isAmount"/></md-input-container>
                 <md-input-container><input type="text" ng-model="account" id="dialogAcct" listaccts ng-disabled="!isAccount" placeholder="Account"/></md-input-container>
                 <md-input-container><input type="text" ng-model="payee" id="dialogPayee" ng-disabled="!isPayee" placeholder="Payee"/></md-input-container>
@@ -89,5 +88,4 @@
             <md-button class="md-raised .btn" ng-click="reset()" id="resetbtn">Reset</md-button>
         </md-content>
     </div>
-</div>
     </div>

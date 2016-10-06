@@ -46,6 +46,10 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 			},
 	function errorCallback(err){
 		console.log('error')
+		alert(err.data.error)
+		$location.path('/view2')
+
+
 	})
 	}
 	//add a new invoice

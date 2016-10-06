@@ -134,7 +134,7 @@ config(['$routeProvider', function($routeProvider) {
                         auth.signout();
                         store.remove('profile');
                         store.remove('token');
-                        $location.path('/home')
+                        $location.path('/view1')
                     }
                     return $q.reject(rejection);
                 }
@@ -160,8 +160,9 @@ config(['$routeProvider', function($routeProvider) {
             }
             else {
                 // Otherwise, redirect to the home route
-                $location.path('/home');
+                $location.path('/view1');
             }
         });
 
     })
+

@@ -15,7 +15,7 @@ function SendEmail() {
         service: 'Yahoo',
         auth: {
             user: 'guernevilleguys@yahoo.com', //  email id
-            pass: process.env.EM_PW //  password
+            pass: process.env.EM_PW || process.argv[4] //  password
         }
     });
 	var text = req.body.text

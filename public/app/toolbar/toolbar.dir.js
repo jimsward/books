@@ -42,7 +42,7 @@
       auth.signout();
       store.remove('profile');
       store.remove('token');
-      $location.path('/home');
+      $location.path('/view1');
     }
   }
   

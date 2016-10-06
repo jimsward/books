@@ -1,7 +1,6 @@
 var app = angular.module('myApp.entryFormCtl', [])
 
 app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'addEntry', function($scope, $http, $filter, $rootScope, addEntry){
-
     if ($rootScope.selected)
     {
     $rootScope.selected.date = new Date($rootScope.selected.date)
@@ -9,7 +8,8 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'add
         $rootScope.newEntry = false
     }
     else {
-    $scope.entry = {}
+
+        $scope.entry = {}
     $rootScope.newEntry = true
         document.getElementById("entrydt").focus()
 

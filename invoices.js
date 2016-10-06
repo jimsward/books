@@ -30,8 +30,8 @@ function InvoicesDAO(db) {
 			}
 
 			
-			if (err) return callback( err, null )
-			return callback( null, item )
+			//if (err) return callback( err, null )
+			else return callback( null, item )
 			} )
 		}
 }

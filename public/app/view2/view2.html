@@ -18,8 +18,8 @@
     <th md-column class="rtalign">Action</th>
   </tr>
     </thead>
-  <tbody md-body>
-  <tr md-row ng-repeat="customer in customers" >
+  <tbody md-body class="tbody">
+  <tr md-row ng-repeat="customer in customers" class="customerRow">
   	<td md-cell class="crsrptr" ng-click="customerDetails($event, customer)">{{customer.name}}</td>
       <td md-cell class="crsrptr" ng-click="customerDetails($event, customer)">{{customer.company}}</td>
 

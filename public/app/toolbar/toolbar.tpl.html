@@ -7,6 +7,7 @@
     
     <md-button
       aria-label="Login"
+      id="login"
       ng-if="!toolbar.auth.isAuthenticated"
       ng-click="toolbar.login()">
       Login
@@ -21,6 +22,7 @@
     
     <md-button
       aria-label="Logout"
+      id="logout"
       ng-if="toolbar.auth.isAuthenticated"
       ng-click="toolbar.logout()">
       Logout
