@@ -14,6 +14,7 @@ angular.module('myApp', [
   'myApp.view9',
    'myApp.view10',
    'myApp.entryFormCtl',
+    'myApp.home',
    'myApp.version',
   'ngMessages',
   'angular-loading-bar',
@@ -63,6 +64,10 @@ config(['$routeProvider', function($routeProvider) {
         .when('/view10', {
             templateUrl: 'view10/view10.html',
             controller: 'view10Ctrl'
+        })
+        .when('/home', {
+            templateUrl: 'home/home.html',
+            controller: 'homeCtrl'
         })
   .otherwise({redirectTo: '/view1'});
 }])
@@ -119,7 +124,6 @@ config(['$routeProvider', function($routeProvider) {
 
 
         function redirect($q, $injector, $timeout, store, $location) {
-
             var auth;
             $timeout(function() {
                 auth = $injector.get('auth');
@@ -134,15 +138,18 @@ config(['$routeProvider', function($routeProvider) {
                         auth.signout();
                         store.remove('profile');
                         store.remove('token');
-                        $location.path('/view1')
+                        $location.path('/home')
                     }
                     return $q.reject(rejection);
                 }
             }
         }
         $provide.factory('redirect', redirect);
+
         $httpProvider.interceptors.push('jwtInterceptor');
         $httpProvider.interceptors.push('redirect');
+        console.dir($httpProvider.interceptors)
+
     })
     .run(function($rootScope, auth, store, jwtHelper, $location) {
 
@@ -160,7 +167,7 @@ config(['$routeProvider', function($routeProvider) {
             }
             else {
                 // Otherwise, redirect to the home route
-                $location.path('/view1');
+                $location.path('/home');
             }
         });
 
