@@ -17,8 +17,11 @@
     "morgan": "~1.5.1",
     "nodemailer": "0.7",
     "serve-favicon": "~2.2.0",
-    "swig": "^1.4.2"
-  },
+    "swig": "^1.4.2",
+      "chai": "^3.2.0",
+      "chai-http": "^1.0.0"
+      },
+
   "description": "Online Bookkeeping",
   "main": "app.js",
   "devDependencies": {},

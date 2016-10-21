@@ -71,7 +71,7 @@ function EntriesDAO(db) {
 		
 	this.updateEntry = function( obj, callback){
 			
-			//mongo returned a seriealized ObjectID on original GET
+			//mongo returned a serialized ObjectID on original GET
 			//need to turn it back into a BSON object for the query object
 			var _id = new ObjectID.createFromHexString(obj._id)
 			delete obj._id
@@ -90,7 +90,8 @@ function EntriesDAO(db) {
 	this.findEntries =  function(obj, callback){
 			
 			var key = obj.key,
-			val= obj.val
+			val = obj.val
+
 			var query = {}, q1 = {}, q2 = {}
 			var deposit = 'deposit', payment ='payment'
 

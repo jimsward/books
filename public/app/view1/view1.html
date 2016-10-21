@@ -1,14 +1,7 @@
 <div id="frontpage" class="container" >
     <entry-form id="entry-form"></entry-form>
 
-    <div ng-controller="view1Ctrl">
-        <!--This probably needs to be removed to make auth0 work properly-->
-  <!--  <div id="users">
-<div ng-hide="user"><p>You are not logged in!</p><span ng-click="login()" class="clickable">Login</span>|<span ng-click="signUp()" class="clickable">Sign  Up</span></div>
-<p></p>
-<div ng-show="user"><span>Welcome {{username}}</span><span ng-click="logout()" class="clickable"> | LOGOUT</span></div>
-     </div>-->
-        <div>
+
 <md-table-container>
 <table id="entriesTable" md-table >
 <thead md-head>
@@ -22,7 +15,7 @@
     <th md-column class="rtalign">Balance</th>
   </tr>
 </thead>
-<tbody md-body>
+<tbody class="tbody" md-body>
   <tr md-row ng-repeat="item in items"  ng-click="openForm(item); $event.stopImmediatePropagation();" id={{item.id}}>
     <td md-cell class="date">{{item.date | date:'MM/dd/yyyy'}}</td>
     <td md-cell class="payee">{{item.payee}}</td>
@@ -35,7 +28,5 @@
  </tbody>
 </table>
 </md-table-container>
-   </div>
-</div><!--View1Ctrl-->
-</div><!--container-->
+</div>
 

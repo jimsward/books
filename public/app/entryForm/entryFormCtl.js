@@ -9,9 +9,9 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'add
     }
     else {
 
-        $scope.entry = {}
+    $scope.entry = {}
     $rootScope.newEntry = true
-        document.getElementById("entrydt").focus()
+    document.getElementById("entrydt").focus()
 
     $scope.refs = {payment :'Payment', deposit : 'Deposit'}
     $scope.entry.date = new Date()
@@ -23,10 +23,9 @@ app.controller('entryFormCtl', ['$scope', '$http', '$filter', '$rootScope', 'add
     $scope.entry.deposit = ''
     $scope.disablePayment = true
     $scope.disableDeposit = true
-}
+    }
 
     $scope.change = function(){
-        //var ref = angular.element( 'select#reference' ).val()
         var ref = $scope.entry.reference
         if ( ref == 'Payment' )
         { $scope.disablePayment = false

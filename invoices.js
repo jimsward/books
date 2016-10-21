@@ -1,3 +1,4 @@
+var ObjectID = require('mongodb').ObjectID
 
 /* The EntriesDAO must be constructed with a connected database object */
 function InvoicesDAO(db) {
@@ -34,6 +35,20 @@ function InvoicesDAO(db) {
 			else return callback( null, item )
 			} )
 		}
+	this.deleteInvoice = function( invoice, callback ){
+
+		//var _id = new ObjectID.createFromHexString(invoice._id)
+
+		invoices.deleteOne( { 'number' : invoice.number }, function (err, result) {
+			console.dir( err)
+
+			"use strict";
+			if (err) {
+				return callback(err, null);
+			}
+			callback(err, result);
+		});
+	}
 }
 
 module.exports.InvoicesDAO = InvoicesDAO;

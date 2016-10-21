@@ -28,7 +28,6 @@ function ContentHandler (app, db) {
 
     this.displayMainPage = function(req, res, next) {
         "use strict";
-		console.log('username ' + req.username)
 
         entries.getEntries( function(err, results) {	
 			
@@ -62,7 +61,7 @@ function ContentHandler (app, db) {
 			
 			
 
-		   return res.send( {items : displArr, username : req.username} )
+		   return res.send( {items : displArr} )
         });
     }
 
@@ -122,7 +121,6 @@ function ContentHandler (app, db) {
 
 	var obj = req.query
 
-		 console.dir(obj)
 
 
 		entries.findEntries(obj, function(err, results)
@@ -202,7 +200,6 @@ function ContentHandler (app, db) {
 	this.newInvoice = function( req, res, next ){
 		var obj = req.body
 		var errors = {'number' : req.body.number}
-		obj.date = pivot(obj.date)
 		invoices.addInvoice( obj, function( err, result ){
 			if (err)
 			{
@@ -234,6 +231,17 @@ function ContentHandler (app, db) {
 			else return res.send( result )
 			} )
 		}
+	this.deleteInvoice = function(req, res, next)
+	{
+		var number = req.body
+		number.number = parseInt(number.number)
+		console.log(number)
+		invoices.deleteInvoice(number, function(err, results){
+			if (err) return next(err);
+
+			return res.end()
+		})
+	}
 	this.listServices = function( req, res, next )
 	{
 		services.getList( function(err, results)

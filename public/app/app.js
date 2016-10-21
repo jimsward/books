@@ -148,8 +148,6 @@ config(['$routeProvider', function($routeProvider) {
 
         $httpProvider.interceptors.push('jwtInterceptor');
         $httpProvider.interceptors.push('redirect');
-        console.dir($httpProvider.interceptors)
-
     })
     .run(function($rootScope, auth, store, jwtHelper, $location) {
 

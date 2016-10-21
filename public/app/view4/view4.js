@@ -91,6 +91,14 @@ app.controller('view4Ctrl', ['$scope', '$window','$http', '$routeParams', '$loca
 		)
 	}
 	$scope.saveInvoice = function(){
+
+		var dtObj = $scope.invoice.date
+		var month = (dtObj.getMonth() + 1).toString()
+		if (month.length == 1) month = "0" + month
+		var day = dtObj.getDate().toString()
+		if (day.length == 1) day = "0" + day
+		$scope.invoice.date =   month + '/' + day + '/' + dtObj.getFullYear()
+
 		var length =  $scope.invoice.lines.length
 		var re = /\,/g
 		var amount = $scope.invoice.lines[length - 1].amount

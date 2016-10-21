@@ -19,20 +19,9 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 	$scope.items = response.data.items
 		return response
 	}).then(function(response){
-		$scope.username = response.data.username
-		$rootScope.user = $scope.username ? true : false
+		/*$scope.username = response.data.username
+		$rootScope.user = $scope.username ? true : false*/
 	})
-	$scope.login = function(){
-		$location.path('/view6')
-		}
-	$scope.signUp = function(){
-		$location.path('/view7')
-		}
-	$scope.logout = function(){		
-		$http.get( '/logout' ).then( function(response){
-			$scope.user = false
-			} )
-		}
 	$scope.openForm = function(item){
 		$rootScope.selected = item
 		angular.element('entry-form').remove()
@@ -42,8 +31,6 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 app.factory( 'getEntries', [ '$http', function($http) {	 
     return $http({url : '/entries', method : 'GET'})
 	}])
-	//form with controls for new entries to the check register
-
 app.factory('addEntry', ['$http', function($http) {
 	return {
 		newEnt: function (data) {
@@ -70,7 +57,7 @@ app.directive('listaccts', [ '$http', function($http){
    	 	method: "GET"}		 
 		)
 		.then( function(msg){
-			angular.forEach(msg.data, function( value, key){
+			angular.forEach(msg.data, function(value, key){
 			accounts[key] = value.account;
 			})	
 			element.autocomplete({
