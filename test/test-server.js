@@ -8,13 +8,12 @@ var server = require('../app');
 var expect = require('chai').expect
 chai.use(chaiHttp);
 
-    describe('Entries', function () {
+describe('Entries', function () {
           it('should list ALL entries on /entries GET', function(done) {
             chai.request(server)
                 .get('/entries')
 
                 .end(function (err, res) {
-                    console.log(res.status)
                     expect(res.status).to.equal(200)
                     expect(res).to.be.json;
                     expect(res.body).to.have.property('items');
@@ -24,10 +23,26 @@ chai.use(chaiHttp);
         });
     });
 describe('newentry', function () {
+    var added
+   /* afterEach(function(done){
+        chai.request(server)
+            .post('/delete')
+            .send(added)
+
+            .end(function (err, res) {
+                expect(res.status).to.equal(200)
+                done();
+            });
+    });*/
     it('should add an entry to the entries collection', function(done) {
         var date = new Date()
-        var dtArr =  date.getMonth() + 1 +'/' + date.getDate() + '/' + date.getFullYear()
-        var entry = {date : dtArr, reference : 'payment', payment : 0, deposit :0, account : 'advertising'  }
+        var month = date.getMonth() + 1
+        if (month.length < 2) month = "0" + month
+        var day = date.getDate()
+        if (day.length < 2 ) day = "0" + day
+        var year = date.getFullYear()
+        var dt = month + '/' + day + '/' +  year
+        var entry = {date : dt, reference : 'payment', payment : 0, deposit :0, account : 'advertising'  }
         chai.request(server)
             .post('/newentry')
             .send(entry)
@@ -37,6 +52,8 @@ describe('newentry', function () {
                 expect(res).to.be.json;
                 expect(res.body.items[39]).to.have.property('date');
                 expect(res.body.items[39].date).to.match(/\d{4}\/\d{2}\/\d{2}/)
+                added = res.body.items[39]
+                console.dir(res.body.items[39])
                 done();
             });
     });
@@ -81,7 +98,7 @@ describe('check update', function () {
             "payee": "",
             "memo": "Funds Transfer",
             "account": "Petty Cash",
-            "payment": "4000",
+            "payment": "40",
             "deposit": "0"
         }
         chai.request(server)
@@ -259,6 +276,30 @@ describe('list accounts', function () {
             .end(function (err, res) {
                 expect(res.status).to.equal(200)
                 expect(res.body).to.be.an('array');
+                done();
+            });
+    });
+});
+describe('post message', function () {
+    it('post data to the messages collection from a contact form submittal', function(done) {
+        var obj = { text : 'some text', email : 'test@test.com' }
+        chai.request(server)
+            .post('/contact')
+            .send(obj)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200)
+                done();
+            });
+    });
+});
+describe('send email', function () {
+    it('sends email to the address provided', function(done) {
+        var obj = { text : 'some text', email : 'jim@jimsward.com', pw : 'Ec2A_xx' }
+        chai.request(server)
+            .post('/sendemail')
+            .send(obj)
+            .end(function (err, res) {
+                expect(res.status).to.equal(200)
                 done();
             });
     });
