@@ -6,7 +6,7 @@
 
 #### Login
 
-A user not yet logged in has read-only access. Unless you are logged in, any actions that would change the database are disabled. The Sign Up page allows a potential user to receive an email with a randomly generated 8 character password.
+A user needs to be logged in to access the site.
 
 #### Table of checkbook entries
 
@@ -15,6 +15,10 @@ The table starts with 40 rows - one per entries document - of check entries. Cli
 #### Check Entry Form
 
 This is where new checks are entered. Date, account, and an amount is required. The amount can be a payment or a deposit but not both. The account must be in the accounts collection. Only logged in users can save an entry
+
+#### Check Edit Form
+
+Check on any entry in the check register. The entry will be replaced by a Check Entry Form where you can modify and save or delete the entry
 
 #### Search Registry Dialog
 
@@ -32,11 +36,11 @@ Find a customer by entering a name or click on a customer name in the customer t
 
 #### Create Invoice
 
-Create an invoice by way of the Create Invoice button or clicking the create invoice field of an individual customer's entry in the customer table
+Create an invoice by way of the Create Invoice button or clicking the create invoice field of an individual customer's entry in the customer table.
 
 #### Invoice Entry
 
-The Invoice Page has inputs for name, invoice number, date and a table for line items. Each line item has a (required) service, (optional) description, and (required) amount
+The Invoice Page has inputs for name, address, invoice number, date and a table for line items. Each line item has a (required) service, (optional) description, and (required) amount.
 
 ### Reports
 
@@ -47,6 +51,10 @@ The Profit and Loss Report takes a date range and produces a report subtotaled b
 ### About
 
 A few paragraphs about us. Most relevant: "We are a small startup with the goal of producing a complete online accounting package via the MEAN stack."
+
+### Contact
+
+A form with name, email, and message fields - all are required - puts the info in our database and sends us an email with the info.
 
 #### Links:
 
