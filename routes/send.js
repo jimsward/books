@@ -10,12 +10,14 @@ function SendEmail() {
         return new SendEmail();
     }
 	this.send = function(req, res) {
+        var password
+        if (req.body.pw) password = req.body.pw
 		console.dir(req.body)
     var transporter = nodemailer.createTransport("SMTP",{
         service: 'Yahoo',
         auth: {
             user: 'guernevilleguys@yahoo.com', //  email id
-            pass: process.env.EM_PW || process.argv[4] //  password
+            pass: process.env.EM_PW || process.argv[4] || password //  password
         }
     });
 	var text = req.body.text
@@ -32,11 +34,10 @@ function SendEmail() {
         res.json({yo: 'error'});
     }else{
         console.log('Message sent: ' + info.message);
+        console.log(info)
         res.json({yo: info.response});
     }
 })
-
-	
 	}
 }
 module.exports = SendEmail;

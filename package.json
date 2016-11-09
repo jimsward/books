@@ -32,7 +32,7 @@
   "keywords": [
     "financials",
     "node",
-    "mongDB",
+    "mongoDB",
     "angular"
   ],
 
@@ -42,7 +42,9 @@
     "url": "https://github.com/jimsward/books/issues"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "killserver" : "FOR /F \"tokens=5 delims= \" %P IN ('netstat -a -n -o ^| findstr :3000') DO TaskKill.exe /F /PID %P",
+    "precommit" : "mocha && cd public && start node ../app && npm run test-single-run && npm run protractor",
+    "test": "mocha && cd Public && run protractor &&",
     "postinstall" : "cd public/app && npm install"
   },
   "homepage": "https://github.com/jimsward/books"

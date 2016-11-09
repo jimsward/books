@@ -300,6 +300,8 @@ footer {
 
 form#contact { padding-top : 20px; width : 600px !important; }
 
+#customerDetail > div > md-content {padding : 30px 0}
+
 
 
 

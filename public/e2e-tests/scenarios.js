@@ -58,7 +58,7 @@ describe('my app', function() {
     });
 describe( 'entryForm', function(){
 	beforeEach(function(){
-		element( by.id('12261')).click().then( function(){
+		element( by.id('12210')).click().then( function(){
 			console.log('XXXXXXXXOOOOOOOOXXXXX')
 			} )
 		})	

@@ -4,7 +4,7 @@ exports.config = {
   specs: [
     '*.js'
   ],
-
+  directConnect: true,
   capabilities: {
     'browserName': 'chrome'
   },
@@ -12,7 +12,7 @@ exports.config = {
   baseUrl: 'http://127.0.0.1:3000/app/',
 
   framework: 'jasmine',
-  
+
   directConnect: true,
 
   jasmineNodeOpts: {

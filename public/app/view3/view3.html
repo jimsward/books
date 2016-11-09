@@ -1,15 +1,16 @@
 <div class="container" id="customerDetail">
 <div ng-controller="view3Ctrl">
 
-<div id="tabs" tabs>
+<!--<div id="tabs" tabs>
 <ul>
 <li><a href="#tabs-1">Customer Details</a></li>
 <li><a href="#tabs-2">Transaction List</a></li>
-</ul>
-<div id="tabs-1">
+</ul>-->
     <md-content>
+
+    <md-tabs>
+        <md-tab label="Customer Details">
 <md-button id="editcustomer" ng-click="openEdit()" title="Opens a dialog where you can edit the details for a customer">Edit</md-button>
-    </md-content>
 <table md-table>
     <tbody md-body="">
   <tr md-row>
@@ -38,8 +39,8 @@
   </tr>
     </tbody>
 </table>
-</div>
-<div id="tabs-2">
+        </md-tab>
+        <md-tab label="Transaction List">
 
 <table md-table>
     <thead md-head>
@@ -59,8 +60,13 @@
   </tr>
     </tbody>
 </table>
-</div>
-</div><!--#tabs-->
+        </md-tab>
+    </md-tabs>
+    </md-content>
+
+
+    <!--</div>-->
+
 </div><!--View3Ctrl-->
 
 <div id="edit-customer-form" title="Customer Information" custedit>

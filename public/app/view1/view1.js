@@ -6,9 +6,8 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'view1Ctrl'
   });
 }])
-//Populate the table with checkbook entries
 /**
- * description Controller for the table of check entries
+ * @description Controller for the table of check entries
  *
  * @param {string} a
  */
