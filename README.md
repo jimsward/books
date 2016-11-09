@@ -6,7 +6,7 @@
 
 #### Login
 
-A user needs to be logged in to access the site.
+A user needs to be logged in to access the site. We use auth0 to authenticate. An email and user chosen password is required.
 
 #### Table of checkbook entries
 
