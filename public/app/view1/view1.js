@@ -30,14 +30,7 @@ app.controller('view1Ctrl', [ '$scope', 'getEntries', '$http', '$location', '$ro
 app.factory( 'getEntries', [ '$http', function($http) {	 
     return $http({url : '/entries', method : 'GET'})
 	}])
-app.factory('addEntry', ['$http', function($http) {
-	return {
-		newEnt: function (data) {
-			return $http({url: '/newentry', data: data, method: "POST"})
-		}
-	}
-}])
-app.directive('maskmoney', function(){	      
+app.directive('maskmoney', function(){
 	return {
 	link : function(scope,element,attrs, ngModel){
 		element.maskMoney();	

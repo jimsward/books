@@ -18,9 +18,12 @@ var cons = require('consolidate') // Templating library adapter for Express
 app.use(express.static('public'));
 
 
-//MongoClient.connect('mongodb://localhost:27017/checking', {server: {poolSize: 1}}, function(err, db) {
-	
-	var user, password, connectUri
+/**
+ * If argv[] has only 2 elements, assume cli user who wants local mongod instance
+ * Otherwise: if there are db user and pw environment variables, use them;
+ * That leaves the 3rd and 4th argv[] elements
+ */
+var user, password, connectUri
 console.log(process.argv)
 if (process.argv.length < 3)
 connectUri = 'mongodb://localhost/checking'
@@ -28,11 +31,8 @@ else {
     user = process.env.DB_USER || process.argv[2]
     password = process.env.DB_PW || process.argv[3]
     var connectUri = 'mongodb://' + user + ':' + password + '@ds045757.mongolab.com:45757/checking'
-
     }
-		MongoClient.connect(connectUri, function(err, db) {
-
-
+MongoClient.connect(connectUri, function(err, db) {
      "use strict";
     if(err) throw err;
 var users = db.collection('users')
